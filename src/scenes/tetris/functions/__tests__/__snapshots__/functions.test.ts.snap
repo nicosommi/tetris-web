@@ -1,0 +1,1293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`a i shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 7,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 7,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "i",
+  },
+}
+`;
+
+exports[`a i shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "i",
+  },
+}
+`;
+
+exports[`a i shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 1,
+      "y": 23,
+    },
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 1,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "i",
+  },
+}
+`;
+
+exports[`a i shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 20,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 20,
+    },
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 20,
+    },
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "i",
+  },
+}
+`;
+
+exports[`a j shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "j",
+  },
+}
+`;
+
+exports[`a j shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "j",
+  },
+}
+`;
+
+exports[`a j shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "j",
+  },
+}
+`;
+
+exports[`a j shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "j",
+  },
+}
+`;
+
+exports[`a l shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "l",
+  },
+}
+`;
+
+exports[`a l shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 3,
+      "y": 25,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "l",
+  },
+}
+`;
+
+exports[`a l shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 2,
+      "y": 22,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 2,
+      "y": 22,
+    },
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 2,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "l",
+  },
+}
+`;
+
+exports[`a l shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 21,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 5,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "l",
+  },
+}
+`;
+
+exports[`a o shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "o",
+  },
+}
+`;
+
+exports[`a o shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "o",
+  },
+}
+`;
+
+exports[`a o shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "o",
+  },
+}
+`;
+
+exports[`a o shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "o",
+  },
+}
+`;
+
+exports[`a s shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "s",
+  },
+}
+`;
+
+exports[`a s shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+    Object {
+      "x": 3,
+      "y": 25,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 3,
+      "y": 25,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "s",
+  },
+}
+`;
+
+exports[`a s shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 2,
+      "y": 22,
+    },
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 2,
+      "y": 22,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "s",
+  },
+}
+`;
+
+exports[`a s shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 21,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 5,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 5,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "s",
+  },
+}
+`;
+
+exports[`a t shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "t",
+  },
+}
+`;
+
+exports[`a t shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "t",
+  },
+}
+`;
+
+exports[`a t shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "t",
+  },
+}
+`;
+
+exports[`a t shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "t",
+  },
+}
+`;
+
+exports[`a z shape in position 0 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 0,
+    "type": "z",
+  },
+}
+`;
+
+exports[`a z shape in position 1 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 1,
+    "type": "z",
+  },
+}
+`;
+
+exports[`a z shape in position 2 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 3,
+      "y": 22,
+    },
+    Object {
+      "x": 2,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 3,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 2,
+    "type": "z",
+  },
+}
+`;
+
+exports[`a z shape in position 3 snapshot should have the appropiate max points at each side ì 1`] = `
+Object {
+  "bottom": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+  ],
+  "left": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 4,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "right": Array [
+    Object {
+      "x": 4,
+      "y": 21,
+    },
+    Object {
+      "x": 5,
+      "y": 22,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+  ],
+  "shape": Object {
+    "column": 4,
+    "line": 23,
+    "position": 3,
+    "type": "z",
+  },
+}
+`;
