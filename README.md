@@ -9,15 +9,16 @@ I feel like is the analogue of writing a book for a developer. Programming gives
 - add blast command
 - fix bug when eating lines with a stand up i
 - add auto fit to rotation command
-- add right side settings panel
+- add settings panel
 - add theme selector
 - polish shapes with gradients and transitions
 - add music turned off by default
-- add sounds to line eatings including mute
-- add sounds to level transitions including mute
-- add sounds to game over including mute
-- add sounds to regular thick including mute
+- add sounds settings on or mute (by default mute)
+- add sound setting for line eating
+- add sound setting for level transition
+- add sound setting for game over
+- add sound setting for regular thick
 - make it similar to theme c palace and adjusting a theme
-- make it responsive and playable on mobile (add buttons onscreen)
-- add one level o complexity: scarsity for I, etc
+- try it in rn 0.59+ (hooks)
+- add one more level of complexity: scarsity for I, etc
 - complete other themes
