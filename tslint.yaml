@@ -7,3 +7,4 @@ rules:
   interface-over-type-literal: false
   prefer-conditional-expression: false
   no-implicit-dependencies: false
+  curly: false

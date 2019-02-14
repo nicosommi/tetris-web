@@ -15,7 +15,7 @@ type Props = {
 
 const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
-  // e.g. change keyboard assignation, theme, etc
+  // e.g. change keyboard assignation, etc
   const [game, duration, handlers] = useTetris()
 
   return (

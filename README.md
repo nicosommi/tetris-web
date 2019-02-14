@@ -6,7 +6,6 @@ I feel like is the analogue of writing a book for a developer. Programming gives
 
 ## TODO
 
-- add complex level configuration
 - add blast command
 - fix bug when eating lines with a stand up i
 - add auto fit to rotation command

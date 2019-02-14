@@ -2,7 +2,7 @@ import { React } from "../../../utils/view"
 
 import { Reducer } from "react"
 import { createBoard, drawBoardLines, simplifyLines } from "./board"
-import { createGame } from "./game"
+import { createGame, getLevelForLines, getTickForLevel } from "./game"
 import { useKeyDowns } from "./keyboard"
 import { GAME_THICK_INTERVAL } from "./settings"
 import {
@@ -53,6 +53,8 @@ const reduceGame: GameReducer = (previous, action) => {
         : [oneForNow, ...newShapeQueue.slice(0, newShapeQueue.length)]
       const [newBoardLines, newLines] = simplifyLines(previous.board)
       const lines = previous.lines + newLines
+      const level = getLevelForLines(lines)
+
       return {
         ...previous,
         board: {
@@ -78,7 +80,7 @@ const reduceGame: GameReducer = (previous, action) => {
             ? new Date()
             : undefined,
         gameOver: activeShape === undefined && collidesOneForNow ? true : false,
-        level: Math.floor(lines / 1) + 1,
+        level,
         lines,
         startDate: previous.ticks === 0 ? new Date() : previous.startDate,
         ticks: action.payload ? Number(action.payload) : previous.ticks
@@ -240,7 +242,7 @@ export function useTetris(): [Game, number, Commands] {
 
   useTick(
     t => dispatch({ type: "THICK", payload: t }),
-    () => GAME_THICK_INTERVAL / game.level,
+    () => getTickForLevel(game.level),
     [game.level]
   )
 
