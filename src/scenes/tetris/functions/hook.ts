@@ -282,7 +282,7 @@ export function useTetris(): [Game, number, Commands] {
           : 0
       setDuration(newDuration)
     },
-    () => 500,
+    () => 250,
     [game.startDate, game.endDate]
   )
 
