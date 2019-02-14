@@ -6,9 +6,8 @@ I feel like is the analogue of writing a book for a developer. Programming gives
 
 ## TODO
 
-~- adjust shape initial original positions~
-
 - add blast command
+- fix bug when eating lines with a stand up i
 - add auto fit to rotation command
 - add right side settings panel
 - add theme selector
