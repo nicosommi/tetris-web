@@ -199,7 +199,9 @@ function isOffTheBoard({ x, y }: Point, side: Side, shape: Shape): boolean {
       return x > LINE_LENGTH - getShapeWidth(shape) + (x - shape.column) - 1
     }
     case "top": {
-      return y > BOARD_LENGTH - getShapeShownHeight(shape) + (y - shape.line)
+      return (
+        y > BOARD_LENGTH - getShapeShownHeight(shape) + (y - shape.line) - 1
+      )
     }
   }
   return true

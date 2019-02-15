@@ -17,10 +17,15 @@ const { useReducer, useEffect, useLayoutEffect, useState, useRef } = React
 const initialGame: Game = createGame()
 
 const reduceGame: GameReducer = (previous, action) => {
-  if (previous.gameOver === true && action.type !== "RESTART") {
-    return previous
-  }
+  if (previous.gameOver === true && action.type !== "RESTART") return previous
+  if (previous.paused && action.type !== "PAUSE") return previous
   switch (action.type) {
+    case "PAUSE": {
+      return {
+        ...previous,
+        paused: !previous.paused
+      }
+    }
     case "DOWN":
     case "THICK": {
       const [newShapeQueue, oneForNow] = prepareQueue(previous.board)
@@ -87,6 +92,7 @@ const reduceGame: GameReducer = (previous, action) => {
       }
     }
     case "BLAST": {
+      // TODO: implement command
       return previous
     }
     case "LEFT": {
@@ -227,6 +233,7 @@ const createHandlers: CommandCreator = d => ({
   BLAST: createHandler("BLAST", d),
   DOWN: createHandler("DOWN", d),
   LEFT: createHandler("LEFT", d),
+  PAUSE: createHandler("PAUSE", d),
   RESTART: createHandler("RESTART", d),
   RIGHT: createHandler("RIGHT", d),
   ROTATE: createHandler("ROTATE", d),
@@ -268,6 +275,10 @@ export function useTetris(): [Game, number, Commands] {
     {
       handler: handlers.RESTART,
       keys: ["r"]
+    },
+    {
+      handler: handlers.PAUSE,
+      keys: ["p"]
     }
   ])
 
@@ -282,10 +293,10 @@ export function useTetris(): [Game, number, Commands] {
           : game.startDate
           ? Math.floor((new Date().getTime() - game.startDate.getTime()) / 1000)
           : 0
-      setDuration(newDuration)
+      if (!game.paused) setDuration(newDuration)
     },
     () => 250,
-    [game.startDate, game.endDate]
+    [game.startDate, game.endDate, game.paused]
   )
 
   return [game, duration, handlers]

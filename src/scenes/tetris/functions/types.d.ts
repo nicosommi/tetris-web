@@ -47,6 +47,7 @@ type AnonymousGame = {
   gameOver: boolean
   startDate?: Date
   endDate?: Date
+  paused: boolean
 } & Identificable
 type Game = AnonymousGame & Identificable
 
@@ -58,6 +59,7 @@ type ActionType =
   | "ROTATE"
   | "BLAST"
   | "RESTART"
+  | "PAUSE"
 type Action<T = any> = {
   type: ActionType
   payload?: T

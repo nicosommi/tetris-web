@@ -52,8 +52,13 @@ const tetris = ({ theme = "default" }: Props) => {
               onPress={() => handlers.ROTATE()}
             />
             <Button
+              accessibilityLabel="pause"
+              title="Pause"
+              onPress={() => handlers.PAUSE()}
+            />
+            <Button
               accessibilityLabel="restart"
-              title="Restart game"
+              title="Start new game"
               onPress={() => handlers.RESTART()}
             />
           </Controls>
