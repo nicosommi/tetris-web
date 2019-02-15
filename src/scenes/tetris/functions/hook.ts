@@ -4,7 +4,6 @@ import { Reducer } from "react"
 import { createBoard, drawBoardLines, simplifyLines } from "./board"
 import { createGame, getLevelForLines, getTickForLevel } from "./game"
 import { useKeyDowns } from "./keyboard"
-import { GAME_THICK_INTERVAL } from "./settings"
 import {
   doesShapeCollidesWithFilledBoxAtSide,
   doesShapeCollidesWithFilledBoxInCurrentPosition,
@@ -36,6 +35,8 @@ const reduceGame: GameReducer = (previous, action) => {
       )
       let activeShape = previous.board.activeShape
       let useOneForNow = false
+      let newBoardLines = previous.board.lines
+      let newLines = 0
       if (activeShape) {
         const collidesActive = activeShape
           ? doesShapeCollidesWithFilledBoxAtSide(
@@ -48,6 +49,7 @@ const reduceGame: GameReducer = (previous, action) => {
           activeShape = { ...activeShape, line: activeShape.line - 1 }
         } else {
           activeShape = undefined
+          ;[newBoardLines, newLines] = simplifyLines(previous.board)
         }
       } else {
         activeShape = !collidesOneForNow ? oneForNow : undefined
@@ -56,7 +58,6 @@ const reduceGame: GameReducer = (previous, action) => {
       const finalShapeQueue = useOneForNow
         ? newShapeQueue
         : [oneForNow, ...newShapeQueue.slice(0, newShapeQueue.length)]
-      const [newBoardLines, newLines] = simplifyLines(previous.board)
       const lines = previous.lines + newLines
       const level = getLevelForLines(lines)
 

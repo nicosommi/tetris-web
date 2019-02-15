@@ -7,8 +7,8 @@ I feel like is the analogue of writing a book for a developer. Programming gives
 ## TODO
 
 - add blast command
-- fix bug when eating lines with a stand up i
 - add auto fit to rotation command
+- try it in rn 0.59+ (hooks)
 - add settings panel
 - add theme selector
 - polish shapes with gradients and transitions
@@ -19,6 +19,5 @@ I feel like is the analogue of writing a book for a developer. Programming gives
 - add sound setting for game over
 - add sound setting for regular thick
 - make it similar to theme c palace and adjusting a theme
-- try it in rn 0.59+ (hooks)
 - add one more level of complexity: scarsity for I, etc
 - complete other themes
