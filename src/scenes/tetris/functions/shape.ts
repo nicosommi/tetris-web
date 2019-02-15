@@ -190,16 +190,13 @@ export function getShapeWidth(shape: Shape): number {
 }
 
 function isOffTheBoard({ x, y }: Point, side: Side, shape: Shape): boolean {
-  // if (shape.type === "i") {
-  //   console.log("is off", { w: getShapeWidth(shape), x, y })
-  // }
   switch (side) {
     case "bottom":
       return y <= 1
     case "left":
       return x <= 0
     case "right": {
-      return x > LINE_LENGTH - getShapeWidth(shape) + (x - shape.column)
+      return x > LINE_LENGTH - getShapeWidth(shape) + (x - shape.column) - 1
     }
     case "top": {
       return y > BOARD_LENGTH - getShapeShownHeight(shape) + (y - shape.line)
