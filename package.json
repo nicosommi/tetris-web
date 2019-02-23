@@ -34,12 +34,16 @@
     "lint": "tslint --project .",
     "type-check": "tsc --noEmit",
     "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }

@@ -36,5 +36,5 @@ Because this is a experiment using react hooks.
 - support theme
 - test shape positions
 - support levels of complexity
-- expose generic handlers
-- keyboard and mouse support
+- expose generic handlers for alternative inputs like press
+- keyboard support
