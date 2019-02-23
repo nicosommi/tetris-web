@@ -1,4 +1,4 @@
-import { Button, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import { DebugContext } from "../../../utils/debug"
 import { getThemeByName, ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
@@ -7,6 +7,7 @@ import { useTetris } from "../functions/hook"
 
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
+import Button from "./Button"
 import ShapePreview from "./ShapePreview"
 
 type Props = {
