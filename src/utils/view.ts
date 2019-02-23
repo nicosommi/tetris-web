@@ -1,5 +1,9 @@
 import { css, keyframes } from "@emotion/core"
-import styled from "@emotion/styled"
+import styledNative from "@emotion/native"
+import styled, { CreateStyled } from "@emotion/styled"
 import React from "react"
+import { isWeb } from "./debug"
 
-export { React, styled as g, css as getClassNameFromObject, keyframes }
+const g: CreateStyled<any> = isWeb() ? styled : styledNative
+
+export { React, g, css as getClassNameFromObject, keyframes }
