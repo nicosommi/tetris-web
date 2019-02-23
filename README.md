@@ -38,3 +38,7 @@ Because this is a experiment using react hooks.
 - support levels of complexity
 - expose generic handlers for alternative inputs like press
 - keyboard support
+
+## KNOWN ISSUES
+
+- elapsed time counts pause / resume time
