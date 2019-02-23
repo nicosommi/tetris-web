@@ -53,6 +53,11 @@ const tetris = ({ theme = "default" }: Props) => {
               onPress={() => handlers.ROTATE()}
             />
             <Button
+              accessibilityLabel="blast"
+              title="Blast!"
+              onPress={() => handlers.BLAST()}
+            />
+            <Button
               accessibilityLabel="pause"
               title="Pause"
               onPress={() => handlers.PAUSE()}
