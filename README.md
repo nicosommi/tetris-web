@@ -8,13 +8,13 @@ Fun, practice, experiment, learn.
 
 ### Why not use canvas or a game engine?
 
-Because this is a experiment using react hooks.
+Not using an enginer because this is a experiment with react hooks.
+On the other hand, I'm rendering divs as a first iteration implementation, but it should be relatively easy to adapt the game state to a canvas or even an svg renderer.
 
 ## TODO
 
-- add blast command
-- add auto fit to rotation command
 - add onscreen keyboard when native and optional on web
+- add auto fit to rotation command
 - add settings panel
 - add theme selector
 - polish shapes with gradients and transitions
@@ -30,6 +30,7 @@ Because this is a experiment using react hooks.
 
 ## DONE
 
+- add blast command
 - basic game mechanism
 - react native compatibility
 - separate state from UI
