@@ -93,8 +93,34 @@ const reduceGame: GameReducer = (previous, action) => {
       }
     }
     case "BLAST": {
-      // TODO: implement command
-      return previous
+      let activeShape = previous.board.activeShape
+      if (!activeShape) return previous
+      let collidesActive = doesShapeCollidesWithFilledBoxAtSide(
+        previous.board,
+        activeShape,
+        "bottom"
+      )
+      while (!collidesActive) {
+        activeShape = {
+          ...activeShape,
+          line: activeShape.line - 1
+        }
+
+        collidesActive = doesShapeCollidesWithFilledBoxAtSide(
+          previous.board,
+          activeShape,
+          "bottom"
+        )
+      }
+
+      return {
+        ...previous,
+        board: {
+          ...previous.board,
+          activeShape,
+          lines: drawBoardLines(previous.board.lines, activeShape)
+        }
+      }
     }
     case "LEFT": {
       if (!previous.board.activeShape) {
@@ -276,6 +302,10 @@ export function useTetris(): [Game, number, Commands] {
     {
       handler: handlers.RESTART,
       keys: ["r"]
+    },
+    {
+      handler: handlers.BLAST,
+      keys: ["b"]
     },
     {
       handler: handlers.PAUSE,
