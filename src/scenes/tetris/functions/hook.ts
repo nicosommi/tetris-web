@@ -1,9 +1,9 @@
 import { React } from "../../../utils/view"
 
 import { Reducer } from "react"
+import { useKeyDowns } from "../../joystick/components/keyboard"
 import { createBoard, drawBoardLines, simplifyLines } from "./board"
 import { createGame, getLevelForLines, getTickForLevel } from "./game"
-import { useKeyDowns } from "./keyboard"
 import {
   doesShapeCollidesWithFilledBoxAtSide,
   doesShapeCollidesWithFilledBoxInCurrentPosition,
@@ -275,37 +275,6 @@ export function useTetris(): [Game, number, Commands] {
   )
 
   const handlers = createHandlers(dispatch)
-
-  useKeyDowns([
-    {
-      handler: handlers.ROTATE,
-      keys: ["Enter", "ArrowUp", "x"]
-    },
-    {
-      handler: handlers.RIGHT,
-      keys: ["ArrowRight"]
-    },
-    {
-      handler: handlers.LEFT,
-      keys: ["ArrowLeft"]
-    },
-    {
-      handler: handlers.DOWN,
-      keys: ["ArrowDown"]
-    },
-    {
-      handler: handlers.RESTART,
-      keys: ["r"]
-    },
-    {
-      handler: handlers.BLAST,
-      keys: ["b", "y", " "]
-    },
-    {
-      handler: handlers.PAUSE,
-      keys: ["p"]
-    }
-  ])
 
   const [duration, setDuration] = useState(0)
   useTick(

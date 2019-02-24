@@ -17,6 +17,7 @@ type Props = TouchableOpacityProps & {
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
+
   const { handlers } = props
   return (
     <ViewContainer theme={theme}>

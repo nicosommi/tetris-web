@@ -1,13 +1,9 @@
 import { useContext } from "react"
-import {
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View
-} from "react-native"
+import { TouchableOpacityProps, View } from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import Button from "./Button"
+import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
   handlers: JoystickCommands
@@ -15,7 +11,28 @@ type Props = TouchableOpacityProps & {
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
+
   const { handlers } = props
+
+  useKeyDowns([
+    {
+      handler: handlers.up,
+      keys: ["ArrowUp", "w"]
+    },
+    {
+      handler: handlers.right,
+      keys: ["ArrowRight", "d"]
+    },
+    {
+      handler: handlers.left,
+      keys: ["ArrowLeft", "a"]
+    },
+    {
+      handler: handlers.down,
+      keys: ["ArrowDown", "s"]
+    }
+  ])
+
   return (
     <ViewContainer theme={theme}>
       <Button

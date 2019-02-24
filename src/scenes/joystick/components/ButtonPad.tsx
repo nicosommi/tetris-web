@@ -8,6 +8,7 @@ import {
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import Button from "./Button"
+import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
   handlers: JoystickCommands
@@ -16,6 +17,18 @@ type Props = TouchableOpacityProps & {
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
   const { handlers } = props
+
+  useKeyDowns([
+    {
+      handler: handlers.x,
+      keys: ["j", "z"]
+    },
+    {
+      handler: handlers.y,
+      keys: ["k", "x"]
+    }
+  ])
+
   return (
     <ViewContainer theme={theme}>
       <Button

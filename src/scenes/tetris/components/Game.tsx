@@ -25,7 +25,7 @@ const tetris = ({ theme = "default" }: Props) => {
     right: handlers.RIGHT,
     select: handlers.RESTART,
     start: handlers.PAUSE,
-    up: () => undefined,
+    up: handlers.ROTATE,
     x: handlers.ROTATE,
     y: handlers.BLAST
   }
