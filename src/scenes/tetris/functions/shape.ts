@@ -12,12 +12,18 @@ export const rotate90Left = (points: Point[]): Point[] => {
   // tslint:disable-next-line:variable-name
   const newPoints = points.map(({ x: _x, y: _y }) => ({ x: -_y, y: _x }))
   // find bottom left point (origin)
-  const bottomPoints = getMaxPoints(newPoints, "bottom")
-  const originPoint = getMaxPoints(bottomPoints, "left")[0]
+  const bottomPoints = getFacePoints(newPoints, "bottom")
+  let originPoint: Point = bottomPoints[0]
+  for (const currentPoint of bottomPoints) {
+    if (!originPoint || currentPoint.x < originPoint.x) {
+      originPoint = currentPoint
+    }
+  }
   // translate to origin = 0,0
-  const deltaX = -originPoint.x
-  const deltaY = -originPoint.y
-  return newPoints.map(({ x, y }) => ({ x: x + deltaX, y: y + deltaY }))
+  const deltaX = originPoint.x < 0 ? -originPoint.x : originPoint.x
+  const deltaY = originPoint.y < 0 ? -originPoint.y : originPoint.y
+  const result = newPoints.map(({ x, y }) => ({ x: x + deltaX, y: y + deltaY }))
+  return result
 }
 
 const coordinatesOn1stCuadrant: ShapeCoordinates = {
@@ -34,40 +40,21 @@ const shapes: ShapeType[] = (Object.keys(
   coordinatesOn1stCuadrant
 ) as unknown) as ShapeType[]
 
-const coordinatesOn2ndCuadrant: ShapeCoordinates = {
-  ...shapes.reduce<ShapeCoordinates>(
-    (acc, key) => ({
-      ...acc,
-      [key]: rotate90Left(coordinatesOn1stCuadrant[key])
-    }),
-    {} as any
-  )
-}
-
-const coordinatesOn3rdCuadrant: ShapeCoordinates = {
-  ...shapes.reduce<ShapeCoordinates>(
-    (acc, key) => ({
-      ...acc,
-      [key]: rotate90Left(coordinatesOn2ndCuadrant[key])
-    }),
-    {} as any
-  )
-}
-const coordinatesOn4thCuadrant: ShapeCoordinates = {
-  ...shapes.reduce<ShapeCoordinates>(
-    (acc, key) => ({
-      ...acc,
-      [key]: rotate90Left(coordinatesOn3rdCuadrant[key])
-    }),
-    {} as any
-  )
-}
-
 export const coordinates: ShapeAllPositionCoordinates = {
   0: coordinatesOn1stCuadrant,
-  1: coordinatesOn2ndCuadrant,
-  2: coordinatesOn3rdCuadrant,
-  3: coordinatesOn4thCuadrant
+  1: { ...coordinatesOn1stCuadrant },
+  2: { ...coordinatesOn1stCuadrant },
+  3: { ...coordinatesOn1stCuadrant }
+}
+
+for (const i of shapes) {
+  const first = coordinatesOn1stCuadrant[i]
+  const second = rotate90Left(first)
+  const third = rotate90Left(second)
+  const fourth = rotate90Left(third)
+  coordinates[1][i] = second
+  coordinates[2][i] = third
+  coordinates[3][i] = fourth
 }
 
 const c = chance()
@@ -142,7 +129,7 @@ function getXsByYs(points: Point[]): XsByXs {
   )
 }
 
-function getMaxPoints(points: Point[], side: Side): Point[] {
+export function getFacePoints(points: Point[], side: Side): Point[] {
   const xsByXs =
     side === "top" || side === "bottom" ? getYsByXs(points) : getXsByYs(points)
   // suspicious: operation with signs might be more simple
@@ -167,9 +154,9 @@ function getMaxPoints(points: Point[], side: Side): Point[] {
   return result
 }
 
-export function getShapeMaxPoints(shape: Shape, side: Side): Point[] {
+export function getShapeFacePoints(shape: Shape, side: Side): Point[] {
   const absoluteRotatedCoordinates = getAbsoluteShapeCoordinates(shape)
-  return getMaxPoints(absoluteRotatedCoordinates, side)
+  return getFacePoints(absoluteRotatedCoordinates, side)
 }
 
 export function getShapeShownHeight(shape: Shape): number {
@@ -212,7 +199,7 @@ export function doesShapeCollidesWithFilledBoxAtSide(
   shape: Shape,
   side: Side
 ): boolean {
-  const points: Point[] = getShapeMaxPoints(shape, side)
+  const points: Point[] = getShapeFacePoints(shape, side)
   return points.find(({ x: currentPointColumn, y: currentPointRow }) => {
     const currentLine = translateLine(board.lines.length, currentPointRow)
     if (
