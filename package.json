@@ -35,7 +35,7 @@
     "type-check": "tsc --noEmit",
     "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
-    "deploy": "gh-pages -d build"
+    "deploy": "yarn build && gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
