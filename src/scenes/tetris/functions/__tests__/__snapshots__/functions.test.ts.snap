@@ -98,31 +98,31 @@ exports[`a i shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 1,
-      "y": 23,
-    },
-    Object {
-      "x": 2,
-      "y": 23,
-    },
-    Object {
-      "x": 3,
-      "y": 23,
-    },
-    Object {
       "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 23,
+    },
+    Object {
+      "x": 7,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 1,
+      "x": 4,
       "y": 23,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
+      "x": 7,
       "y": 23,
     },
   ],
@@ -237,39 +237,39 @@ exports[`a j shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 25,
     },
   ],
@@ -286,36 +286,36 @@ exports[`a j shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 2,
-      "y": 24,
-    },
-    Object {
-      "x": 3,
-      "y": 24,
-    },
-    Object {
       "x": 4,
-      "y": 23,
+      "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 24,
     },
     Object {
-      "x": 2,
-      "y": 24,
+      "x": 4,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 24,
     },
     Object {
-      "x": 4,
-      "y": 24,
+      "x": 6,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -331,40 +331,40 @@ exports[`a j shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 21,
-    },
-    Object {
       "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
-      "y": 21,
-    },
-    Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 4,
+      "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 3,
-      "y": 21,
-    },
-    Object {
-      "x": 3,
-      "y": 22,
+      "x": 4,
+      "y": 23,
     },
     Object {
       "x": 4,
-      "y": 23,
+      "y": 24,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -425,40 +425,40 @@ exports[`a l shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 25,
+      "x": 4,
+      "y": 27,
     },
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 5,
+      "y": 25,
     },
   ],
   "left": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 4,
-      "y": 24,
-    },
-    Object {
-      "x": 3,
+      "x": 5,
       "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 26,
+    },
+    Object {
+      "x": 4,
+      "y": 27,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 4,
-      "y": 24,
-    },
-    Object {
-      "x": 4,
+      "x": 5,
       "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 26,
+    },
+    Object {
+      "x": 5,
+      "y": 27,
     },
   ],
   "shape": Object {
@@ -474,36 +474,36 @@ exports[`a l shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 2,
-      "y": 22,
-    },
-    Object {
-      "x": 3,
-      "y": 23,
-    },
-    Object {
       "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 2,
-      "y": 22,
+      "x": 4,
+      "y": 23,
     },
     Object {
-      "x": 2,
-      "y": 23,
+      "x": 4,
+      "y": 24,
     },
   ],
   "right": Array [
     Object {
-      "x": 2,
-      "y": 22,
-    },
-    Object {
       "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
     },
   ],
   "shape": Object {
@@ -519,39 +519,39 @@ exports[`a l shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 5,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 6,
+      "x": 5,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 5,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 24,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 6,
+      "x": 5,
       "y": 23,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 24,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 25,
     },
   ],
@@ -609,31 +609,31 @@ exports[`a o shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 3,
+      "x": 4,
       "y": 24,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
   ],
@@ -650,31 +650,31 @@ exports[`a o shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 3,
+      "x": 4,
       "y": 24,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
   ],
@@ -691,31 +691,31 @@ exports[`a o shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 3,
+      "x": 4,
       "y": 24,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
+      "x": 5,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
   ],
@@ -777,40 +777,40 @@ exports[`a s shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 24,
+      "x": 4,
+      "y": 25,
     },
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 3,
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 3,
+      "x": 4,
       "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 3,
+      "x": 5,
       "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
     },
   ],
   "shape": Object {
@@ -826,36 +826,36 @@ exports[`a s shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 2,
-      "y": 22,
-    },
-    Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
       "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 23,
+    },
+    Object {
+      "x": 6,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 2,
-      "y": 22,
+      "x": 4,
+      "y": 23,
     },
     Object {
-      "x": 3,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
   ],
   "right": Array [
     Object {
-      "x": 3,
-      "y": 22,
+      "x": 5,
+      "y": 23,
     },
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 24,
     },
   ],
   "shape": Object {
@@ -871,40 +871,40 @@ exports[`a s shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 5,
-      "y": 24,
+      "x": 4,
+      "y": 25,
     },
     Object {
-      "x": 6,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 6,
-      "y": 23,
-    },
-    Object {
       "x": 5,
       "y": 24,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
     },
   ],
   "right": Array [
     Object {
-      "x": 6,
-      "y": 23,
-    },
-    Object {
-      "x": 6,
+      "x": 5,
       "y": 24,
     },
     Object {
       "x": 5,
       "y": 25,
+    },
+    Object {
+      "x": 4,
+      "y": 26,
     },
   ],
   "shape": Object {
@@ -965,40 +965,40 @@ exports[`a t shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 24,
+      "x": 4,
+      "y": 25,
     },
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 3,
+      "x": 5,
       "y": 24,
     },
     Object {
       "x": 4,
       "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 26,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
-      "y": 23,
-    },
-    Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 26,
     },
   ],
   "shape": Object {
@@ -1014,36 +1014,36 @@ exports[`a t shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 2,
-      "y": 23,
-    },
-    Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
       "x": 4,
-      "y": 23,
+      "y": 25,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
+    },
+    Object {
+      "x": 6,
+      "y": 25,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
-      "y": 22,
+      "x": 5,
+      "y": 24,
     },
     Object {
-      "x": 2,
-      "y": 23,
+      "x": 4,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 3,
-      "y": 22,
+      "x": 5,
+      "y": 24,
     },
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -1059,40 +1059,40 @@ exports[`a t shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 5,
-      "y": 22,
+      "x": 4,
+      "y": 23,
     },
     Object {
-      "x": 6,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 5,
-      "y": 22,
-    },
-    Object {
-      "x": 5,
+      "x": 4,
       "y": 23,
     },
     Object {
-      "x": 5,
+      "x": 4,
       "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 5,
-      "y": 22,
-    },
-    Object {
-      "x": 6,
+      "x": 4,
       "y": 23,
     },
     Object {
       "x": 5,
       "y": 24,
+    },
+    Object {
+      "x": 4,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -1153,40 +1153,40 @@ exports[`a z shape in position 1 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 24,
+      "x": 4,
+      "y": 23,
     },
     Object {
-      "x": 4,
-      "y": 25,
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
-      "y": 24,
-    },
-    Object {
-      "x": 3,
-      "y": 25,
+      "x": 4,
+      "y": 23,
     },
     Object {
       "x": 4,
-      "y": 26,
+      "y": 24,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 3,
+      "x": 4,
+      "y": 23,
+    },
+    Object {
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 25,
-    },
-    Object {
-      "x": 4,
-      "y": 26,
     },
   ],
   "shape": Object {
@@ -1202,36 +1202,36 @@ exports[`a z shape in position 2 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 2,
+      "x": 4,
+      "y": 25,
+    },
+    Object {
+      "x": 5,
       "y": 24,
     },
     Object {
-      "x": 3,
-      "y": 23,
-    },
-    Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
-      "y": 23,
+      "x": 5,
+      "y": 24,
     },
     Object {
-      "x": 2,
-      "y": 24,
+      "x": 4,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 4,
-      "y": 23,
+      "x": 6,
+      "y": 24,
     },
     Object {
-      "x": 3,
-      "y": 24,
+      "x": 5,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -1247,40 +1247,40 @@ exports[`a z shape in position 3 snapshot should have the appropiate max points 
 Object {
   "bottom": Array [
     Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
       "x": 4,
       "y": 23,
+    },
+    Object {
+      "x": 5,
+      "y": 24,
     },
   ],
   "left": Array [
     Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
-      "x": 3,
+      "x": 4,
       "y": 23,
     },
     Object {
       "x": 4,
       "y": 24,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
     },
   ],
   "right": Array [
     Object {
-      "x": 3,
-      "y": 22,
-    },
-    Object {
       "x": 4,
       "y": 23,
     },
     Object {
-      "x": 4,
+      "x": 5,
       "y": 24,
+    },
+    Object {
+      "x": 5,
+      "y": 25,
     },
   ],
   "shape": Object {
@@ -1299,12 +1299,12 @@ Array [
     "y": 0,
   },
   Object {
-    "x": -1,
-    "y": -1,
+    "x": 1,
+    "y": 0,
   },
   Object {
-    "x": -2,
-    "y": -1,
+    "x": 2,
+    "y": 1,
   },
 ]
 `;
@@ -1312,12 +1312,12 @@ Array [
 exports[`get max points at side left for shape s at position 2 1`] = `
 Array [
   Object {
-    "x": -1,
+    "x": 0,
     "y": 0,
   },
   Object {
-    "x": -2,
-    "y": -1,
+    "x": 1,
+    "y": 1,
   },
 ]
 `;
@@ -1325,12 +1325,12 @@ Array [
 exports[`get max points at side right for shape s at position 2 1`] = `
 Array [
   Object {
-    "x": 0,
+    "x": 1,
     "y": 0,
   },
   Object {
-    "x": -1,
-    "y": -1,
+    "x": 2,
+    "y": 1,
   },
 ]
 `;
@@ -1342,12 +1342,12 @@ Array [
     "y": 0,
   },
   Object {
-    "x": -1,
-    "y": 0,
+    "x": 1,
+    "y": 1,
   },
   Object {
-    "x": -2,
-    "y": -1,
+    "x": 2,
+    "y": 1,
   },
 ]
 `;

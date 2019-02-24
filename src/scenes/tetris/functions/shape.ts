@@ -110,23 +110,21 @@ export function getAbsoluteShapeCoordinates(shape: Shape): Point[] {
 }
 
 function getYsByXs(points: Point[]): XsByXs {
-  return points.reduce<XsByXs>(
-    (acc, { x, y }) => ({
-      ...acc,
-      [x]: [...(acc[x] || []), y]
-    }),
-    {} as any
-  )
+  const result: XsByXs = {}
+  for (const { x, y } of points) {
+    if (!result[x]) result[x] = []
+    result[x].push(y)
+  }
+  return result
 }
 
 function getXsByYs(points: Point[]): XsByXs {
-  return points.reduce<XsByXs>(
-    (acc, { x, y }) => ({
-      ...acc,
-      [y]: [...(acc[y] || []), x]
-    }),
-    {} as any
-  )
+  const result: XsByXs = {}
+  for (const { x, y } of points) {
+    if (!result[y]) result[y] = []
+    result[y].push(x)
+  }
+  return result
 }
 
 export function getFacePoints(points: Point[], side: Side): Point[] {

@@ -26,7 +26,8 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 - make it similar to theme c palace and adjusting a theme
 - add one more level of complexity: scarsity for I, etc
 - complete other themes
-- hide first 3 lines?
+- hide first 3 lines?ù
+- put keybindings as part of the joystick?
 
 ## DONE
 
