@@ -240,12 +240,6 @@ const useTick = (
   }, props)
 }
 
-type CommandHandler = (_?: string, e?: KeyboardEvent) => void
-
-type Commands = { [key in ActionType]: CommandHandler }
-
-type CommandCreator = (dispatch: React.Dispatch<Action>) => Commands
-
 const createHandler = (
   type: ActionType,
   dispatch: React.Dispatch<Action>
@@ -285,7 +279,7 @@ export function useTetris(): [Game, number, Commands] {
   useKeyDowns([
     {
       handler: handlers.ROTATE,
-      keys: ["Enter", "ArrowUp"]
+      keys: ["Enter", "ArrowUp", "x"]
     },
     {
       handler: handlers.RIGHT,
@@ -297,7 +291,7 @@ export function useTetris(): [Game, number, Commands] {
     },
     {
       handler: handlers.DOWN,
-      keys: ["ArrowDown", " "]
+      keys: ["ArrowDown"]
     },
     {
       handler: handlers.RESTART,
@@ -305,7 +299,7 @@ export function useTetris(): [Game, number, Commands] {
     },
     {
       handler: handlers.BLAST,
-      keys: ["b"]
+      keys: ["b", "y", " "]
     },
     {
       handler: handlers.PAUSE,

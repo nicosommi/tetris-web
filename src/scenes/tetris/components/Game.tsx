@@ -5,9 +5,9 @@ import { g, React } from "../../../utils/view"
 
 import { useTetris } from "../functions/hook"
 
+import Joystick from "../../joystick/components/Joystick"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
-import Button from "./Button"
 import ShapePreview from "./ShapePreview"
 
 type Props = {
@@ -18,6 +18,17 @@ const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
   const [game, duration, handlers] = useTetris()
+
+  const joystickHandlers: JoystickCommands = {
+    down: handlers.DOWN,
+    left: handlers.LEFT,
+    right: handlers.RIGHT,
+    select: handlers.RESTART,
+    start: handlers.PAUSE,
+    up: () => undefined,
+    x: handlers.ROTATE,
+    y: handlers.BLAST
+  }
 
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
@@ -31,43 +42,7 @@ const tetris = ({ theme = "default" }: Props) => {
             <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
             <Text accessibilityLabel="level">Level: {game.level}</Text>
           </Indicators>
-          <Controls>
-            <Button
-              accessibilityLabel="left"
-              title="<"
-              onPress={() => handlers.LEFT()}
-            />
-            <Button
-              accessibilityLabel="right"
-              title=">"
-              onPress={() => handlers.RIGHT()}
-            />
-            <Button
-              accessibilityLabel="down"
-              title="DOWN"
-              onPress={() => handlers.DOWN()}
-            />
-            <Button
-              accessibilityLabel="rotate"
-              title="Rotate!"
-              onPress={() => handlers.ROTATE()}
-            />
-            <Button
-              accessibilityLabel="blast"
-              title="Blast!"
-              onPress={() => handlers.BLAST()}
-            />
-            <Button
-              accessibilityLabel="pause"
-              title="Pause"
-              onPress={() => handlers.PAUSE()}
-            />
-            <Button
-              accessibilityLabel="restart"
-              title="Start new game"
-              onPress={() => handlers.RESTART()}
-            />
-          </Controls>
+          <Joystick handlers={joystickHandlers} />
           <BoardComponent>
             {game.board.lines.map((line, lineIndex) =>
               line.map((box, boxIndex) => (
@@ -113,11 +88,6 @@ const BoardContainer = g(View)({
 })
 
 const Indicators = g(View)({
-  display: "flex",
-  flexDirection: "row"
-})
-
-const Controls = g(View)({
   display: "flex",
   flexDirection: "row"
 })

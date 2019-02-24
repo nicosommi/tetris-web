@@ -1,3 +1,21 @@
+type CommandHandler = (_?: string, e?: KeyboardEvent) => void
+
+type Commands = { [key in ActionType]: CommandHandler }
+
+type JoystickButtonType =
+  | "up"
+  | "down"
+  | "left"
+  | "right"
+  | "x"
+  | "y"
+  | "start"
+  | "select"
+
+type JoystickCommands = { [key in JoystickButtonType]: CommandHandler }
+
+type CommandCreator = (dispatch: React.Dispatch<Action>) => Commands
+
 type Identificable = {
   id: string
 }
