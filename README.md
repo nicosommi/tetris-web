@@ -6,12 +6,12 @@ Idea: create a game using the DOM with react hooks and try how far I can get wit
 
 Fun, practice, experiment, learn.
 
-### Why not use canvas or a game engine?
+### Why not use canvas or a game engine?
 
 Not using an enginer because this is a experiment with react hooks.
 On the other hand, I'm rendering divs as a first iteration implementation, but it should be relatively easy to adapt the game state to a canvas or even an svg renderer.
 
-## TODO
+## TODO
 
 - add settings panel
 - add music turned off by default
@@ -28,7 +28,7 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 - complete other themes
 - hide first 3 lines?
 
-## DONE
+## DONE
 
 - put keybindings as part of the joystick
 - onscreen basic joystick
