@@ -8,7 +8,7 @@ Fun, practice, experiment, learn.
 
 ### Why not use canvas or a game engine?
 
-Not using an enginer because this is a experiment with react hooks.
+I'm not using a game engine because this is an experiment using react hooks.
 On the other hand, I'm rendering divs as a first iteration implementation, but it should be relatively easy to adapt the game state to a canvas or even an svg renderer.
 
 ## TODO
