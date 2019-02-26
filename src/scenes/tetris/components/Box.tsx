@@ -3,8 +3,7 @@ import { Text, View } from "react-native"
 import { DebugContext } from "../../../utils/debug"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
-
-import { BOX_HEIGHT, BOX_WIDTH } from "../functions/settings"
+import { getBoxMaxSide } from "../functions/util"
 
 interface Props {
   box: Box
@@ -33,8 +32,8 @@ const BoxComponent = (props: Props) => {
 const Container = g(View)<Props & { theme: Theme }>(
   {
     border: "1px dashed rgba(0,0,0,.2)",
-    height: BOX_HEIGHT,
-    width: BOX_WIDTH
+    height: getBoxMaxSide(),
+    width: getBoxMaxSide()
   },
   ({ box, theme }) => ({
     backgroundColor: box.partOfShape
