@@ -9,6 +9,7 @@ interface Props {
   box: Box
   line: number
   column: number
+  joystickCollapsed: boolean
 }
 const BoxComponent = (props: Props) => {
   const theme = useContext(ThemeContext)
@@ -31,14 +32,14 @@ const BoxComponent = (props: Props) => {
 
 const Container = g(View)<Props & { theme: Theme }>(
   {
-    border: "1px dashed rgba(0,0,0,.2)",
-    height: getBoxMaxSide(),
-    width: getBoxMaxSide()
+    border: "1px dashed rgba(0,0,0,.2)"
   },
-  ({ box, theme }) => ({
+  ({ box, theme, joystickCollapsed }) => ({
     backgroundColor: box.partOfShape
       ? theme.shapeColors[box.partOfShape.shape.type]
-      : "white"
+      : "white",
+    height: getBoxMaxSide(joystickCollapsed),
+    width: getBoxMaxSide(joystickCollapsed)
   })
 )
 

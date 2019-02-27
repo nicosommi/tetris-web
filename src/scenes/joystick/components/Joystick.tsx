@@ -13,17 +13,18 @@ import OptionPad from "./OptionPad"
 
 type Props = TouchableOpacityProps & {
   handlers: JoystickCommands
+  visible: boolean
 }
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
 
-  const { handlers } = props
+  const { handlers, visible } = props
   return (
     <ViewContainer theme={theme}>
-      <ArrowPad handlers={handlers} />
-      <OptionPad handlers={handlers} />
-      <ButtonPad handlers={handlers} />
+      <ArrowPad handlers={handlers} visible={visible} />
+      <OptionPad handlers={handlers} visible={visible} />
+      <ButtonPad handlers={handlers} visible={visible} />
     </ViewContainer>
   )
 }
@@ -34,8 +35,8 @@ const ViewContainer = g(View)<{ theme: Theme }>(
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    minWidth: 175,
     position: "relative",
-    width: 250,
     zIndex: 1
   },
   ({ theme }) => ({})

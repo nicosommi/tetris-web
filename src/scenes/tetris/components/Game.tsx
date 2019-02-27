@@ -5,10 +5,13 @@ import { g, React } from "../../../utils/view"
 
 import { useTetris } from "../functions/hook"
 
+import ButtonComponent from "../../joystick/components/Button"
 import Joystick from "../../joystick/components/Joystick"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import ShapePreview from "./ShapePreview"
+
+const { useState } = React
 
 type Props = {
   theme?: ThemeNames
@@ -18,6 +21,8 @@ const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
   const [game, duration, handlers] = useTetris()
+
+  const [joystickCollapsed, setJoystickCollapsed] = useState(true)
 
   const joystickHandlers: JoystickCommands = {
     down: handlers.DOWN,
@@ -42,28 +47,38 @@ const tetris = ({ theme = "default" }: Props) => {
             <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
             <Text accessibilityLabel="level">Level: {game.level}</Text>
           </Indicators>
-          <Joystick handlers={joystickHandlers} />
-          <BoardComponent>
+          <BoardComponent joystickCollapsed={joystickCollapsed}>
             {game.board.lines.map((line, lineIndex) =>
               line.map((box, boxIndex) => (
                 <BoxComponent
                   key={`${box.id}`}
                   box={box}
+                  joystickCollapsed={joystickCollapsed}
                   line={lineIndex}
                   column={boxIndex}
                 />
               ))
             )}
           </BoardComponent>
+          <ButtonComponent
+            accessibilityLabel="toggle onscreen joystick"
+            title="Onscreen joystick"
+            onPress={() => setJoystickCollapsed(!joystickCollapsed)}
+          />
+          <Joystick handlers={joystickHandlers} visible={!joystickCollapsed} />
         </BoardContainer>
         <BoardContainer>
           {game.board.previewBoards.map(previewBoard => (
-            <ShapePreview key={`${previewBoard.id}`}>
+            <ShapePreview
+              key={`${previewBoard.id}`}
+              joystickCollapsed={joystickCollapsed}
+            >
               {previewBoard.lines.map((line, lineIndex) =>
                 line.map((box, boxIndex) => (
                   <BoxComponent
                     key={`${box.id}`}
                     box={box}
+                    joystickCollapsed={joystickCollapsed}
                     line={lineIndex}
                     column={boxIndex}
                   />
@@ -83,6 +98,7 @@ const Container = g(View)({
 })
 
 const BoardContainer = g(View)({
+  alignItems: "center",
   display: "flex",
   flexDirection: "column"
 })

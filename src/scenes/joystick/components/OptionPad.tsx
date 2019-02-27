@@ -7,11 +7,12 @@ import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
   handlers: JoystickCommands
+  visible: boolean
 }
 
 const OptionPad = (props: Props) => {
   const theme = useContext(ThemeContext)
-  const { handlers } = props
+  const { handlers, visible } = props
 
   useKeyDowns([
     {
@@ -24,7 +25,7 @@ const OptionPad = (props: Props) => {
     }
   ])
 
-  return (
+  return visible ? (
     <ViewContainer theme={theme}>
       <Button
         accessibilityLabel="select button"
@@ -39,16 +40,13 @@ const OptionPad = (props: Props) => {
         onPress={() => handlers.start()}
       />
     </ViewContainer>
-  )
+  ) : null
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>(
-  {
-    display: "flex",
-    flexDirection: "row",
-    height: 60
-  },
-  ({ theme }) => ({})
-)
+const ViewContainer = g(View)<{ theme: Theme }>({
+  display: "flex",
+  flexDirection: "row",
+  height: 60
+})
 
 export default OptionPad

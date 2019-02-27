@@ -5,32 +5,39 @@ import { BOARD_LENGTH, BOX_WIDTH, LINE_LENGTH } from "./settings"
 
 export const chance = () => new C()
 
+export const getJoystickHeight = (joystickCollapsed: boolean) => {
+  return joystickCollapsed ? 60 : 200
+}
+
 export const getViewportWidth = () =>
-  0.8 *
-  (isWeb()
+  isWeb()
     ? document.documentElement.clientWidth
-    : Dimensions.get("window").width)
+    : Dimensions.get("window").width
 export const getViewportHeight = () =>
-  0.8 *
-  (isWeb()
+  isWeb()
     ? document.documentElement.clientHeight
-    : Dimensions.get("window").height)
+    : Dimensions.get("window").height
 
 function getPotentialBoxMaxWidth() {
   return Math.floor(getViewportWidth() / LINE_LENGTH)
 }
-function getPotentialBoxMaxHeight() {
-  return Math.floor(getViewportHeight() / BOARD_LENGTH)
+function getPotentialBoxMaxHeight(joystickCollapsed: boolean) {
+  return Math.floor(
+    (getViewportHeight() - getJoystickHeight(joystickCollapsed)) / BOARD_LENGTH
+  )
 }
 
-export function getBoxMaxSide() {
-  return Math.min(getPotentialBoxMaxHeight(), getPotentialBoxMaxWidth())
+export function getBoxMaxSide(joystickCollapsed: boolean) {
+  return Math.min(
+    getPotentialBoxMaxHeight(joystickCollapsed),
+    getPotentialBoxMaxWidth()
+  )
 }
 
-export const getBoardWidth = (): number => {
-  return getBoxMaxSide() * LINE_LENGTH
+export const getBoardWidth = (joystickCollapsed: boolean): number => {
+  return getBoxMaxSide(joystickCollapsed) * LINE_LENGTH
 }
 
-export const getBoardHeight = (): number => {
-  return getBoxMaxSide() * BOARD_LENGTH
+export const getBoardHeight = (joystickCollapsed: boolean): number => {
+  return getBoxMaxSide(joystickCollapsed) * BOARD_LENGTH
 }

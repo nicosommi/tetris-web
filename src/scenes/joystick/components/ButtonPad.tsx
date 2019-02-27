@@ -1,10 +1,5 @@
 import { useContext } from "react"
-import {
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View
-} from "react-native"
+import { TouchableOpacityProps, View } from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import Button from "./Button"
@@ -12,11 +7,12 @@ import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
   handlers: JoystickCommands
+  visible: boolean
 }
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
-  const { handlers } = props
+  const { handlers, visible } = props
 
   useKeyDowns([
     {
@@ -29,7 +25,7 @@ const Joystick = (props: Props) => {
     }
   ])
 
-  return (
+  return visible ? (
     <ViewContainer theme={theme}>
       <Button
         accessibilityLabel="x button"
@@ -44,15 +40,12 @@ const Joystick = (props: Props) => {
         onPress={() => handlers.y()}
       />
     </ViewContainer>
-  )
+  ) : null
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>(
-  {
-    display: "flex",
-    flexDirection: "row"
-  },
-  ({ theme }) => ({})
-)
+const ViewContainer = g(View)<{ theme: Theme }>({
+  display: "flex",
+  flexDirection: "row"
+})
 
 export default Joystick
