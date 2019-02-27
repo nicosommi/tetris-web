@@ -1,9 +1,9 @@
 import { React } from "../../../utils/view"
 
 import { Reducer } from "react"
-import { useKeyDowns } from "../../joystick/components/keyboard"
 import { createBoard, drawBoardLines, simplifyLines } from "./board"
 import { createGame, getLevelForLines, getTickForLevel } from "./game"
+import { PREVIEW_BOARD_LENGTH, PREVIEW_LINE_LENGTH } from "./settings"
 import {
   doesShapeCollidesWithFilledBoxAtSide,
   doesShapeCollidesWithFilledBoxInCurrentPosition,
@@ -68,7 +68,7 @@ const reduceGame: GameReducer = (previous, action) => {
           activeShape,
           lines: drawBoardLines(newBoardLines, activeShape),
           previewBoards: finalShapeQueue.map(currentShape => {
-            const board = createBoard(4, 4)
+            const board = createBoard(PREVIEW_BOARD_LENGTH, PREVIEW_LINE_LENGTH)
             const adaptedShape: Shape = {
               ...currentShape,
               column: 0,

@@ -3,6 +3,7 @@ import { isDebug } from "../../../utils/debug"
 export const BOX_WIDTH = isDebug() ? 44 : 24
 export const BOX_HEIGHT = 24
 export const LINE_LENGTH = 10
+export const PREVIEW_BOARD_LENGTH = 2
 export const PREVIEW_LINE_LENGTH = 4
 export const BOARD_LENGTH = 24
 export const SHAPE_QUEUE_LENGTH = 3
