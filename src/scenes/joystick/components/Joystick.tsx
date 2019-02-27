@@ -29,17 +29,14 @@ const Joystick = (props: Props) => {
   )
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>(
-  {
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    minWidth: 175,
-    position: "relative",
-    zIndex: 1
-  },
-  ({ theme }) => ({})
-)
+const ViewContainer = g(View)<{ theme: Theme }>({
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  minWidth: 175,
+  position: "relative",
+  zIndex: 1
+})
 
 export default Joystick

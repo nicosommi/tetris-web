@@ -38,42 +38,18 @@ const tetris = ({ theme = "default" }: Props) => {
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
       <Container>
-        <BoardContainer>
-          <Indicators>
-            <DebugContext.Consumer>
-              {isDebug => isDebug && <Text>Thicks: {game.ticks}</Text>}
-            </DebugContext.Consumer>
-            <Text accessibilityLabel="time">Time: {duration}</Text>
-            <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
-            <Text accessibilityLabel="level">Level: {game.level}</Text>
-          </Indicators>
-          <BoardComponent joystickCollapsed={joystickCollapsed}>
-            {game.board.lines.map((line, lineIndex) =>
-              line.map((box, boxIndex) => (
-                <BoxComponent
-                  key={`${box.id}`}
-                  box={box}
-                  joystickCollapsed={joystickCollapsed}
-                  line={lineIndex}
-                  column={boxIndex}
-                />
-              ))
-            )}
-          </BoardComponent>
-          <ButtonComponent
-            accessibilityLabel="toggle onscreen joystick"
-            title="Onscreen joystick"
-            onPress={() => setJoystickCollapsed(!joystickCollapsed)}
-          />
-          <Joystick handlers={joystickHandlers} visible={!joystickCollapsed} />
-        </BoardContainer>
-        <BoardContainer>
-          {game.board.previewBoards.map(previewBoard => (
-            <ShapePreview
-              key={`${previewBoard.id}`}
-              joystickCollapsed={joystickCollapsed}
-            >
-              {previewBoard.lines.map((line, lineIndex) =>
+        <GameContainer>
+          <BoardContainer>
+            <Indicators>
+              <DebugContext.Consumer>
+                {isDebug => isDebug && <Text>Thicks: {game.ticks}</Text>}
+              </DebugContext.Consumer>
+              <Text accessibilityLabel="time">Time: {duration}</Text>
+              <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
+              <Text accessibilityLabel="level">Level: {game.level}</Text>
+            </Indicators>
+            <BoardComponent joystickCollapsed={joystickCollapsed}>
+              {game.board.lines.map((line, lineIndex) =>
                 line.map((box, boxIndex) => (
                   <BoxComponent
                     key={`${box.id}`}
@@ -84,17 +60,50 @@ const tetris = ({ theme = "default" }: Props) => {
                   />
                 ))
               )}
-            </ShapePreview>
-          ))}
-        </BoardContainer>
+            </BoardComponent>
+          </BoardContainer>
+          <BoardContainer>
+            {game.board.previewBoards.map(previewBoard => (
+              <ShapePreview
+                key={`${previewBoard.id}`}
+                joystickCollapsed={joystickCollapsed}
+              >
+                {previewBoard.lines.map((line, lineIndex) =>
+                  line.map((box, boxIndex) => (
+                    <BoxComponent
+                      key={`${box.id}`}
+                      box={box}
+                      joystickCollapsed={joystickCollapsed}
+                      line={lineIndex}
+                      column={boxIndex}
+                    />
+                  ))
+                )}
+              </ShapePreview>
+            ))}
+          </BoardContainer>
+        </GameContainer>
+        <ButtonComponent
+          accessibilityLabel="toggle onscreen joystick"
+          title="Onscreen joystick"
+          onPress={() => setJoystickCollapsed(!joystickCollapsed)}
+        />
+        <Joystick handlers={joystickHandlers} visible={!joystickCollapsed} />
       </Container>
     </ThemeContext.Provider>
   )
 }
 
+const GameContainer = g(View)({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center"
+})
+
 const Container = g(View)({
   display: "flex",
-  flexDirection: "row"
+  flexDirection: "column",
+  flexGrow: 0
 })
 
 const BoardContainer = g(View)({
