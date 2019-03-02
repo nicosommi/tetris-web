@@ -38,6 +38,7 @@ const tetris = ({ theme = "default" }: Props) => {
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
       <Container>
+        <Menu show={game.paused === true} />
         <GameContainer>
           <BoardContainer>
             <Indicators>
@@ -105,6 +106,27 @@ const Container = g(View)({
   flexDirection: "column",
   flexGrow: 0
 })
+
+type MenuProps = {
+  show: boolean
+}
+
+const Menu = g(View)(
+  {
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    height: "100%",
+    left: 0,
+    overflowX: "hidden",
+    position: "fixed",
+    top: 0,
+    transition: "0.03s",
+    width: "0",
+    zIndex: 1
+  },
+  ({ show }: MenuProps) => ({
+    width: show ? "100%" : 0
+  })
+)
 
 const BoardContainer = g(View)({
   alignItems: "center",
