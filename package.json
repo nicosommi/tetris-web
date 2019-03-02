@@ -22,6 +22,7 @@
     "react-dom": "^16.8.1",
     "react-native-web": "^0.10.0",
     "react-scripts": "2.1.5",
+    "react-spring": "^8.0.9",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3"

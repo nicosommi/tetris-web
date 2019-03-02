@@ -1,4 +1,5 @@
 import { Text, View } from "react-native"
+import { animated, useSpring } from "react-spring"
 import { DebugContext } from "../../../utils/debug"
 import { getThemeByName, ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
@@ -35,10 +36,14 @@ const tetris = ({ theme = "default" }: Props) => {
     y: handlers.BLAST
   }
 
+  const { show } = useSpring({ show: "100%", from: { show: "0%" } })
+
+  const AniOverlay = animated(Overlay)
+
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
       <Container>
-        <Menu show={game.paused === true} />
+        <AniOverlay show={game.paused === true ? show : "0%"} />
         <GameContainer>
           <BoardContainer>
             <Indicators>
@@ -107,24 +112,22 @@ const Container = g(View)({
   flexGrow: 0
 })
 
-type MenuProps = {
-  show: boolean
+type OverlayProps = {
+  show: string
 }
 
-const Menu = g(View)(
+const Overlay = g(View)(
   {
     backgroundColor: "rgba(0, 0, 0, 0.9)",
-    height: "100%",
     left: 0,
     overflowX: "hidden",
     position: "fixed",
     top: 0,
-    transition: "0.03s",
-    width: "0",
     zIndex: 1
   },
-  ({ show }: MenuProps) => ({
-    width: show ? "100%" : 0
+  ({ show }: OverlayProps) => ({
+    height: show,
+    width: show
   })
 )
 
