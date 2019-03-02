@@ -1,5 +1,4 @@
 import { Text, View } from "react-native"
-import { animated, config, useSpring } from "react-spring"
 import { DebugContext } from "../../../utils/debug"
 import { getThemeByName, ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
@@ -22,7 +21,7 @@ type Props = {
 const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
-  const [game, duration, handlers] = useTetris()
+  const [game, handlers] = useTetris()
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
 
@@ -47,7 +46,9 @@ const tetris = ({ theme = "default" }: Props) => {
               <DebugContext.Consumer>
                 {isDebug => isDebug && <Text>Thicks: {game.ticks}</Text>}
               </DebugContext.Consumer>
-              <Text accessibilityLabel="time">Time: {duration}</Text>
+              <Text accessibilityLabel="time">
+                Time: {game.durationInSeconds}
+              </Text>
               <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
               <Text accessibilityLabel="level">Level: {game.level}</Text>
             </Indicators>

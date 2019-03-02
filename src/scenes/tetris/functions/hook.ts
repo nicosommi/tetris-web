@@ -19,14 +19,26 @@ const reduceGame: GameReducer = (previous, action) => {
   if (previous.gameOver === true && action.type !== "RESTART") return previous
   if (previous.paused && action.type !== "PAUSE") return previous
   switch (action.type) {
-    case "PAUSE": {
+    case "SECOND": {
+      const durationInSeconds = previous.paused
+        ? previous.durationInSeconds
+        : previous.durationInSeconds + Number(action.payload)
       return {
         ...previous,
-        paused: !previous.paused
+        durationInSeconds
+      }
+    }
+    case "PAUSE": {
+      const paused = !previous.paused
+      const lastStartDate = paused ? previous.lastStartDate : new Date()
+      return {
+        ...previous,
+        lastStartDate,
+        paused
       }
     }
     case "DOWN":
-    case "THICK": {
+    case "TICK": {
       const [newShapeQueue, oneForNow] = prepareQueue(previous.board)
       const collidesOneForNow = doesShapeCollidesWithFilledBoxAtSide(
         previous.board,
@@ -60,6 +72,8 @@ const reduceGame: GameReducer = (previous, action) => {
         : [oneForNow, ...newShapeQueue.slice(0, newShapeQueue.length)]
       const lines = previous.lines + newLines
       const level = getLevelForLines(lines)
+      const startDate = previous.ticks === 0 ? new Date() : previous.startDate
+      const ticks = action.payload ? Number(action.payload) : previous.ticks
 
       return {
         ...previous,
@@ -86,10 +100,13 @@ const reduceGame: GameReducer = (previous, action) => {
             ? new Date()
             : undefined,
         gameOver: activeShape === undefined && collidesOneForNow ? true : false,
+        lastStartDate: previous.lastStartDate
+          ? previous.lastStartDate
+          : startDate,
         level,
         lines,
-        startDate: previous.ticks === 0 ? new Date() : previous.startDate,
-        ticks: action.payload ? Number(action.payload) : previous.ticks
+        startDate,
+        ticks
       }
     }
     case "BLAST": {
@@ -258,10 +275,11 @@ const createHandlers: CommandCreator = d => ({
   RESTART: createHandler("RESTART", d),
   RIGHT: createHandler("RIGHT", d),
   ROTATE: createHandler("ROTATE", d),
-  THICK: createHandler("THICK", d)
+  SECOND: createHandler("SECOND", d),
+  TICK: createHandler("TICK", d)
 })
 
-export function useTetris(): [Game, number, Commands] {
+export function useTetris(): [Game, Commands] {
   const [game, dispatch] = useReducer<Reducer<Game, Action>, Game>(
     reduceGame,
     initialGame,
@@ -269,29 +287,14 @@ export function useTetris(): [Game, number, Commands] {
   )
 
   useTick(
-    t => dispatch({ type: "THICK", payload: t }),
+    t => dispatch({ type: "TICK", payload: t }),
     () => getTickForLevel(game.level),
     [game.level]
   )
 
   const handlers = createHandlers(dispatch)
 
-  const [duration, setDuration] = useState(0)
-  useTick(
-    () => {
-      const newDuration =
-        game.endDate && game.startDate
-          ? Math.floor(
-              (game.endDate.getTime() - game.startDate.getTime()) / 1000
-            )
-          : game.startDate
-          ? Math.floor((new Date().getTime() - game.startDate.getTime()) / 1000)
-          : 0
-      if (!game.paused) setDuration(newDuration)
-    },
-    () => 250,
-    [game.startDate, game.endDate, game.paused]
-  )
+  useTick(() => dispatch({ type: "SECOND", payload: 1 }), () => 1000, [])
 
-  return [game, duration, handlers]
+  return [game, handlers]
 }

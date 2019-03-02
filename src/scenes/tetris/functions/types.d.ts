@@ -64,13 +64,15 @@ type AnonymousGame = {
   ticks: number
   gameOver: boolean
   startDate?: Date
+  durationInSeconds: number
+  lastStartDate?: Date
   endDate?: Date
   paused: boolean
 } & Identificable
 type Game = AnonymousGame & Identificable
 
 type ActionType =
-  | "THICK"
+  | "TICK"
   | "LEFT"
   | "RIGHT"
   | "DOWN"
@@ -78,6 +80,7 @@ type ActionType =
   | "BLAST"
   | "RESTART"
   | "PAUSE"
+  | "SECOND"
 type Action<T = any> = {
   type: ActionType
   payload?: T

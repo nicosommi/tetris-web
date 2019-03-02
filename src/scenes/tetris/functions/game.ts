@@ -27,6 +27,7 @@ export function createGame(previous?: Game): Game {
   const c = chance()
   return {
     board: createBoard(),
+    durationInSeconds: 0,
     gameOver: false,
     id: c.guid({ version: 4 }),
     level: 1,
