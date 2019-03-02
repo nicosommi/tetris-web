@@ -1,5 +1,5 @@
 import { Text, View } from "react-native"
-import { animated, useSpring } from "react-spring"
+import { animated, config, useSpring } from "react-spring"
 import { DebugContext } from "../../../utils/debug"
 import { getThemeByName, ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
@@ -10,6 +10,7 @@ import ButtonComponent from "../../joystick/components/Button"
 import Joystick from "../../joystick/components/Joystick"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
+import Overlay from "./Overlay"
 import ShapePreview from "./ShapePreview"
 
 const { useState } = React
@@ -36,14 +37,10 @@ const tetris = ({ theme = "default" }: Props) => {
     y: handlers.BLAST
   }
 
-  const { show } = useSpring({ show: "100%", from: { show: "0%" } })
-
-  const AniOverlay = animated(Overlay)
-
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
       <Container>
-        <AniOverlay show={game.paused === true ? show : "0%"} />
+        <Overlay open={!game.paused} />
         <GameContainer>
           <BoardContainer>
             <Indicators>
@@ -111,25 +108,6 @@ const Container = g(View)({
   flexDirection: "column",
   flexGrow: 0
 })
-
-type OverlayProps = {
-  show: string
-}
-
-const Overlay = g(View)(
-  {
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
-    left: 0,
-    overflowX: "hidden",
-    position: "fixed",
-    top: 0,
-    zIndex: 1
-  },
-  ({ show }: OverlayProps) => ({
-    height: show,
-    width: show
-  })
-)
 
 const BoardContainer = g(View)({
   alignItems: "center",
