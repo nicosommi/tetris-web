@@ -30,10 +30,8 @@ const reduceGame: GameReducer = (previous, action) => {
     }
     case "PAUSE": {
       const paused = !previous.paused
-      const lastStartDate = paused ? previous.lastStartDate : new Date()
       return {
         ...previous,
-        lastStartDate,
         paused
       }
     }
@@ -100,9 +98,6 @@ const reduceGame: GameReducer = (previous, action) => {
             ? new Date()
             : undefined,
         gameOver: activeShape === undefined && collidesOneForNow ? true : false,
-        lastStartDate: previous.lastStartDate
-          ? previous.lastStartDate
-          : startDate,
         level,
         lines,
         startDate,

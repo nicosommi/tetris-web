@@ -65,7 +65,6 @@ type AnonymousGame = {
   gameOver: boolean
   startDate?: Date
   durationInSeconds: number
-  lastStartDate?: Date
   endDate?: Date
   paused: boolean
 } & Identificable
