@@ -45,5 +45,5 @@ export function useKeyDowns(keyHandlers: UseKeyDownsArgs) {
     }
     return () =>
       isWeb() ? window.removeEventListener("keydown", listener) : undefined
-  }, [])
+  }, [keyHandlers])
 }

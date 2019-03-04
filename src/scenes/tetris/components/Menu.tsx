@@ -1,28 +1,21 @@
 import { View } from "react-native"
-import { animated, SpringConfig, useSpring } from "react-spring"
+import { animated, config, useSpring } from "react-spring"
 import { g, React } from "../../../utils/view"
 
-type OverlayProps = {
+type MenuProps = {
   open: boolean
-  children: React.ReactNode
 }
 
-const config: SpringConfig = {
-  clamp: false,
-  friction: 10,
-  mass: 1,
-  tension: 360
-}
-
-const Overlay = ({ children, open }: OverlayProps) => {
+const Menu = ({ open }: MenuProps) => {
   const { show } = useSpring({
-    config,
+    config: config.stiff,
     from: { show: "0%" },
-    reverse: !open,
+    reset: !open,
+    reverse: open,
     show: "100%"
   })
 
-  return <Container show={show}>{open ? children : null}</Container>
+  return <Container show={show} />
 }
 
 type ContainerProps = {
@@ -37,13 +30,13 @@ const Container = animated(
       overflowX: "hidden",
       position: "fixed",
       top: 0,
-      width: "100%",
       zIndex: 1
     },
     ({ show }: ContainerProps) => ({
-      height: show
+      height: show,
+      width: show
     })
   )
 )
 
-export default Overlay
+export default Menu

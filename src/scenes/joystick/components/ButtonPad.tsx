@@ -6,21 +6,22 @@ import Button from "./Button"
 import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
-  handlers: JoystickCommands
+  x: CommandHandler
+  y: CommandHandler
   visible: boolean
 }
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
-  const { handlers, visible } = props
+  const { x, y, visible } = props
 
   useKeyDowns([
     {
-      handler: handlers.x,
+      handler: x,
       keys: ["j", "z"]
     },
     {
-      handler: handlers.y,
+      handler: y,
       keys: ["k", "x"]
     }
   ])
@@ -31,13 +32,13 @@ const Joystick = (props: Props) => {
         accessibilityLabel="x button"
         title="X"
         type="circle"
-        onPress={() => handlers.x()}
+        onPress={() => x()}
       />
       <Button
         accessibilityLabel="y button"
         title="Y"
         type="circle"
-        onPress={() => handlers.y()}
+        onPress={() => y()}
       />
     </ViewContainer>
   ) : null

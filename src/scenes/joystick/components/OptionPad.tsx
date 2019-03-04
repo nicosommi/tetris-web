@@ -6,21 +6,22 @@ import Button from "./Button"
 import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
-  handlers: JoystickCommands
+  select: CommandHandler
+  start: CommandHandler
   visible: boolean
 }
 
 const OptionPad = (props: Props) => {
   const theme = useContext(ThemeContext)
-  const { handlers, visible } = props
+  const { select, start, visible } = props
 
   useKeyDowns([
     {
-      handler: handlers.select,
+      handler: select,
       keys: [" ", "o"]
     },
     {
-      handler: handlers.start,
+      handler: start,
       keys: ["Enter", "Escape"]
     }
   ])
@@ -31,13 +32,13 @@ const OptionPad = (props: Props) => {
         accessibilityLabel="select button"
         title="Select"
         type="pill"
-        onPress={() => handlers.select()}
+        onPress={() => select()}
       />
       <Button
         accessibilityLabel="start button"
         title="Start"
         type="pill"
-        onPress={() => handlers.start()}
+        onPress={() => start()}
       />
     </ViewContainer>
   ) : null

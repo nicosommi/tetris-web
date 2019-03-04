@@ -6,30 +6,33 @@ import Button from "./Button"
 import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
-  handlers: JoystickCommands
+  up: CommandHandler
+  down: CommandHandler
+  left: CommandHandler
+  right: CommandHandler
   visible: boolean
 }
 
 const Joystick = (props: Props) => {
   const theme = useContext(ThemeContext)
 
-  const { handlers, visible } = props
+  const { up, down, left, right, visible } = props
 
   useKeyDowns([
     {
-      handler: handlers.up,
+      handler: up,
       keys: ["ArrowUp", "w"]
     },
     {
-      handler: handlers.right,
+      handler: right,
       keys: ["ArrowRight", "d"]
     },
     {
-      handler: handlers.left,
+      handler: left,
       keys: ["ArrowLeft", "a"]
     },
     {
-      handler: handlers.down,
+      handler: down,
       keys: ["ArrowDown", "s"]
     }
   ])
@@ -40,14 +43,14 @@ const Joystick = (props: Props) => {
         accessibilityLabel="up"
         title={"\u25B2"}
         type="square"
-        onPress={() => handlers.up()}
+        onPress={() => up()}
       />
       <HorizontalAxis>
         <Button
           accessibilityLabel="left button"
           title={"\u25C0"}
           type="square"
-          onPress={() => handlers.left()}
+          onPress={() => left()}
         />
         <Button
           accessibilityLabel="center"
@@ -58,14 +61,14 @@ const Joystick = (props: Props) => {
           accessibilityLabel="right"
           title={"\u25B6"}
           type="square"
-          onPress={() => handlers.right()}
+          onPress={() => right()}
         />
       </HorizontalAxis>
       <Button
         accessibilityLabel="down"
         title={"\u25BC"}
         type="square"
-        onPress={() => handlers.down()}
+        onPress={() => down()}
       />
     </ViewContainer>
   ) : null

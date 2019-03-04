@@ -9,6 +9,8 @@ import ButtonComponent from "../../joystick/components/Button"
 import Joystick from "../../joystick/components/Joystick"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
+import MenuItem from "./MenuItem"
+import MenuTitle from "./MenuTitle"
 import Overlay from "./Overlay"
 import ShapePreview from "./ShapePreview"
 
@@ -18,28 +20,71 @@ type Props = {
   theme?: ThemeNames
 }
 
+type MenuOptionTypes = "continue" | "new-game" | "music" | "sound" | "theme"
+type MenuOptions = {
+  type: MenuOptionTypes
+  label: string
+}
+
+const menuOptions: MenuOptions[] = [
+  {
+    label: "CONTINUE",
+    type: "continue"
+  },
+  {
+    label: "START A NEW GAME",
+    type: "new-game"
+  },
+  {
+    label: "MUSIC",
+    type: "music"
+  },
+  {
+    label: "SOUND EFFECTS",
+    type: "sound"
+  },
+  {
+    label: "THEME",
+    type: "theme"
+  }
+]
+
+type Settings = {
+  music: boolean
+  sound: boolean
+  theme: ThemeNames
+}
+
 const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
+  const [currentMenuOptionIndex, setCurrentMenuOptionIndex] = useState(0)
+  const [settings, setSetting] = useState<Settings>({
+    music: false,
+    sound: false,
+    theme: "default"
+  })
+
   const [game, handlers] = useTetris()
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
 
-  const joystickHandlers: JoystickCommands = {
-    down: handlers.DOWN,
-    left: handlers.LEFT,
-    right: handlers.RIGHT,
-    select: handlers.RESTART,
-    start: handlers.PAUSE,
-    up: handlers.ROTATE,
-    x: handlers.ROTATE,
-    y: handlers.BLAST
-  }
-
   return (
     <ThemeContext.Provider value={getThemeByName(theme)}>
       <Container>
-        <Overlay open={!game.paused} />
+        {/* Use joystick arrow handlers and x y handlers for menu too */}
+        <Overlay open={game.paused}>
+          <React.Fragment>
+            <MenuTitle label="SETTINGS" />
+            {menuOptions.map((menuOption, idx) => (
+              <MenuItem
+                selected={idx === currentMenuOptionIndex}
+                key={menuOption.type}
+                label={menuOption.label}
+              />
+            ))}
+          </React.Fragment>
+        </Overlay>
         <GameContainer>
           <BoardContainer>
             <Indicators>
@@ -92,7 +137,33 @@ const tetris = ({ theme = "default" }: Props) => {
           title="Onscreen joystick"
           onPress={() => setJoystickCollapsed(!joystickCollapsed)}
         />
-        <Joystick handlers={joystickHandlers} visible={!joystickCollapsed} />
+        <Joystick
+          down={(...args) => {
+            game.paused
+              ? setCurrentMenuOptionIndex(
+                  currentMenuOptionIndex < menuOptions.length - 1
+                    ? currentMenuOptionIndex + 1
+                    : 0
+                )
+              : handlers.DOWN.apply(null, args)
+          }}
+          left={handlers.LEFT}
+          right={handlers.RIGHT}
+          select={handlers.RESTART}
+          start={handlers.PAUSE}
+          up={(...args) => {
+            game.paused
+              ? setCurrentMenuOptionIndex(
+                  currentMenuOptionIndex > 0
+                    ? currentMenuOptionIndex - 1
+                    : menuOptions.length - 1
+                )
+              : handlers.ROTATE.apply(null, args)
+          }}
+          x={handlers.ROTATE}
+          y={handlers.BLAST}
+          visible={!joystickCollapsed}
+        />
       </Container>
     </ThemeContext.Provider>
   )
