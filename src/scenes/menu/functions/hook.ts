@@ -1,29 +1,35 @@
 import { useState } from "react"
 
+export type MenuActionType = "increase" | "decrease" | "select"
+
 export default function useMenu(
-  menuOptions: Array<unknown>,
-  handler: (index: number, type: "increase" | "decrease" | "select") => void
+  menuOptions: object,
+  handler: (menuOption: string, type: MenuActionType) => void
 ) {
+  const keys = Object.keys(menuOptions)
   const [currentMenuOptionIndex, setCurrentMenuOptionIndex] = useState(0)
 
   const up = () =>
     setCurrentMenuOptionIndex(
-      currentMenuOptionIndex > 0
-        ? currentMenuOptionIndex - 1
-        : menuOptions.length - 1
+      currentMenuOptionIndex > 0 ? currentMenuOptionIndex - 1 : keys.length - 1
     )
 
   const down = () => {
     setCurrentMenuOptionIndex(
-      currentMenuOptionIndex < menuOptions.length - 1
-        ? currentMenuOptionIndex + 1
-        : 0
+      currentMenuOptionIndex < keys.length - 1 ? currentMenuOptionIndex + 1 : 0
     )
   }
 
-  const increase = () => handler(currentMenuOptionIndex, "increase")
-  const decrease = () => handler(currentMenuOptionIndex, "decrease")
-  const select = () => handler(currentMenuOptionIndex, "select")
+  const increase = () => handler(keys[currentMenuOptionIndex], "increase")
+  const decrease = () => handler(keys[currentMenuOptionIndex], "decrease")
+  const select = () => handler(keys[currentMenuOptionIndex], "select")
 
-  return { up, down, increase, decrease, select, currentMenuOptionIndex }
+  return {
+    currentMenuOption: keys[currentMenuOptionIndex],
+    decrease,
+    down,
+    increase,
+    select,
+    up
+  }
 }

@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { TouchableOpacityProps, View } from "react-native"
+import Button from "../../../components/Button"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
-import Button from "./Button"
 import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {

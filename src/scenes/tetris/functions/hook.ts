@@ -17,7 +17,8 @@ const initialGame: Game = createGame()
 
 const reduceGame: GameReducer = (previous, action) => {
   if (previous.gameOver === true && action.type !== "RESTART") return previous
-  if (previous.paused && action.type !== "PAUSE") return previous
+  if (previous.paused && action.type !== "PAUSE" && action.type !== "RESTART")
+    return previous
   switch (action.type) {
     case "SECOND": {
       const durationInSeconds = previous.paused

@@ -5,8 +5,8 @@ import {
   TouchableOpacityProps,
   View
 } from "react-native"
-import { ThemeContext } from "../../../utils/theme"
-import { g, React } from "../../../utils/view"
+import { ThemeContext } from "../utils/theme"
+import { g, React } from "../utils/view"
 
 type ButtonType = "square" | "pill" | "circle" | "normal"
 

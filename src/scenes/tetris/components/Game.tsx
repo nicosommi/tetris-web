@@ -5,12 +5,12 @@ import { g, React } from "../../../utils/view"
 
 import { useTetris } from "../functions/hook"
 
-import ButtonComponent from "../../joystick/components/Button"
+import ButtonComponent from "../../../components/Button"
 import Joystick from "../../joystick/components/Joystick"
 import MenuItem from "../../menu/components/MenuItem"
 import MenuTitle from "../../menu/components/MenuTitle"
 import Overlay from "../../menu/components/Overlay"
-import useMenu from "../../menu/functions/hook"
+import useMenu, { MenuActionType } from "../../menu/functions/hook"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import ShapePreview from "./ShapePreview"
@@ -23,36 +23,17 @@ type Props = {
 
 type MenuOptionIds = "continue" | "new-game" | "music" | "sound" | "theme"
 type MenuOptions = {
-  id: MenuOptionIds
-  label: string
+  [key in MenuOptionIds]: {
+    handler: (type: MenuActionType) => void
+    label: string
+  }
 }
 
-const menuOptions: MenuOptions[] = [
-  {
-    id: "continue",
-    label: "CONTINUE"
-  },
-  {
-    id: "new-game",
-    label: "START A NEW GAME"
-  },
-  {
-    id: "music",
-    label: "MUSIC"
-  },
-  {
-    id: "sound",
-    label: "SOUND EFFECTS"
-  },
-  {
-    id: "theme",
-    label: "THEME"
-  }
-]
+type Volume = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 
 type Settings = {
-  music: boolean
-  sound: boolean
+  music: Volume
+  sound: Volume
   theme: ThemeNames
 }
 
@@ -60,26 +41,57 @@ const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
   const [settings, setSetting] = useState<Settings>({
-    music: false,
-    sound: false,
+    music: 0,
+    sound: 0,
     theme: "default"
   })
 
+  const [game, handlers] = useTetris()
+
+  const menuOptions: MenuOptions = {
+    continue: {
+      handler: type => {
+        console.log("continue")
+        if (type === "select") handlers.PAUSE()
+      },
+      label: "CONTINUE"
+    },
+    music: {
+      handler: type => {
+        console.log("music")
+      },
+      label: "MUSIC"
+    },
+    "new-game": {
+      handler: type => {
+        if (type === "select") handlers.RESTART()
+      },
+      label: "START A NEW GAME"
+    },
+    sound: {
+      handler: type => {
+        console.log("sound")
+      },
+      label: "SOUND EFFECTS"
+    },
+    theme: {
+      handler: type => {
+        console.log("theme")
+      },
+      label: "THEME"
+    }
+  }
+
   const {
-    currentMenuOptionIndex,
+    currentMenuOption,
     up: upMenu,
     down: downMenu,
     increase,
     decrease,
     select
-  } = useMenu(menuOptions, (menuOptionIndex, actionType) => {
-    // TODO: change settings accordingly (reducer? useSettings?)
-    const currentOption = menuOptions[menuOptionIndex]
-    // true depends on the specific setting
-    setSetting({ ...settings, [currentOption.id]: true })
-  })
-
-  const [game, handlers] = useTetris()
+  } = useMenu(menuOptions, (menuOption, actionType) =>
+    menuOptions[menuOption as MenuOptionIds].handler(actionType)
+  )
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
 
@@ -90,15 +102,20 @@ const tetris = ({ theme = "default" }: Props) => {
         <Overlay open={game.paused}>
           <React.Fragment>
             <MenuTitle label="SETTINGS" />
-            {menuOptions.map((menuOption, idx) => (
+            {Object.keys(menuOptions).map((menuOption, idx) => (
               <MenuItem
-                selected={idx === currentMenuOptionIndex}
-                key={menuOption.id}
-                label={menuOption.label}
-                value={
-                  (settings as any)[menuOption.id]
-                    ? (settings as any)[menuOption.id]
-                    : undefined
+                selected={menuOption === currentMenuOption}
+                key={menuOption}
+                label={menuOptions[menuOption as MenuOptionIds].label}
+                value={(settings as any)[menuOption]}
+                onIncrease={() =>
+                  menuOptions[menuOption as MenuOptionIds].handler("increase")
+                }
+                onDecrease={() =>
+                  menuOptions[menuOption as MenuOptionIds].handler("decrease")
+                }
+                onSelect={() =>
+                  menuOptions[menuOption as MenuOptionIds].handler("select")
                 }
               />
             ))}
