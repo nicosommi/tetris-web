@@ -7,11 +7,12 @@ import { useTetris } from "../functions/hook"
 
 import ButtonComponent from "../../joystick/components/Button"
 import Joystick from "../../joystick/components/Joystick"
+import MenuItem from "../../menu/components/MenuItem"
+import MenuTitle from "../../menu/components/MenuTitle"
+import Overlay from "../../menu/components/Overlay"
+import useMenu from "../../menu/functions/hook"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
-import MenuItem from "./MenuItem"
-import MenuTitle from "./MenuTitle"
-import Overlay from "./Overlay"
 import ShapePreview from "./ShapePreview"
 
 const { useState } = React
@@ -20,32 +21,32 @@ type Props = {
   theme?: ThemeNames
 }
 
-type MenuOptionTypes = "continue" | "new-game" | "music" | "sound" | "theme"
+type MenuOptionIds = "continue" | "new-game" | "music" | "sound" | "theme"
 type MenuOptions = {
-  type: MenuOptionTypes
+  id: MenuOptionIds
   label: string
 }
 
 const menuOptions: MenuOptions[] = [
   {
-    label: "CONTINUE",
-    type: "continue"
+    id: "continue",
+    label: "CONTINUE"
   },
   {
-    label: "START A NEW GAME",
-    type: "new-game"
+    id: "new-game",
+    label: "START A NEW GAME"
   },
   {
-    label: "MUSIC",
-    type: "music"
+    id: "music",
+    label: "MUSIC"
   },
   {
-    label: "SOUND EFFECTS",
-    type: "sound"
+    id: "sound",
+    label: "SOUND EFFECTS"
   },
   {
-    label: "THEME",
-    type: "theme"
+    id: "theme",
+    label: "THEME"
   }
 ]
 
@@ -58,11 +59,24 @@ type Settings = {
 const tetris = ({ theme = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
-  const [currentMenuOptionIndex, setCurrentMenuOptionIndex] = useState(0)
   const [settings, setSetting] = useState<Settings>({
     music: false,
     sound: false,
     theme: "default"
+  })
+
+  const {
+    currentMenuOptionIndex,
+    up: upMenu,
+    down: downMenu,
+    increase,
+    decrease,
+    select
+  } = useMenu(menuOptions, (menuOptionIndex, actionType) => {
+    // TODO: change settings accordingly (reducer? useSettings?)
+    const currentOption = menuOptions[menuOptionIndex]
+    // true depends on the specific setting
+    setSetting({ ...settings, [currentOption.id]: true })
   })
 
   const [game, handlers] = useTetris()
@@ -79,8 +93,13 @@ const tetris = ({ theme = "default" }: Props) => {
             {menuOptions.map((menuOption, idx) => (
               <MenuItem
                 selected={idx === currentMenuOptionIndex}
-                key={menuOption.type}
+                key={menuOption.id}
                 label={menuOption.label}
+                value={
+                  (settings as any)[menuOption.id]
+                    ? (settings as any)[menuOption.id]
+                    : undefined
+                }
               />
             ))}
           </React.Fragment>
@@ -139,29 +158,25 @@ const tetris = ({ theme = "default" }: Props) => {
         />
         <Joystick
           down={(...args) => {
-            game.paused
-              ? setCurrentMenuOptionIndex(
-                  currentMenuOptionIndex < menuOptions.length - 1
-                    ? currentMenuOptionIndex + 1
-                    : 0
-                )
-              : handlers.DOWN.apply(null, args)
+            game.paused ? downMenu() : handlers.DOWN.apply(null, args)
           }}
-          left={handlers.LEFT}
-          right={handlers.RIGHT}
+          left={(...args) => {
+            game.paused ? decrease() : handlers.LEFT.apply(null, args)
+          }}
+          right={(...args) => {
+            game.paused ? increase() : handlers.RIGHT.apply(null, args)
+          }}
           select={handlers.RESTART}
           start={handlers.PAUSE}
           up={(...args) => {
-            game.paused
-              ? setCurrentMenuOptionIndex(
-                  currentMenuOptionIndex > 0
-                    ? currentMenuOptionIndex - 1
-                    : menuOptions.length - 1
-                )
-              : handlers.ROTATE.apply(null, args)
+            game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
           }}
-          x={handlers.ROTATE}
-          y={handlers.BLAST}
+          x={(...args) => {
+            game.paused ? select() : handlers.ROTATE.apply(null, args)
+          }}
+          y={(...args) => {
+            game.paused ? select() : handlers.BLAST.apply(null, args)
+          }}
           visible={!joystickCollapsed}
         />
       </Container>

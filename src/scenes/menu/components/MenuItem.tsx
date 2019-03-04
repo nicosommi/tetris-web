@@ -4,15 +4,17 @@ import { g, React } from "../../../utils/view"
 
 type MenuItemProps = {
   label: string
+  value?: unknown
   selected: boolean
 }
 
-const MenuItem = ({ label, selected }: MenuItemProps) => {
+const MenuItem = ({ label, selected, value }: MenuItemProps) => {
   return (
     <Container>
       <Label>
         {selected ? "selected - " : ""}
         {label}
+        {` (${value})`}
       </Label>
     </Container>
   )
