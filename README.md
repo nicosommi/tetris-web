@@ -14,16 +14,15 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 ## TODO
 
 - polish settings panel
-- add original sound setting for line eating x1, x2, (x3 or more)
-- add original sound setting for game over
-- add original sound setting for regular thick
 - add auto fit algorithm to rotation command
-- polish shapes with gradients and transitions
+- polish shapes
 - complete themes
 - hide first 3 lines?
+- polish settings panel
 
 ## DONE
 
+- sound for line eat
 - settings panel mechanics
 - add music
 - theme selector
