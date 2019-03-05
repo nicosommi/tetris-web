@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { Text, TextProps, View } from "react-native"
 import { animated } from "react-spring"
 import Button from "../../../components/Button"
 import { g, React } from "../../../utils/view"
@@ -39,11 +39,18 @@ const Container = animated(
   })
 )
 
+type LabelProps = { theme: Theme }
+
 const Label = animated(
-  g(Text)({
-    backgroundColor: "#ffffff",
-    zIndex: 2
-  })
+  g(Text)<TextProps>(
+    {
+      backgroundColor: "#ffffff",
+      zIndex: 2
+    },
+    ({ theme }: LabelProps) => ({
+      fontFamily: theme.fontFamily
+    })
+  )
 )
 
 export default MenuItem

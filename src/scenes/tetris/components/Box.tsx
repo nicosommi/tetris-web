@@ -12,9 +12,8 @@ interface Props {
   joystickCollapsed: boolean
 }
 const BoxComponent = (props: Props) => {
-  const theme = useContext(ThemeContext)
   return (
-    <Container {...{ ...props, theme }}>
+    <Container {...{ ...props }}>
       <DebugContext.Consumer>
         {debug =>
           debug ? (
@@ -30,7 +29,7 @@ const BoxComponent = (props: Props) => {
   )
 }
 
-const Container = g(View)<Props & { theme: Theme }>(
+const Container = g(View)<Props>(
   {
     border: "1px dashed rgba(0,0,0,.2)"
   },

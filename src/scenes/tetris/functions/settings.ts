@@ -19,6 +19,7 @@ export const GAME_COMMANDS: GameCommands = {
 }
 
 export const TETROMINO_THEME: Theme = {
+  fontFamily: "sans-serif",
   name: "default",
   shapeColors: {
     i: "maroon",
@@ -32,6 +33,7 @@ export const TETROMINO_THEME: Theme = {
 }
 
 export const GAMEBOY_THEME: Theme = {
+  fontFamily: "sans-serif",
   name: "gameboy",
   shapeColors: {
     i: "orange",
@@ -44,6 +46,7 @@ export const GAMEBOY_THEME: Theme = {
   }
 }
 export const RED_THEME: Theme = {
+  fontFamily: "sans-serif",
   name: "red",
   shapeColors: {
     i: "red",

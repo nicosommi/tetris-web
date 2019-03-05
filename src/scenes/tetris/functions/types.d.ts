@@ -106,6 +106,7 @@ type ThemeNames =
   | "red"
 type Theme = {
   name: ThemeNames
+  fontFamily: string
   shapeColors: { [key in ShapeType]: string }
 }
 

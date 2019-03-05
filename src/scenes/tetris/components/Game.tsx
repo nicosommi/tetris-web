@@ -1,6 +1,10 @@
-import { Text, View } from "react-native"
+import { Text, TextProps, View } from "react-native"
 import { DebugContext } from "../../../utils/debug"
-import { getThemeByName, ThemeContext } from "../../../utils/theme"
+import {
+  EmotionThemeProvider,
+  getThemeByName,
+  ThemeContext
+} from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 
 import { useTetris } from "../functions/hook"
@@ -18,7 +22,7 @@ import ShapePreview from "./ShapePreview"
 const { useState } = React
 
 type Props = {
-  theme?: ThemeNames
+  themeName?: ThemeNames
 }
 
 type MenuOptionIds = "continue" | "new-game" | "music" | "sound" | "theme"
@@ -37,7 +41,7 @@ type Settings = {
   theme: ThemeNames
 }
 
-const tetris = ({ theme = "default" }: Props) => {
+const tetris = ({ themeName = "default" }: Props) => {
   // TODO: receive default configuration via parameter (initial game maybe)
   // e.g. change keyboard assignation, etc
   const [settings, setSetting] = useState<Settings>({
@@ -51,7 +55,6 @@ const tetris = ({ theme = "default" }: Props) => {
   const menuOptions: MenuOptions = {
     continue: {
       handler: type => {
-        console.log("continue")
         if (type === "select") handlers.PAUSE()
       },
       label: "CONTINUE"
@@ -59,6 +62,14 @@ const tetris = ({ theme = "default" }: Props) => {
     music: {
       handler: type => {
         console.log("music")
+        // switch(type) {
+        //   case "decrease": {
+        //     if (settings.music > 0) setSetting({ ...settings, music: settings.music - 1})
+        //   }
+        //   case "increase": {
+        //     if (settings.music < 10) setSetting(settings.music + 1)
+        //   }
+        // }
       },
       label: "MUSIC"
     },
@@ -94,66 +105,49 @@ const tetris = ({ theme = "default" }: Props) => {
   )
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
+  const theme = getThemeByName(themeName)
 
   return (
-    <ThemeContext.Provider value={getThemeByName(theme)}>
-      <Container>
-        {/* Use joystick arrow handlers and x y handlers for menu too */}
-        <Overlay open={game.paused}>
-          <React.Fragment>
-            <MenuTitle label="SETTINGS" />
-            {Object.keys(menuOptions).map((menuOption, idx) => (
-              <MenuItem
-                selected={menuOption === currentMenuOption}
-                key={menuOption}
-                label={menuOptions[menuOption as MenuOptionIds].label}
-                value={(settings as any)[menuOption]}
-                onIncrease={() =>
-                  menuOptions[menuOption as MenuOptionIds].handler("increase")
-                }
-                onDecrease={() =>
-                  menuOptions[menuOption as MenuOptionIds].handler("decrease")
-                }
-                onSelect={() =>
-                  menuOptions[menuOption as MenuOptionIds].handler("select")
-                }
-              />
-            ))}
-          </React.Fragment>
-        </Overlay>
-        <GameContainer>
-          <BoardContainer>
-            <Indicators>
-              <DebugContext.Consumer>
-                {isDebug => isDebug && <Text>Thicks: {game.ticks}</Text>}
-              </DebugContext.Consumer>
-              <Text accessibilityLabel="time">
-                Time: {game.durationInSeconds}
-              </Text>
-              <Text accessibilityLabel="lines">Lines: {game.lines}</Text>
-              <Text accessibilityLabel="level">Level: {game.level}</Text>
-            </Indicators>
-            <BoardComponent joystickCollapsed={joystickCollapsed}>
-              {game.board.lines.map((line, lineIndex) =>
-                line.map((box, boxIndex) => (
-                  <BoxComponent
-                    key={`${box.id}`}
-                    box={box}
-                    joystickCollapsed={joystickCollapsed}
-                    line={lineIndex}
-                    column={boxIndex}
-                  />
-                ))
-              )}
-            </BoardComponent>
-          </BoardContainer>
-          <BoardContainer>
-            {game.board.previewBoards.map(previewBoard => (
-              <ShapePreview
-                key={`${previewBoard.id}`}
-                joystickCollapsed={joystickCollapsed}
-              >
-                {previewBoard.lines.map((line, lineIndex) =>
+    <ThemeContext.Provider value={theme}>
+      <EmotionThemeProvider theme={theme}>
+        <Container>
+          {/* Use joystick arrow handlers and x y handlers for menu too */}
+          <Overlay open={game.paused}>
+            <React.Fragment>
+              <MenuTitle label="SETTINGS" />
+              {Object.keys(menuOptions).map((menuOption, idx) => (
+                <MenuItem
+                  selected={menuOption === currentMenuOption}
+                  key={menuOption}
+                  label={menuOptions[menuOption as MenuOptionIds].label}
+                  value={(settings as any)[menuOption]}
+                  onIncrease={() =>
+                    menuOptions[menuOption as MenuOptionIds].handler("increase")
+                  }
+                  onDecrease={() =>
+                    menuOptions[menuOption as MenuOptionIds].handler("decrease")
+                  }
+                  onSelect={() =>
+                    menuOptions[menuOption as MenuOptionIds].handler("select")
+                  }
+                />
+              ))}
+            </React.Fragment>
+          </Overlay>
+          <GameContainer>
+            <BoardContainer>
+              <Indicators>
+                <DebugContext.Consumer>
+                  {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
+                </DebugContext.Consumer>
+                <Label accessibilityLabel="time">
+                  Time: {game.durationInSeconds}
+                </Label>
+                <Label accessibilityLabel="lines">Lines: {game.lines}</Label>
+                <Label accessibilityLabel="level">Level: {game.level}</Label>
+              </Indicators>
+              <BoardComponent joystickCollapsed={joystickCollapsed}>
+                {game.board.lines.map((line, lineIndex) =>
                   line.map((box, boxIndex) => (
                     <BoxComponent
                       key={`${box.id}`}
@@ -164,39 +158,59 @@ const tetris = ({ theme = "default" }: Props) => {
                     />
                   ))
                 )}
-              </ShapePreview>
-            ))}
-          </BoardContainer>
-        </GameContainer>
-        <ButtonComponent
-          accessibilityLabel="toggle onscreen joystick"
-          title="Onscreen joystick"
-          onPress={() => setJoystickCollapsed(!joystickCollapsed)}
-        />
-        <Joystick
-          down={(...args) => {
-            game.paused ? downMenu() : handlers.DOWN.apply(null, args)
-          }}
-          left={(...args) => {
-            game.paused ? decrease() : handlers.LEFT.apply(null, args)
-          }}
-          right={(...args) => {
-            game.paused ? increase() : handlers.RIGHT.apply(null, args)
-          }}
-          select={handlers.RESTART}
-          start={handlers.PAUSE}
-          up={(...args) => {
-            game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
-          }}
-          x={(...args) => {
-            game.paused ? select() : handlers.ROTATE.apply(null, args)
-          }}
-          y={(...args) => {
-            game.paused ? select() : handlers.BLAST.apply(null, args)
-          }}
-          visible={!joystickCollapsed}
-        />
-      </Container>
+              </BoardComponent>
+            </BoardContainer>
+            <BoardContainer>
+              {game.board.previewBoards.map(previewBoard => (
+                <ShapePreview
+                  key={`${previewBoard.id}`}
+                  joystickCollapsed={joystickCollapsed}
+                >
+                  {previewBoard.lines.map((line, lineIndex) =>
+                    line.map((box, boxIndex) => (
+                      <BoxComponent
+                        key={`${box.id}`}
+                        box={box}
+                        joystickCollapsed={joystickCollapsed}
+                        line={lineIndex}
+                        column={boxIndex}
+                      />
+                    ))
+                  )}
+                </ShapePreview>
+              ))}
+            </BoardContainer>
+          </GameContainer>
+          <ButtonComponent
+            accessibilityLabel="toggle onscreen joystick"
+            title="Onscreen joystick"
+            onPress={() => setJoystickCollapsed(!joystickCollapsed)}
+          />
+          <Joystick
+            down={(...args) => {
+              game.paused ? downMenu() : handlers.DOWN.apply(null, args)
+            }}
+            left={(...args) => {
+              game.paused ? decrease() : handlers.LEFT.apply(null, args)
+            }}
+            right={(...args) => {
+              game.paused ? increase() : handlers.RIGHT.apply(null, args)
+            }}
+            select={handlers.RESTART}
+            start={handlers.PAUSE}
+            up={(...args) => {
+              game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
+            }}
+            x={(...args) => {
+              game.paused ? select() : handlers.ROTATE.apply(null, args)
+            }}
+            y={(...args) => {
+              game.paused ? select() : handlers.BLAST.apply(null, args)
+            }}
+            visible={!joystickCollapsed}
+          />
+        </Container>
+      </EmotionThemeProvider>
     </ThemeContext.Provider>
   )
 }
@@ -223,5 +237,11 @@ const Indicators = g(View)({
   display: "flex",
   flexDirection: "row"
 })
+
+type LabelProps = { theme: Theme }
+
+const Label = g(Text)<TextProps>({}, ({ theme }: LabelProps) => ({
+  fontFamily: theme.fontFamily
+}))
 
 export default tetris
