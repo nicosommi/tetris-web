@@ -32,6 +32,7 @@ type ContainerProps = {
 const Container = animated(
   g(View)(
     {
+      alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.9)",
       left: 0,
       overflowX: "hidden",

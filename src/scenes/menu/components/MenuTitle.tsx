@@ -20,12 +20,11 @@ const Container = animated(
   })
 )
 
-type LabelProps = { theme: Theme }
-
 const Label = animated(
   g(Text)<TextProps>(
     {
-      backgroundColor: "#ffffff",
+      color: "#ffffff",
+      fontSize: 30,
       zIndex: 2
     },
     ({ theme }) => ({

@@ -55,7 +55,7 @@ const Container = g(TouchableOpacity)<{ theme: Theme; type: ButtonType }>(
 const ViewContainer = g(View)<{ theme: Theme }>({})
 
 const Caption = g(Text)<{ theme: Theme; type: ButtonType }>({}, ({ type }) => ({
-  fontSize: type === "pill" ? 8 : type === "normal" ? 10 : 20
+  fontSize: type === "pill" ? 8 : 20
 }))
 
 export default ButtonComponent

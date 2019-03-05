@@ -9,6 +9,8 @@ type Props = {
 
 const BoardComponent = g(View)(
   {
+    borderWidth: 1,
+    boxSizing: "content-box",
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap"

@@ -12,6 +12,7 @@ import { useTetris } from "../functions/hook"
 
 import ButtonComponent from "../../../components/Button"
 import Joystick from "../../joystick/components/Joystick"
+import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
 import MenuTitle from "../../menu/components/MenuTitle"
 import Overlay from "../../menu/components/Overlay"
@@ -24,7 +25,13 @@ import ShapePreview from "./ShapePreview"
 
 const { useState } = React
 
-type MenuOptionIds = "continue" | "new-game" | "music" | "sound" | "theme"
+type MenuOptionIds =
+  | "continue"
+  | "new-game"
+  | "grid"
+  | "music"
+  | "sound"
+  | "theme"
 type MenuOptions = {
   [key in MenuOptionIds]: {
     handler: (type: MenuActionType) => void
@@ -33,6 +40,7 @@ type MenuOptions = {
 }
 
 type Settings = {
+  grid: boolean
   music: boolean
   musicVolume: number
   sound: boolean
@@ -42,6 +50,7 @@ type Settings = {
 
 const tetris = () => {
   const [settings, setSetting] = useState<Settings>({
+    grid: true,
     music: false,
     musicVolume: 0.6,
     sound: false,
@@ -64,6 +73,12 @@ const tetris = () => {
         if (type === "select") handlers.RESTART()
       },
       label: "START A NEW GAME"
+    },
+    grid: {
+      handler: () => {
+        setSetting({ ...settings, grid: !settings.grid })
+      },
+      label: "GRID"
     },
     music: {
       handler: () => {
@@ -125,7 +140,7 @@ const tetris = () => {
         <Container>
           {/* Use joystick arrow handlers and x y handlers for menu too */}
           <Overlay open={game.paused}>
-            <React.Fragment>
+            <MenuContent>
               <MenuTitle label="SETTINGS" />
               {Object.keys(menuOptions).map((menuOption, idx) => (
                 <MenuItem
@@ -144,7 +159,7 @@ const tetris = () => {
                   }
                 />
               ))}
-            </React.Fragment>
+            </MenuContent>
           </Overlay>
           <GameContainer>
             <BoardContainer>
@@ -167,6 +182,7 @@ const tetris = () => {
                       joystickCollapsed={joystickCollapsed}
                       line={lineIndex}
                       column={boxIndex}
+                      grid={settings.grid}
                     />
                   ))
                 )}
@@ -186,11 +202,26 @@ const tetris = () => {
                         joystickCollapsed={joystickCollapsed}
                         line={lineIndex}
                         column={boxIndex}
+                        grid={settings.grid}
                       />
                     ))
                   )}
                 </ShapePreview>
               ))}
+              <Info>
+                <Label small>Commands</Label>
+                <Label small>ROTATE: X or UP</Label>
+                <Label small>BLAST: Y</Label>
+                <Label small>ACC: DOWN</Label>
+                <Label small>PAUSE: START</Label>
+                <Label small>RESTART: SELECT</Label>
+              </Info>
+              <Info>
+                <Label small>Key bindings</Label>
+                <Label small>ARROWS: wasd or arrows</Label>
+                <Label small>BUTTONS: jk</Label>
+                <Label small>OPTIONS: ENTER or SPACE</Label>
+              </Info>
             </BoardContainer>
           </GameContainer>
           <ButtonComponent
@@ -245,15 +276,28 @@ const BoardContainer = g(View)({
   flexDirection: "column"
 })
 
+const Info = g(View)({
+  alignItems: "center",
+  borderColor: "#000000",
+  borderWidth: 1,
+  display: "flex",
+  flexDirection: "column"
+})
+
 const Indicators = g(View)({
   display: "flex",
   flexDirection: "row"
 })
 
-type LabelProps = { theme: Theme }
+type LabelProps = { small?: boolean }
+type ThemeProps = { theme: Theme }
 
-const Label = g(Text)<TextProps>({}, ({ theme }: LabelProps) => ({
-  fontFamily: theme.fontFamily
-}))
+const Label = g(Text)<TextProps & LabelProps>(
+  {},
+  ({ small, theme }: LabelProps & ThemeProps) => ({
+    fontFamily: theme.fontFamily,
+    fontSize: small ? 12 : 20
+  })
+)
 
 export default tetris

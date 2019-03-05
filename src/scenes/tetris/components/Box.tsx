@@ -1,12 +1,11 @@
-import { useContext } from "react"
 import { Text, View } from "react-native"
 import { DebugContext } from "../../../utils/debug"
-import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import { getBoxMaxSide } from "../functions/util"
 
 interface Props {
   box: Box
+  grid: boolean
   line: number
   column: number
   joystickCollapsed: boolean
@@ -30,13 +29,12 @@ const BoxComponent = (props: Props) => {
 }
 
 const Container = g(View)<Props>(
-  {
-    border: "1px dashed rgba(0,0,0,.2)"
-  },
-  ({ box, theme, joystickCollapsed }) => ({
+  {},
+  ({ box, grid, theme, joystickCollapsed }) => ({
     backgroundColor: box.partOfShape
       ? theme.shapeColors[box.partOfShape.shape.type]
       : "white",
+    border: grid ? "1px dashed rgba(0,0,0,.2)" : 0,
     height: getBoxMaxSide(joystickCollapsed),
     width: getBoxMaxSide(joystickCollapsed)
   })
