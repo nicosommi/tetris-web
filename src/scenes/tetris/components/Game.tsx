@@ -1,5 +1,6 @@
 import { Text, TextProps, View } from "react-native"
-import { DebugContext } from "../../../utils/debug"
+import ReactPlayer from "react-player"
+import { DebugContext, isWeb } from "../../../utils/debug"
 import {
   EmotionThemeProvider,
   getThemeByName,
@@ -15,15 +16,12 @@ import MenuItem from "../../menu/components/MenuItem"
 import MenuTitle from "../../menu/components/MenuTitle"
 import Overlay from "../../menu/components/Overlay"
 import useMenu, { MenuActionType } from "../../menu/functions/hook"
+import { themes } from "../functions/settings"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import ShapePreview from "./ShapePreview"
 
 const { useState } = React
-
-type Props = {
-  themeName?: ThemeNames
-}
 
 type MenuOptionIds = "continue" | "new-game" | "music" | "sound" | "theme"
 type MenuOptions = {
@@ -33,25 +31,26 @@ type MenuOptions = {
   }
 }
 
-type Volume = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-
 type Settings = {
-  music: Volume
-  sound: Volume
+  music: boolean
+  musicVolume: number
+  sound: boolean
+  soundVolume: number
   theme: ThemeNames
 }
 
-const tetris = ({ themeName = "default" }: Props) => {
-  // TODO: receive default configuration via parameter (initial game maybe)
-  // e.g. change keyboard assignation, etc
+const tetris = () => {
   const [settings, setSetting] = useState<Settings>({
-    music: 0,
-    sound: 0,
+    music: false,
+    musicVolume: 1,
+    sound: false,
+    soundVolume: 1,
     theme: "default"
   })
 
   const [game, handlers] = useTetris()
 
+  // tslint:disable:object-literal-sort-keys
   const menuOptions: MenuOptions = {
     continue: {
       handler: type => {
@@ -59,39 +58,37 @@ const tetris = ({ themeName = "default" }: Props) => {
       },
       label: "CONTINUE"
     },
-    music: {
-      handler: type => {
-        console.log("music")
-        // switch(type) {
-        //   case "decrease": {
-        //     if (settings.music > 0) setSetting({ ...settings, music: settings.music - 1})
-        //   }
-        //   case "increase": {
-        //     if (settings.music < 10) setSetting(settings.music + 1)
-        //   }
-        // }
-      },
-      label: "MUSIC"
-    },
     "new-game": {
       handler: type => {
         if (type === "select") handlers.RESTART()
       },
       label: "START A NEW GAME"
     },
+    music: {
+      handler: () => {
+        setSetting({ ...settings, music: !settings.music })
+      },
+      label: "MUSIC"
+    },
     sound: {
-      handler: type => {
-        console.log("sound")
+      handler: () => {
+        setSetting({ ...settings, sound: !settings.sound })
       },
       label: "SOUND EFFECTS"
     },
     theme: {
       handler: type => {
-        console.log("theme")
+        const currentIndex = themes.findIndex(t => t.name === settings.theme)
+        let nextIndex = currentIndex - 1
+        if (type === "increase" || type === "select")
+          nextIndex = currentIndex + 1
+        if (themes[nextIndex])
+          setSetting({ ...settings, theme: themes[nextIndex].name })
       },
       label: "THEME"
     }
   }
+  // tslint:enable:object-literal-sort-keys
 
   const {
     currentMenuOption,
@@ -105,11 +102,21 @@ const tetris = ({ themeName = "default" }: Props) => {
   )
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
-  const theme = getThemeByName(themeName)
+  const theme = getThemeByName(settings.theme)
 
   return (
     <ThemeContext.Provider value={theme}>
       <EmotionThemeProvider theme={theme}>
+        {isWeb() && (
+          <ReactPlayer
+            url={`${process.env.PUBLIC_URL}/assets/music/01.mp3`}
+            height={0}
+            loop
+            playing={settings.music}
+            volume={settings.musicVolume}
+            width={0}
+          />
+        )}
         <Container>
           {/* Use joystick arrow handlers and x y handlers for menu too */}
           <Overlay open={game.paused}>
