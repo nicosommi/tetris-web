@@ -13,23 +13,20 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 
 ## TODO
 
-- add settings panel
-- add music turned off by default
-- add sounds settings on or mute (by default mute)
-- add sound setting for line eating x1, x2, (x3 or more)
-- add sound setting for level transition
-- add sound setting for game over
-- add sound setting for regular thick
-- add auto fit to rotation command
-- add theme selector
+- polish settings panel
+- add original sound setting for line eating x1, x2, (x3 or more)
+- add original sound setting for game over
+- add original sound setting for regular thick
+- add auto fit algorithm to rotation command
 - polish shapes with gradients and transitions
-- make it similar to theme c palace and adjusting a theme
-- add one more level of complexity: scarsity for I, etc
-- complete other themes
+- complete themes
 - hide first 3 lines?
 
 ## DONE
 
+- settings panel mechanics
+- add music
+- theme selector
 - put keybindings as part of the joystick
 - onscreen basic joystick
 - add blast command
@@ -44,4 +41,4 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 
 ## KNOWN ISSUES
 
-- elapsed time counts pause / resume time
+- clunky rotation
