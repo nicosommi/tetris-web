@@ -64,6 +64,7 @@ type AnonymousGame = {
   ticks: number
   gameOver: boolean
   startDate?: Date
+  lastEatenLines: number
   durationInSeconds: number
   endDate?: Date
   paused: boolean

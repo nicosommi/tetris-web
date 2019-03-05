@@ -30,6 +30,7 @@ export function createGame(previous?: Game): Game {
     durationInSeconds: 0,
     gameOver: false,
     id: c.guid({ version: 4 }),
+    lastEatenLines: 0,
     level: 1,
     lines: 0,
     paused: false,

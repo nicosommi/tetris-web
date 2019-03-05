@@ -15,7 +15,7 @@ const { useReducer, useEffect, useLayoutEffect, useState, useRef } = React
 
 const initialGame: Game = createGame()
 
-const reduceGame: GameReducer = (previous, action) => {
+const reduceGame: GameReducer = (previous, action): Game => {
   if (
     previous.gameOver === true &&
     action.type !== "RESTART" &&
@@ -104,6 +104,7 @@ const reduceGame: GameReducer = (previous, action) => {
             ? new Date()
             : undefined,
         gameOver: activeShape === undefined && collidesOneForNow ? true : false,
+        lastEatenLines: newLines,
         level,
         lines,
         startDate,

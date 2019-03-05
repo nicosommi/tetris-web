@@ -19,6 +19,7 @@ import useMenu, { MenuActionType } from "../../menu/functions/hook"
 import { themes } from "../functions/settings"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
+import Effect from "./Effect"
 import ShapePreview from "./ShapePreview"
 
 const { useState } = React
@@ -42,7 +43,7 @@ type Settings = {
 const tetris = () => {
   const [settings, setSetting] = useState<Settings>({
     music: false,
-    musicVolume: 1,
+    musicVolume: 0.6,
     sound: false,
     soundVolume: 1,
     theme: "default"
@@ -117,6 +118,10 @@ const tetris = () => {
             width={0}
           />
         )}
+        <Effect
+          volume={settings.soundVolume}
+          play={settings.sound && game.lastEatenLines > 0}
+        />
         <Container>
           {/* Use joystick arrow handlers and x y handlers for menu too */}
           <Overlay open={game.paused}>
