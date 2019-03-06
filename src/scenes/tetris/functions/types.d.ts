@@ -108,6 +108,10 @@ type ThemeNames =
 type Theme = {
   name: ThemeNames
   fontFamily: string
+  music: string
+  sounds: {
+    lineEat: string
+  }
   shapeColors: { [key in ShapeType]: string }
 }
 

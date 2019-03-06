@@ -125,7 +125,7 @@ const tetris = () => {
       <EmotionThemeProvider theme={theme}>
         {isWeb() && (
           <ReactPlayer
-            url={`${process.env.PUBLIC_URL}/assets/music/01.mp3`}
+            url={theme.music}
             height={0}
             loop
             playing={settings.music}
@@ -134,6 +134,7 @@ const tetris = () => {
           />
         )}
         <Effect
+          url={theme.sounds.lineEat}
           volume={settings.soundVolume}
           play={settings.sound && game.lastEatenLines > 0}
         />

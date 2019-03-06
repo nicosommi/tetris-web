@@ -18,8 +18,11 @@ export const GAME_COMMANDS: GameCommands = {
   right: "ArrowRight"
 }
 
+const prefixUrl = process.env.PUBLIC_URL
+
 export const TETROMINO_THEME: Theme = {
   fontFamily: "sans-serif",
+  music: `${prefixUrl}/assets/music/01.mp3`,
   name: "default",
   shapeColors: {
     i: "maroon",
@@ -29,11 +32,15 @@ export const TETROMINO_THEME: Theme = {
     s: "green",
     t: "brown",
     z: "teal"
+  },
+  sounds: {
+    lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
   }
 }
 
 export const GAMEBOY_THEME: Theme = {
   fontFamily: "sans-serif",
+  music: `${prefixUrl}/assets/music/01.mp3`,
   name: "gameboy",
   shapeColors: {
     i: "orange",
@@ -43,10 +50,14 @@ export const GAMEBOY_THEME: Theme = {
     s: "Magenta", // buggy
     t: "green",
     z: "amber" // buggy
+  },
+  sounds: {
+    lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
   }
 }
 export const RED_THEME: Theme = {
   fontFamily: "sans-serif",
+  music: `${prefixUrl}/assets/music/01.mp3`,
   name: "red",
   shapeColors: {
     i: "red",
@@ -56,6 +67,9 @@ export const RED_THEME: Theme = {
     s: "red",
     t: "red",
     z: "red"
+  },
+  sounds: {
+    lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
   }
 }
 

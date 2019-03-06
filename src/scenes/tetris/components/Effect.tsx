@@ -1,34 +1,22 @@
-import ReactPlayer from "react-player"
+import Sound, { PlayStatus } from "react-sound"
 import { isWeb } from "../../../utils/debug"
 import { React } from "../../../utils/view"
 import ErrorBoundary from "./ErrorBoundary"
 
-const { useRef } = React
-
-const prefixUrl = process.env.PUBLIC_URL
-
 type Props = {
   play: boolean
   volume: number
+  url: string
 }
 
-const Effect = ({ play, volume }: Props) => {
-  const lineEat1 = useRef(null)
-
-  if (lineEat1.current && play) {
-    // ;(lineEat1.current! as ReactPlayer).seekTo(0)
-    ;((lineEat1.current! as ReactPlayer).getInternalPlayer() as any).play()
-  }
-
+const Effect = ({ url, play, volume }: Props) => {
   return isWeb() ? (
     <ErrorBoundary>
-      <ReactPlayer
-        url={`${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`}
+      <Sound
+        url={url}
+        playStatus={(play ? "PLAYING" : "STOPPED") as PlayStatus}
         loop={false}
-        height={0}
-        width={0}
-        volume={volume}
-        ref={lineEat1}
+        volume={volume * 100}
       />
     </ErrorBoundary>
   ) : null
