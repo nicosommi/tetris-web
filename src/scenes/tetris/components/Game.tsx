@@ -23,7 +23,7 @@ import BoxComponent from "./Box"
 import Effect from "./Effect"
 import ShapePreview from "./ShapePreview"
 
-const { useState } = React
+const { useState, useEffect } = React
 
 type MenuOptionIds =
   | "continue"
@@ -58,6 +58,11 @@ const tetris = () => {
     theme: "default"
   })
 
+  const [smokeTestEffects, setSmokeTestEffects] = useState(false)
+  useEffect(() => {
+    setSmokeTestEffects(false)
+  })
+
   const [game, handlers] = useTetris()
 
   // tslint:disable:object-literal-sort-keys
@@ -89,6 +94,7 @@ const tetris = () => {
     sound: {
       handler: () => {
         setSetting({ ...settings, sound: !settings.sound })
+        setSmokeTestEffects(true)
       },
       label: "SOUND EFFECTS"
     },
@@ -135,8 +141,8 @@ const tetris = () => {
         )}
         <Effect
           url={theme.sounds.lineEat}
-          volume={settings.soundVolume}
-          play={settings.sound && game.lastEatenLines > 0}
+          volume={smokeTestEffects ? 0 : settings.soundVolume}
+          play={(settings.sound && game.lastEatenLines > 0) || smokeTestEffects}
         />
         <Container>
           {/* Use joystick arrow handlers and x y handlers for menu too */}
