@@ -35,9 +35,7 @@ const ViewContainer = g(View)<{ theme: Theme }>({
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-  minWidth: 175,
-  position: "relative",
-  zIndex: 10
+  minWidth: 175
 })
 
 export default Joystick
