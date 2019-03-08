@@ -9,14 +9,8 @@ export const getJoystickHeight = (joystickCollapsed: boolean) => {
   return joystickCollapsed ? 60 : 200
 }
 
-export const getViewportWidth = () =>
-  isWeb()
-    ? document.documentElement.clientWidth
-    : Dimensions.get("window").width
-export const getViewportHeight = () =>
-  isWeb()
-    ? document.documentElement.clientHeight
-    : Dimensions.get("window").height
+export const getViewportWidth = () => Dimensions.get("window").width
+export const getViewportHeight = () => Dimensions.get("window").height
 
 function getPotentialBoxMaxWidth() {
   return Math.floor(getViewportWidth() / LINE_LENGTH)
