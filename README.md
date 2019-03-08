@@ -18,7 +18,6 @@ On the other hand, I'm rendering divs as a first iteration implementation, but i
 - polish shapes
 - complete themes
 - hide first 3 lines?
-- polish settings panel
 
 ## DONE
 
