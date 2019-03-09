@@ -226,8 +226,8 @@ const tetris = () => {
               <Info>
                 <Label small>Key bindings</Label>
                 <Label small>ARROWS: wasd or arrows</Label>
-                <Label small>BUTTONS: jk</Label>
-                <Label small>OPTIONS: ENTER or SPACE</Label>
+                <Label small>BUTTONS: jk or zx</Label>
+                <Label small>OPTIONS: ENTER and SPACE</Label>
               </Info>
             </BoardContainer>
           </GameContainer>
