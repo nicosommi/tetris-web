@@ -5,7 +5,7 @@ import { g, React } from "../../../utils/view"
 
 type MenuItemProps = {
   label: string
-  value?: boolean | string
+  value?: boolean | string | unknown
   selected: boolean
   onDecrease?: () => void
   onIncrease?: () => void
@@ -29,12 +29,18 @@ const MenuItem = ({
   onIncrease,
   onSelect
 }: MenuItemProps) => {
+  const processedValue =
+    typeof value === "boolean"
+      ? value
+      : typeof value === "string"
+      ? value
+      : String(value)
   return (
     <Container selected={selected}>
       <Label>
         {onSelect ? <Button title={label} onPress={onSelect} /> : label}{" "}
         {/* {onDecrease && <Button title="(" onPress={onDecrease} />} */}
-        {value !== undefined && `${translateValue(value)}`}
+        {value !== undefined && `${translateValue(processedValue)}`}
         {/* {onIncrease && <Button title=">" onPress={onIncrease} />} */}
       </Label>
     </Container>

@@ -11,6 +11,7 @@ import { g, React } from "../../../utils/view"
 import { useTetris } from "../functions/hook"
 
 import ButtonComponent from "../../../components/Button"
+import { mapObjectKeysToArrayOf } from "../../../utils/objects"
 import Joystick from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
@@ -149,21 +150,15 @@ const tetris = () => {
           <Overlay open={game.paused}>
             <MenuContent>
               <MenuTitle label="SETTINGS" />
-              {Object.keys(menuOptions).map((menuOption, idx) => (
+              {Object.entries(menuOptions).map(([key, value]) => (
                 <MenuItem
-                  selected={menuOption === currentMenuOption}
-                  key={menuOption}
-                  label={menuOptions[menuOption as MenuOptionIds].label}
-                  value={(settings as any)[menuOption]}
-                  onIncrease={() =>
-                    menuOptions[menuOption as MenuOptionIds].handler("increase")
-                  }
-                  onDecrease={() =>
-                    menuOptions[menuOption as MenuOptionIds].handler("decrease")
-                  }
-                  onSelect={() =>
-                    menuOptions[menuOption as MenuOptionIds].handler("select")
-                  }
+                  selected={key === currentMenuOption}
+                  key={key}
+                  label={value.label}
+                  value={settings[key as keyof Settings]}
+                  onIncrease={() => value.handler("increase")}
+                  onDecrease={() => value.handler("decrease")}
+                  onSelect={() => value.handler("select")}
                 />
               ))}
             </MenuContent>
