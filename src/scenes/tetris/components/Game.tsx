@@ -11,7 +11,6 @@ import { g, React } from "../../../utils/view"
 import { useTetris } from "../functions/hook"
 
 import ButtonComponent from "../../../components/Button"
-import { mapObjectKeysToArrayOf } from "../../../utils/objects"
 import Joystick from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
@@ -27,12 +26,9 @@ import ShapePreview from "./ShapePreview"
 const { useState, useEffect } = React
 
 type MenuOptionIds =
+  | keyof Pick<Settings, "grid" | "music" | "sound" | "theme">
   | "continue"
   | "new-game"
-  | "grid"
-  | "music"
-  | "sound"
-  | "theme"
 type MenuOptions = {
   [key in MenuOptionIds]: {
     handler: (type: MenuActionType) => void
