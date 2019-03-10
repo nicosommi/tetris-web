@@ -47,9 +47,9 @@ export const GAMEBOY_THEME: Theme = {
     j: "cyan",
     l: "red",
     o: "yellow",
-    s: "Magenta", // buggy
+    s: "#ff00ff",
     t: "green",
-    z: "amber" // buggy
+    z: "#ffbf00"
   },
   sounds: {
     lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
