@@ -1,9 +1,9 @@
 import { useContext } from "react"
 import { TouchableOpacityProps, View } from "react-native"
-import Button from "../../../components/Button"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import { useKeyDowns } from "./keyboard"
+import PillButton from "./PillButton"
 
 type Props = TouchableOpacityProps & {
   select: CommandHandler
@@ -28,16 +28,14 @@ const OptionPad = (props: Props) => {
 
   return visible ? (
     <ViewContainer theme={theme}>
-      <Button
+      <PillButton
         accessibilityLabel="select button"
         title="Select"
-        type="pill"
         onPress={() => select()}
       />
-      <Button
+      <PillButton
         accessibilityLabel="start button"
         title="Start"
-        type="pill"
         onPress={() => start()}
       />
     </ViewContainer>
@@ -45,9 +43,12 @@ const OptionPad = (props: Props) => {
 }
 
 const ViewContainer = g(View)<{ theme: Theme }>({
+  alignItems: "center",
   display: "flex",
   flexDirection: "row",
-  height: 60
+  flexGrow: 1,
+  height: 60,
+  justifyContent: "center"
 })
 
 export default OptionPad

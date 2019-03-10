@@ -4,6 +4,7 @@ import Button from "../../../components/Button"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import { useKeyDowns } from "./keyboard"
+import SquareButton from "./SquareButton"
 
 type Props = TouchableOpacityProps & {
   up: CommandHandler
@@ -39,36 +40,31 @@ const Joystick = (props: Props) => {
 
   return visible ? (
     <ViewContainer theme={theme}>
-      <Button
+      <SquareButton
         accessibilityLabel="up"
         title={"\u25B2"}
-        type="square"
         onPress={() => up()}
       />
       <HorizontalAxis>
-        <Button
-          accessibilityLabel="left button"
+        <SquareButton
+          accessibilityLabel="left"
           title={"\u25C0"}
-          type="square"
           onPress={() => left()}
         />
         <Button
-          type="normal"
           accessibilityLabel="center"
           title={" "}
           onPress={() => undefined}
         />
-        <Button
+        <SquareButton
           accessibilityLabel="right"
           title={"\u25B6"}
-          type="square"
           onPress={() => right()}
         />
       </HorizontalAxis>
-      <Button
+      <SquareButton
         accessibilityLabel="down"
         title={"\u25BC"}
-        type="square"
         onPress={() => down()}
       />
     </ViewContainer>
@@ -79,14 +75,17 @@ const ViewContainer = g(View)<{ theme: Theme }>(
   {
     alignItems: "center",
     display: "flex",
+    flexGrow: 2,
     zIndex: 1
   },
-  ({ theme }) => ({})
+  () => ({})
 )
 const HorizontalAxis = g(View)({
   alignItems: "center",
   display: "flex",
-  flexDirection: "row"
+  flexDirection: "row",
+  marginBottom: 10,
+  marginTop: 10
 })
 
 export default Joystick

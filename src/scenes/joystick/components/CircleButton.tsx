@@ -1,13 +1,13 @@
 import { StatelessComponent, useContext } from "react"
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
-import { ThemeContext } from "../utils/theme"
-import { g, React } from "../utils/view"
+import { ThemeContext } from "../../../utils/theme"
+import { g, React } from "../../../utils/view"
 
 type Props = TouchableOpacityProps & {
   title: string
 }
 
-const ButtonComponent: StatelessComponent<Props> = (props: Props) => {
+const CircleButton: StatelessComponent<Props> = (props: Props) => {
   const theme = useContext(ThemeContext)
   const { title } = props
   return (
@@ -17,22 +17,25 @@ const ButtonComponent: StatelessComponent<Props> = (props: Props) => {
   )
 }
 
-const BUTTON_SIDE = 30
+const BUTTON_SIDE = 45
 
 const Container = g(TouchableOpacity)<{ theme: Theme }>(
   {
     alignItems: "center",
-    justifyContent: "center"
+    borderRadius: BUTTON_SIDE / 2,
+    borderWidth: 1,
+    height: BUTTON_SIDE,
+    justifyContent: "center",
+    minWidth: BUTTON_SIDE
   },
-  () => ({
-    borderRadius: 0,
-    borderWidth: 0,
-    height: BUTTON_SIDE
-  })
+  () => ({})
 )
 
-const Caption = g(Text)<{ theme: Theme }>({}, () => ({
-  fontSize: 20
-}))
+const Caption = g(Text)<{ theme: Theme }>(
+  {
+    fontSize: 20
+  },
+  () => ({})
+)
 
-export default ButtonComponent
+export default CircleButton

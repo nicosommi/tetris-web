@@ -7,16 +7,9 @@ type OverlayProps = {
   children: React.ReactNode
 }
 
-const config: SpringConfig = {
-  clamp: false,
-  friction: 10,
-  mass: 1,
-  tension: 360
-}
-
 const Overlay = ({ children, open }: OverlayProps) => {
   const { show } = useSpring({
-    config,
+    duration: 0.1,
     from: { show: "0%" },
     reverse: !open,
     show: "100%"

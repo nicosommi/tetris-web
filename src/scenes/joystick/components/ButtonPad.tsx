@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { TouchableOpacityProps, View } from "react-native"
-import Button from "../../../components/Button"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
+import CircleButton from "./CircleButton"
 import { useKeyDowns } from "./keyboard"
 
 type Props = TouchableOpacityProps & {
@@ -28,16 +28,14 @@ const Joystick = (props: Props) => {
 
   return visible ? (
     <ViewContainer theme={theme}>
-      <Button
+      <CircleButton
         accessibilityLabel="x button"
         title="X"
-        type="circle"
         onPress={() => x()}
       />
-      <Button
+      <CircleButton
         accessibilityLabel="y button"
         title="Y"
-        type="circle"
         onPress={() => y()}
       />
     </ViewContainer>
@@ -45,8 +43,11 @@ const Joystick = (props: Props) => {
 }
 
 const ViewContainer = g(View)<{ theme: Theme }>({
+  alignItems: "center",
   display: "flex",
-  flexDirection: "row"
+  flexDirection: "row",
+  flexGrow: 2,
+  justifyContent: "center"
 })
 
 export default Joystick

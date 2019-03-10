@@ -223,7 +223,6 @@ const tetris = () => {
             </BoardContainer>
           </GameContainer>
           <ButtonComponent
-            type="normal"
             accessibilityLabel="toggle onscreen joystick"
             title="Onscreen joystick"
             onPress={() => setJoystickCollapsed(!joystickCollapsed)}
