@@ -16,6 +16,7 @@ const MenuTitle = ({ label }: MenuTitleProps) => {
 
 const Container = animated(
   g(View)({
+    padding: 10,
     zIndex: 2
   })
 )
