@@ -1,6 +1,5 @@
-import { Text, TextProps, View, ViewProps } from "react-native"
+import { Text, TextProps, TouchableOpacity } from "react-native"
 import { animated } from "react-spring"
-import Button from "../../../components/Button"
 import { g, React } from "../../../utils/view"
 
 type MenuItemProps = {
@@ -9,7 +8,7 @@ type MenuItemProps = {
   selected: boolean
   onDecrease?: () => void
   onIncrease?: () => void
-  onSelect?: () => void
+  onSelect: () => void
 }
 
 const translateValue = (value: boolean | string) => {
@@ -21,14 +20,7 @@ const translateValue = (value: boolean | string) => {
   }
 }
 
-const MenuItem = ({
-  label,
-  selected,
-  value,
-  onDecrease,
-  onIncrease,
-  onSelect
-}: MenuItemProps) => {
+const MenuItem = ({ label, selected, value, onSelect }: MenuItemProps) => {
   const processedValue =
     typeof value === "boolean"
       ? value
@@ -36,12 +28,9 @@ const MenuItem = ({
       ? value
       : String(value)
   return (
-    <Container selected={selected}>
+    <Container selected={selected} onPress={onSelect}>
       <Label>
-        {onSelect ? <Button title={label} onPress={onSelect} /> : label}{" "}
-        {/* {onDecrease && <Button title="(" onPress={onDecrease} />} */}
-        {value !== undefined && `${translateValue(processedValue)}`}
-        {/* {onIncrease && <Button title=">" onPress={onIncrease} />} */}
+        {label} {value !== undefined && `${translateValue(processedValue)}`}
       </Label>
     </Container>
   )
@@ -52,7 +41,7 @@ type ContainerProps = {
 }
 
 const Container = animated(
-  g(View)<ViewProps & ContainerProps>(
+  g(TouchableOpacity)<ContainerProps>(
     {
       padding: 10
     },

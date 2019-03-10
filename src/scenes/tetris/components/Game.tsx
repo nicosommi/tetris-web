@@ -100,7 +100,7 @@ const tetris = () => {
         const currentIndex = themes.findIndex(t => t.name === settings.theme)
         let nextIndex = currentIndex - 1
         if (type === "increase" || type === "select")
-          nextIndex = currentIndex + 1
+          nextIndex = currentIndex + 1 < themes.length ? currentIndex + 1 : 0
         if (themes[nextIndex])
           setSetting({ ...settings, theme: themes[nextIndex].name })
       },
@@ -223,6 +223,7 @@ const tetris = () => {
             </BoardContainer>
           </GameContainer>
           <ButtonComponent
+            type="normal"
             accessibilityLabel="toggle onscreen joystick"
             title="Onscreen joystick"
             onPress={() => setJoystickCollapsed(!joystickCollapsed)}

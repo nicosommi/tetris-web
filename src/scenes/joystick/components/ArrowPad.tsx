@@ -53,6 +53,7 @@ const Joystick = (props: Props) => {
           onPress={() => left()}
         />
         <Button
+          type="normal"
           accessibilityLabel="center"
           title={" "}
           onPress={() => undefined}
