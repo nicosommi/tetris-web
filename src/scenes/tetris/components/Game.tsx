@@ -17,7 +17,7 @@ import MenuItem from "../../menu/components/MenuItem"
 import MenuTitle from "../../menu/components/MenuTitle"
 import Overlay from "../../menu/components/Overlay"
 import useMenu, { MenuActionType } from "../../menu/functions/hook"
-import { themes } from "../functions/settings"
+import { SHAPE_QUEUE_LENGTH, themes } from "../functions/settings"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import Effect from "./Effect"
@@ -160,17 +160,24 @@ const tetris = () => {
             </MenuContent>
           </Overlay>
           <GameContainer>
+            <Indicators>
+              <DebugContext.Consumer>
+                {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
+              </DebugContext.Consumer>
+              <Label accessibilityLabel="time">Time</Label>
+              <Label accessibilityLabel={String(game.durationInSeconds)}>
+                {game.durationInSeconds}
+              </Label>
+              <Label accessibilityLabel="lines">Lines</Label>
+              <Label accessibilityLabel={String(game.lines)}>
+                {game.lines}
+              </Label>
+              <Label accessibilityLabel="level">Level</Label>
+              <Label accessibilityLabel={String(game.level)}>
+                {game.level}
+              </Label>
+            </Indicators>
             <BoardContainer>
-              <Indicators>
-                <DebugContext.Consumer>
-                  {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
-                </DebugContext.Consumer>
-                <Label accessibilityLabel="time">
-                  Time: {game.durationInSeconds}
-                </Label>
-                <Label accessibilityLabel="lines">Lines: {game.lines}</Label>
-                <Label accessibilityLabel="level">Level: {game.level}</Label>
-              </Indicators>
               <BoardComponent joystickCollapsed={joystickCollapsed}>
                 {game.board.lines.map((line, lineIndex) =>
                   line.map((box, boxIndex) => (
@@ -187,25 +194,27 @@ const tetris = () => {
               </BoardComponent>
             </BoardContainer>
             <BoardContainer>
-              {game.board.previewBoards.map(previewBoard => (
-                <ShapePreview
-                  key={`${previewBoard.id}`}
-                  joystickCollapsed={joystickCollapsed}
-                >
-                  {previewBoard.lines.map((line, lineIndex) =>
-                    line.map((box, boxIndex) => (
-                      <BoxComponent
-                        key={`${box.id}`}
-                        box={box}
-                        joystickCollapsed={joystickCollapsed}
-                        line={lineIndex}
-                        column={boxIndex}
-                        grid={settings.grid}
-                      />
-                    ))
-                  )}
-                </ShapePreview>
-              ))}
+              {game.board.previewBoards
+                .slice(0, SHAPE_QUEUE_LENGTH - 1)
+                .map(previewBoard => (
+                  <ShapePreview
+                    key={`${previewBoard.id}`}
+                    joystickCollapsed={joystickCollapsed}
+                  >
+                    {previewBoard.lines.map((line, lineIndex) =>
+                      line.map((box, boxIndex) => (
+                        <BoxComponent
+                          key={`${box.id}`}
+                          box={box}
+                          joystickCollapsed={joystickCollapsed}
+                          line={lineIndex}
+                          column={boxIndex}
+                          grid={settings.grid}
+                        />
+                      ))
+                    )}
+                  </ShapePreview>
+                ))}
               <Info>
                 <Label small>Commands</Label>
                 <Label small>ROTATE: X or UP</Label>
@@ -215,10 +224,11 @@ const tetris = () => {
                 <Label small>RESTART: SELECT</Label>
               </Info>
               <Info>
-                <Label small>Key bindings</Label>
-                <Label small>ARROWS: wasd or arrows</Label>
-                <Label small>BUTTONS: jk or zx</Label>
-                <Label small>OPTIONS: ENTER and SPACE</Label>
+                <Label small>Keyboard</Label>
+                <Label small>wasd or arrows</Label>
+                <Label small>jk or zx</Label>
+                <Label small>ENTER</Label>
+                <Label small>SPACE</Label>
               </Info>
             </BoardContainer>
           </GameContainer>
@@ -283,8 +293,12 @@ const Info = g(View)({
 })
 
 const Indicators = g(View)({
+  alignItems: "center",
   display: "flex",
-  flexDirection: "row"
+  flexDirection: "column",
+  justifyContent: "center",
+  paddingLeft: 10,
+  paddingRight: 10
 })
 
 type LabelProps = { small?: boolean }

@@ -6,7 +6,7 @@ export const LINE_LENGTH = 10
 export const PREVIEW_BOARD_LENGTH = 2
 export const PREVIEW_LINE_LENGTH = 4
 export const BOARD_LENGTH = 24
-export const SHAPE_QUEUE_LENGTH = 3
+export const SHAPE_QUEUE_LENGTH = 4
 export const GAME_THICK_INTERVAL = 750
 export const GAME_ROTATION_DIRECTION: "clockwise" | "counterclockwise" =
   "clockwise"
