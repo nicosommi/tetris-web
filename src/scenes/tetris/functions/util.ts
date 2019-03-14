@@ -20,7 +20,7 @@ export const getViewportHeight = () => Dimensions.get("window").height
 
 function getPotentialBoxMaxWidth() {
   return Math.floor(
-    (getViewportWidth() - 100) / (LINE_LENGTH + PREVIEW_LINE_LENGTH)
+    (getViewportWidth() - 50) / (LINE_LENGTH + PREVIEW_LINE_LENGTH * 2)
   )
 }
 function getPotentialBoxMaxHeight(joystickCollapsed: boolean) {

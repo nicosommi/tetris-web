@@ -105,14 +105,34 @@ type ThemeNames =
   | "vadim"
   | "sega"
   | "red"
+
 type Theme = {
+  box: {
+    backgroundColor: string
+    borderColor: string
+  }
+  shapeBox: {
+    borderWidth: number
+    borderColor: string
+  }
+  color: string
   name: ThemeNames
   fontFamily: string
   music: string
+  panel: {
+    backgroundColor: string
+    borderColor: string
+  }
   sounds: {
     lineEat: string
   }
   shapeColors: { [key in ShapeType]: string }
+  wall: {
+    backgroundColor: string
+    borderColor: string
+    borderWidth: number
+    secondaryBorderColor?: string
+  }
 }
 
 type GameCommands = {

@@ -1,4 +1,4 @@
-import { Text, TextProps, View } from "react-native"
+import { Text, TextProps, View, ViewProps } from "react-native"
 import ReactPlayer from "react-player"
 import { DebugContext, isWeb } from "../../../utils/debug"
 import {
@@ -22,6 +22,7 @@ import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import Effect from "./Effect"
 import ShapePreview from "./ShapePreview"
+import WallComponent from "./Wall"
 
 const { useState, useEffect } = React
 
@@ -159,8 +160,8 @@ const tetris = () => {
               ))}
             </MenuContent>
           </Overlay>
-          <GameContainer>
-            <Indicators>
+          <Panel>
+            <WallComponent>
               <DebugContext.Consumer>
                 {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
               </DebugContext.Consumer>
@@ -176,7 +177,7 @@ const tetris = () => {
               <Label accessibilityLabel={String(game.level)}>
                 {game.level}
               </Label>
-            </Indicators>
+            </WallComponent>
             <BoardContainer>
               <BoardComponent joystickCollapsed={joystickCollapsed}>
                 {game.board.lines.map((line, lineIndex) =>
@@ -193,7 +194,7 @@ const tetris = () => {
                 )}
               </BoardComponent>
             </BoardContainer>
-            <BoardContainer>
+            <WallComponent>
               {game.board.previewBoards
                 .slice(0, SHAPE_QUEUE_LENGTH - 1)
                 .map(previewBoard => (
@@ -216,12 +217,12 @@ const tetris = () => {
                   </ShapePreview>
                 ))}
               <Info>
-                <Label small>Commands</Label>
-                <Label small>ROTATE: X or UP</Label>
+                <Label small>COMMANDS</Label>
+                <Label small>ROT: X or UP</Label>
                 <Label small>BLAST: Y</Label>
                 <Label small>ACC: DOWN</Label>
                 <Label small>PAUSE: START</Label>
-                <Label small>RESTART: SELECT</Label>
+                <Label small>NEW: SELECT</Label>
               </Info>
               <Info>
                 <Label small>Keyboard</Label>
@@ -230,8 +231,8 @@ const tetris = () => {
                 <Label small>ENTER</Label>
                 <Label small>SPACE</Label>
               </Info>
-            </BoardContainer>
-          </GameContainer>
+            </WallComponent>
+          </Panel>
           <ButtonComponent
             accessibilityLabel="toggle onscreen joystick"
             title="Onscreen joystick"
@@ -266,11 +267,17 @@ const tetris = () => {
   )
 }
 
-const GameContainer = g(View)({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center"
-})
+const Panel = g(View)<ViewProps>(
+  {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+  ({ theme }: ThemeProps) => ({
+    backgroundColor: theme.panel.backgroundColor,
+    borderColor: theme.panel.borderColor
+  })
+)
 
 const Container = g(View)({
   display: "flex",
@@ -286,27 +293,19 @@ const BoardContainer = g(View)({
 
 const Info = g(View)({
   alignItems: "center",
-  borderColor: "#000000",
-  borderWidth: 1,
-  display: "flex",
-  flexDirection: "column"
-})
-
-const Indicators = g(View)({
-  alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  paddingLeft: 10,
-  paddingRight: 10
+  marginTop: 10
 })
 
-type LabelProps = { small?: boolean }
 type ThemeProps = { theme: Theme }
+
+type LabelProps = { small?: boolean }
 
 const Label = g(Text)<TextProps & LabelProps>(
   {},
   ({ small, theme }: LabelProps & ThemeProps) => ({
+    color: theme.color,
     fontFamily: theme.fontFamily,
     fontSize: small ? 12 : 20
   })

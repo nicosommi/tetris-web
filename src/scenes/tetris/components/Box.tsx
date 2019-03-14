@@ -30,11 +30,17 @@ const BoxComponent = (props: Props) => {
 
 const Container = g(View)<Props>(
   {},
-  ({ box, grid, theme, joystickCollapsed }) => ({
+  ({ box, grid, theme, joystickCollapsed }: Props & { theme: Theme }) => ({
     backgroundColor: box.partOfShape
       ? theme.shapeColors[box.partOfShape.shape.type]
-      : "white",
-    border: grid ? "1px dashed rgba(0,0,0,.2)" : 0,
+      : theme.box.backgroundColor,
+    borderColor: box.partOfShape
+      ? theme.shapeBox.borderColor
+      : grid
+      ? theme.box.borderColor
+      : undefined,
+    borderStyle: grid ? "dashed" : undefined,
+    borderWidth: box.partOfShape ? theme.shapeBox.borderWidth : grid ? 1 : 0,
     height: getBoxMaxSide(joystickCollapsed),
     width: getBoxMaxSide(joystickCollapsed)
   })

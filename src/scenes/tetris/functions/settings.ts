@@ -21,9 +21,22 @@ export const GAME_COMMANDS: GameCommands = {
 const prefixUrl = process.env.PUBLIC_URL
 
 export const TETROMINO_THEME: Theme = {
+  box: {
+    backgroundColor: "#051e3e",
+    borderColor: "rgba(255,255,255,.2)"
+  },
+  color: "#ffffff",
   fontFamily: "sans-serif",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "default",
+  panel: {
+    backgroundColor: "#651e3e",
+    borderColor: "#000000"
+  },
+  shapeBox: {
+    borderColor: "rgba(255,255,255,.2)",
+    borderWidth: 1
+  },
   shapeColors: {
     i: "maroon",
     j: "silver",
@@ -35,13 +48,32 @@ export const TETROMINO_THEME: Theme = {
   },
   sounds: {
     lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
+  },
+  wall: {
+    backgroundColor: "#251e3e",
+    borderColor: "#851e3e",
+    borderWidth: 15,
+    secondaryBorderColor: "#ffffff"
   }
 }
 
 export const GAMEBOY_THEME: Theme = {
+  box: {
+    backgroundColor: "rgb(234, 255, 211)",
+    borderColor: "rgba(0,0,0,.2)"
+  },
+  color: "#ffffff",
   fontFamily: "sans-serif",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "gameboy",
+  panel: {
+    backgroundColor: "rgb(28, 50, 60)",
+    borderColor: "#000000"
+  },
+  shapeBox: {
+    borderColor: "rgba(0,0,0,.6)",
+    borderWidth: 1
+  },
   shapeColors: {
     i: "orange",
     j: "cyan",
@@ -53,12 +85,30 @@ export const GAMEBOY_THEME: Theme = {
   },
   sounds: {
     lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
+  },
+  wall: {
+    backgroundColor: "rgb(170, 210, 170)",
+    borderColor: "rgb(234, 255, 211)",
+    borderWidth: 15
   }
 }
 export const RED_THEME: Theme = {
+  box: {
+    backgroundColor: "#ffffff",
+    borderColor: "rgba(0,0,0,.2)"
+  },
+  color: "#000000",
   fontFamily: "sans-serif",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "red",
+  panel: {
+    backgroundColor: "#ffffff",
+    borderColor: "#000000"
+  },
+  shapeBox: {
+    borderColor: "rgba(255,255,255,.2)",
+    borderWidth: 1
+  },
   shapeColors: {
     i: "red",
     j: "red",
@@ -70,6 +120,11 @@ export const RED_THEME: Theme = {
   },
   sounds: {
     lineEat: `${prefixUrl}/assets/sound/tetris-effects-line-eat-1x.mp3`
+  },
+  wall: {
+    backgroundColor: "#ffffff",
+    borderColor: "#ff0000",
+    borderWidth: 15
   }
 }
 
