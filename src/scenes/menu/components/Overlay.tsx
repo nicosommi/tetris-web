@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import { animated, SpringConfig, useSpring } from "react-spring"
+import { animated } from "react-spring"
 import { g, React } from "../../../utils/view"
 
 type OverlayProps = {
@@ -8,18 +8,11 @@ type OverlayProps = {
 }
 
 const Overlay = ({ children, open }: OverlayProps) => {
-  const { show } = useSpring({
-    duration: 0.1,
-    from: { show: "0%" },
-    reverse: !open,
-    show: "100%"
-  })
-
-  return <Container show={show}>{open ? children : null}</Container>
+  return <Container show={open}>{open ? children : null}</Container>
 }
 
 type ContainerProps = {
-  show: string
+  show: boolean
 }
 
 const Container = animated(
@@ -31,11 +24,12 @@ const Container = animated(
       overflowX: "hidden",
       position: "fixed",
       top: 0,
+      transition: "height 0.5s",
       width: "100%",
       zIndex: 1
     },
     ({ show }: ContainerProps) => ({
-      height: show
+      height: show ? "100%" : 0
     })
   )
 )
