@@ -1,22 +1,35 @@
-import Sound, { PlayStatus } from "react-sound"
+import ReactPlayer from "react-player"
 import { isWeb } from "../../../utils/debug"
 import { React } from "../../../utils/view"
 import ErrorBoundary from "./ErrorBoundary"
 
+const { useRef, useEffect } = React
+
 type Props = {
   play: boolean
-  volume: number
   url: string
+  volume: number
 }
 
-const Effect = ({ url, play, volume }: Props) => {
+const Effect = ({ play, url, volume }: Props) => {
+  const effectComponentRef = useRef(null)
+
+  // TODO: improve typings
+  useEffect(() => {
+    if (effectComponentRef.current && play === true) {
+      ;((effectComponentRef.current! as ReactPlayer).getInternalPlayer() as any).play()
+    }
+  }, [play])
+
   return isWeb() ? (
     <ErrorBoundary>
-      <Sound
+      <ReactPlayer
         url={url}
-        playStatus={(play ? "PLAYING" : "STOPPED") as PlayStatus}
         loop={false}
-        volume={volume * 100}
+        height={0}
+        ref={effectComponentRef}
+        width={0}
+        volume={volume}
       />
     </ErrorBoundary>
   ) : null
