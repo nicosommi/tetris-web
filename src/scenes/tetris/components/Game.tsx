@@ -302,13 +302,12 @@ type ThemeProps = { theme: Theme }
 
 type LabelProps = { small?: boolean }
 
-const Label = g(Text)<TextProps & LabelProps>(
-  {},
-  ({ small, theme }: LabelProps & ThemeProps) => ({
-    color: theme.color,
-    fontFamily: theme.fontFamily,
-    fontSize: small ? 12 : 20
-  })
-)
+const Label = g(Text, {
+  shouldForwardProp: prop => prop !== "small"
+})<TextProps & LabelProps>({}, ({ small, theme }: LabelProps & ThemeProps) => ({
+  color: theme.color,
+  fontFamily: theme.fontFamily,
+  fontSize: small ? 12 : 20
+}))
 
 export default tetris
