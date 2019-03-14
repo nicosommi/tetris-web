@@ -48,7 +48,7 @@ type Settings = {
 
 const tetris = () => {
   const [settings, setSetting] = useState<Settings>({
-    grid: true,
+    grid: false,
     music: false,
     musicVolume: 0.6,
     sound: false,
