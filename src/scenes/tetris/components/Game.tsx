@@ -139,7 +139,7 @@ const tetris = () => {
         )}
         <Effect
           url={theme.sounds.lineEat}
-          volume={smokeTestEffects ? 0 : settings.soundVolume}
+          volume={smokeTestEffects ? 0.001 : settings.soundVolume}
           play={(settings.sound && game.lastEatenLines > 0) || smokeTestEffects}
         />
         <Container>
