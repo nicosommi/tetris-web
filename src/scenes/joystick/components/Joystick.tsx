@@ -1,5 +1,6 @@
 import { Text, TouchableOpacityProps, View } from "react-native"
 import { g, React } from "../../../utils/view"
+import { BG_COLOR, FG_COLOR } from "../variables"
 import ArrowPad from "./ArrowPad"
 import ButtonPad from "./ButtonPad"
 import OptionPad from "./OptionPad"
@@ -37,8 +38,8 @@ const Joystick = (props: Props) => {
 
 const ViewContainer = g(View)({
   alignItems: "center",
-  backgroundColor: "rgb(200, 165, 147)",
-  borderColor: "rgb(120, 0, 20)",
+  backgroundColor: FG_COLOR,
+  borderColor: BG_COLOR,
   borderWidth: 10,
   display: "flex",
   flexDirection: "row",
@@ -55,7 +56,7 @@ const VBox = g(View)({
 })
 
 const RedCorner = g(View)({
-  backgroundColor: "rgb(120, 0, 20)",
+  backgroundColor: BG_COLOR,
   display: "flex",
   flexDirection: "column",
   height: 80,
