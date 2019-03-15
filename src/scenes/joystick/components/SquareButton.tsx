@@ -1,10 +1,17 @@
 import { StatelessComponent, useContext } from "react"
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
+import {
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ViewStyle
+} from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 
 type Props = TouchableOpacityProps & {
   title: string
+  style?: ViewStyle
 }
 
 const SquareButton: StatelessComponent<Props> = (props: Props) => {
@@ -19,20 +26,29 @@ const SquareButton: StatelessComponent<Props> = (props: Props) => {
 
 const BUTTON_SIDE = 45
 
-const Container = g(TouchableOpacity)<{ theme: Theme }>(
+type ContainerProps = {
+  style?: ViewStyle
+}
+
+const Container = g(TouchableOpacity)<{ theme: Theme } & ContainerProps>(
   {
     alignItems: "center",
+    backgroundColor: "#000000",
     borderRadius: 4,
     borderWidth: 1,
     height: BUTTON_SIDE,
     justifyContent: "center",
     width: BUTTON_SIDE
   },
-  () => ({})
+  ({ style }: ContainerProps) => ({
+    ...style
+  })
 )
 
 const Caption = g(Text)<{ theme: Theme }>({}, () => ({
-  fontSize: 20
+  color: "#000000",
+  fontSize: 20,
+  textShadow: "-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray"
 }))
 
 export default SquareButton

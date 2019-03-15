@@ -10,7 +10,7 @@ import { g, React } from "../../../utils/view"
 
 import { useTetris } from "../functions/hook"
 
-import ButtonComponent from "../../../components/Button"
+import JoystickButton from "../../../components/JoystickButton"
 import Joystick from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
@@ -233,9 +233,11 @@ const tetris = () => {
               </Info>
             </WallComponent>
           </Panel>
-          <ButtonComponent
+          <JoystickButton
             accessibilityLabel="toggle onscreen joystick"
-            title="Onscreen joystick"
+            title={`Onscreen joystick ${
+              joystickCollapsed ? "\u25BC" : "\u25B2"
+            }`}
             onPress={() => setJoystickCollapsed(!joystickCollapsed)}
           />
           <Joystick

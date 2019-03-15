@@ -111,10 +111,6 @@ type Theme = {
     backgroundColor: string
     borderColor: string
   }
-  shapeBox: {
-    borderWidth: number
-    borderColor: string
-  }
   color: string
   name: ThemeNames
   fontFamily: string
@@ -125,6 +121,10 @@ type Theme = {
   }
   sounds: {
     lineEat: string
+  }
+  shapeBox: {
+    borderWidth: number
+    borderColor: string
   }
   shapeColors: { [key in ShapeType]: string }
   wall: {

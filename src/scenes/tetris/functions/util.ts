@@ -1,18 +1,11 @@
 import C from "chance"
 import { Dimensions } from "react-native"
-import { isWeb } from "../../../utils/debug"
-import {
-  BOARD_LENGTH,
-  BOX_WIDTH,
-  LINE_LENGTH,
-  PREVIEW_LINE_LENGTH
-} from "./settings"
+import { BOARD_LENGTH, LINE_LENGTH, PREVIEW_LINE_LENGTH } from "./settings"
 
 export const chance = () => new C()
 
 export const getJoystickHeight = (joystickCollapsed: boolean) => {
-  // TODO: syn this with joystick real height
-  return joystickCollapsed ? 60 : 200
+  return joystickCollapsed ? 0 : 175
 }
 
 export const getViewportWidth = () => Dimensions.get("window").width
