@@ -30,24 +30,24 @@ const Joystick = (props: Props) => {
     <ViewContainer theme={theme}>
       <CircleButton
         accessibilityLabel="x button"
-        title="X"
+        title="A"
         onPress={() => x()}
       />
       <CircleButton
         accessibilityLabel="y button"
-        title="Y"
+        title="B"
         onPress={() => y()}
       />
     </ViewContainer>
   ) : null
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>({
+const ViewContainer = g(View)({
   alignItems: "center",
   display: "flex",
   flexDirection: "row",
   flexGrow: 2,
-  justifyContent: "center"
+  justifyContent: "space-around"
 })
 
 export default Joystick

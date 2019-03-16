@@ -2,6 +2,8 @@ import { StatelessComponent, useContext } from "react"
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
+import { kindDependent } from "../functions/util"
+import { FG_COLOR } from "../variables"
 
 type Props = TouchableOpacityProps & {
   title: string
@@ -17,25 +19,28 @@ const CircleButton: StatelessComponent<Props> = (props: Props) => {
   )
 }
 
-const BUTTON_SIDE = 45
-
-const Container = g(TouchableOpacity)<{ theme: Theme }>(
+const Container = g(TouchableOpacity)(
   {
     alignItems: "center",
-    borderRadius: BUTTON_SIDE / 2,
+    backgroundColor: "#000000",
     borderWidth: 1,
-    height: BUTTON_SIDE,
-    justifyContent: "center",
-    minWidth: BUTTON_SIDE
+    justifyContent: "center"
   },
-  () => ({})
+  (_, BUTTON_SIDE = kindDependent(33, 50)) => ({
+    borderRadius: BUTTON_SIDE / 2,
+    height: BUTTON_SIDE,
+    minWidth: BUTTON_SIDE
+  })
 )
 
-const Caption = g(Text)<{ theme: Theme }>(
-  {
-    fontSize: 20
-  },
-  () => ({})
-)
+const Caption = g(Text)({
+  backgroundColor: "#000000",
+  borderRadius: 10,
+  color: FG_COLOR,
+  fontSize: 14,
+  marginTop: kindDependent(-55, -70),
+  textAlign: "center",
+  width: "75%"
+})
 
 export default CircleButton

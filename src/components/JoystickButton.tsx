@@ -38,7 +38,8 @@ const Container = g(TouchableOpacity)<{ theme: Theme }>(
 
 const Caption = g(Text)<{ theme: Theme; fontSize?: number }>(
   {},
-  ({ fontSize }) => ({
+  ({ theme, fontSize }) => ({
+    color: theme.color,
     fontSize: fontSize ? fontSize : 20
   })
 )

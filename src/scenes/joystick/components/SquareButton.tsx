@@ -1,6 +1,5 @@
 import { StatelessComponent, useContext } from "react"
 import {
-  StyleProp,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -8,6 +7,7 @@ import {
 } from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
+import { kindDependent } from "../functions/util"
 
 type Props = TouchableOpacityProps & {
   title: string
@@ -24,8 +24,6 @@ const SquareButton: StatelessComponent<Props> = (props: Props) => {
   )
 }
 
-const BUTTON_SIDE = 45
-
 type ContainerProps = {
   style?: ViewStyle
 }
@@ -36,11 +34,11 @@ const Container = g(TouchableOpacity)<{ theme: Theme } & ContainerProps>(
     backgroundColor: "#000000",
     borderRadius: 4,
     borderWidth: 1,
-    height: BUTTON_SIDE,
+    height: kindDependent(30, 45),
     justifyContent: "center",
-    width: BUTTON_SIDE
+    width: kindDependent(30, 45)
   },
-  ({ style }: ContainerProps) => ({
+  ({ style }: ContainerProps, BUTTON_SIDE = kindDependent(30, 45)) => ({
     ...style
   })
 )

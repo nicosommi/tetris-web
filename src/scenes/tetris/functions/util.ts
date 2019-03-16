@@ -1,5 +1,5 @@
 import C from "chance"
-import { Dimensions } from "react-native"
+import { getViewportHeight, getViewportWidth } from "../../../utils/util"
 import { BOARD_LENGTH, LINE_LENGTH, PREVIEW_LINE_LENGTH } from "./settings"
 
 export const chance = () => new C()
@@ -8,12 +8,9 @@ export const getJoystickHeight = (joystickCollapsed: boolean) => {
   return joystickCollapsed ? 0 : 175
 }
 
-export const getViewportWidth = () => Dimensions.get("window").width
-export const getViewportHeight = () => Dimensions.get("window").height
-
 function getPotentialBoxMaxWidth() {
   return Math.floor(
-    (getViewportWidth() - 50) / (LINE_LENGTH + PREVIEW_LINE_LENGTH * 2)
+    getViewportWidth() / (LINE_LENGTH + PREVIEW_LINE_LENGTH * 2)
   )
 }
 function getPotentialBoxMaxHeight(joystickCollapsed: boolean) {

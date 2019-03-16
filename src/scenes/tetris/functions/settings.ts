@@ -52,7 +52,7 @@ export const TETROMINO_THEME: Theme = {
   wall: {
     backgroundColor: "#251e3e",
     borderColor: "#851e3e",
-    borderWidth: 15,
+    borderWidth: 3,
     secondaryBorderColor: "#ffffff"
   }
 }
@@ -89,7 +89,7 @@ export const GAMEBOY_THEME: Theme = {
   wall: {
     backgroundColor: "rgb(170, 210, 170)",
     borderColor: "rgb(234, 255, 211)",
-    borderWidth: 15
+    borderWidth: 3
   }
 }
 export const RED_THEME: Theme = {
@@ -124,7 +124,7 @@ export const RED_THEME: Theme = {
   wall: {
     backgroundColor: "#ffffff",
     borderColor: "#ff0000",
-    borderWidth: 15
+    borderWidth: 3
   }
 }
 

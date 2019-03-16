@@ -1,5 +1,6 @@
 import { Text, TouchableOpacityProps, View } from "react-native"
 import { g, React } from "../../../utils/view"
+import { kindDependent } from "../functions/util"
 import { BG_COLOR, FG_COLOR } from "../variables"
 import ArrowPad from "./ArrowPad"
 import ButtonPad from "./ButtonPad"
@@ -12,8 +13,11 @@ type Props = TouchableOpacityProps &
 
 const Joystick = (props: Props) => {
   const { up, down, left, right, select, start, x, y, visible } = props
+  const MainComponent = visible ? ViewContainer : React.Fragment
+  const FinalVBox = visible ? VBox : React.Fragment
+  const FinalHBox = visible ? HBox : React.Fragment
   return (
-    <ViewContainer>
+    <MainComponent>
       <ArrowPad
         up={up}
         down={down}
@@ -21,18 +25,31 @@ const Joystick = (props: Props) => {
         right={right}
         visible={visible}
       />
-      <VBox>
+      <FinalVBox>
         {visible && (
           <RedCorner>
             <Text> </Text>
           </RedCorner>
         )}
-        <HBox>
+        <FinalHBox>
           <OptionPad select={select} start={start} visible={visible} />
           <ButtonPad x={x} y={y} visible={visible} />
-        </HBox>
-      </VBox>
-    </ViewContainer>
+        </FinalHBox>
+      </FinalVBox>
+      {visible && (
+        <Hrs>
+          <Hr>
+            <Text> </Text>
+          </Hr>
+          <Hr>
+            <Text> </Text>
+          </Hr>
+          <Hr>
+            <Text> </Text>
+          </Hr>
+        </Hrs>
+      )}
+    </MainComponent>
   )
 }
 
@@ -49,25 +66,51 @@ const ViewContainer = g(View)({
 })
 
 const VBox = g(View)({
+  alignSelf: "stretch",
   display: "flex",
   flexDirection: "column",
-  flexGrow: 4
-  // minWidth: "60%"
+  flexGrow: 4,
+  justifyContent: "space-evenly"
 })
 
-const RedCorner = g(View)({
-  backgroundColor: BG_COLOR,
-  display: "flex",
-  flexDirection: "column",
-  height: 80,
-  justifySelf: "stretch",
-  marginRight: -10,
-  marginTop: -35
-})
+const RedCorner = g(View)(
+  {
+    alignSelf: "flex-end",
+    backgroundColor: BG_COLOR,
+    borderRadius: 5,
+    display: "flex",
+    flexDirection: "column",
+    justifySelf: "stretch",
+    marginTop: -35,
+    width: "90%"
+  },
+  () => ({
+    height: kindDependent(40, 80),
+    marginRight: kindDependent(-14, -14)
+  })
+)
 
 const HBox = g(View)({
   display: "flex",
   flexDirection: "row"
+})
+
+const Hrs = g(View)({
+  display: "flex",
+  flex: 1,
+  flexDirection: "column",
+  height: 10,
+  justifyContent: "space-evenly",
+  left: 0,
+  marginTop: 32,
+  position: "absolute",
+  width: "100%",
+  zIndex: -1
+})
+
+const Hr = g(View)({
+  backgroundColor: "#000000",
+  height: 2
 })
 
 export default Joystick

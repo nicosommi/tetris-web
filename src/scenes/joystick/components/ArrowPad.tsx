@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import { Text, TouchableOpacityProps, View } from "react-native"
-import Button from "../../../components/Button"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
 import { BG_COLOR } from "../variables"
@@ -128,15 +127,12 @@ const Joystick = (props: Props) => {
   ) : null
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>(
-  {
-    alignItems: "center",
-    display: "flex",
-    flexGrow: 3,
-    zIndex: 1
-  },
-  () => ({})
-)
+const ViewContainer = g(View)({
+  alignItems: "center",
+  display: "flex",
+  flexGrow: 3,
+  zIndex: 1
+})
 const HorizontalAxis = g(View)({
   alignItems: "center",
   display: "flex",

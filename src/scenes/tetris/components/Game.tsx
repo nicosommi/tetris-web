@@ -235,9 +235,7 @@ const tetris = () => {
           </Panel>
           <JoystickButton
             accessibilityLabel="toggle onscreen joystick"
-            title={`Onscreen joystick ${
-              joystickCollapsed ? "\u25BC" : "\u25B2"
-            }`}
+            title={`JOYSTICK ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
             onPress={() => setJoystickCollapsed(!joystickCollapsed)}
           />
           <Joystick

@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { TouchableOpacityProps, View } from "react-native"
 import { ThemeContext } from "../../../utils/theme"
 import { g, React } from "../../../utils/view"
+import { BG_COLOR } from "../variables"
 import { useKeyDowns } from "./keyboard"
 import PillButton from "./PillButton"
 
@@ -42,13 +43,19 @@ const OptionPad = (props: Props) => {
   ) : null
 }
 
-const ViewContainer = g(View)<{ theme: Theme }>({
+const ViewContainer = g(View)({
   alignItems: "center",
+  backgroundColor: BG_COLOR,
+  borderColor: BG_COLOR,
+  borderRadius: 45,
+  borderStyle: "groove",
+  borderWidth: 10,
   display: "flex",
   flexDirection: "row",
   flexGrow: 1,
-  height: 60,
-  justifyContent: "center"
+  height: 40,
+  justifyContent: "space-evenly",
+  marginTop: 5
 })
 
 export default OptionPad

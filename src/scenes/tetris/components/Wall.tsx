@@ -21,6 +21,7 @@ const Container = g(View)<ViewProps>(
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
+    flexGrow: 1,
     justifyContent: "center",
     paddingBottom: 0
   },
@@ -44,6 +45,7 @@ const Container = g(View)<ViewProps>(
 const Wall = g(View)<ViewProps>(
   {
     alignItems: "center",
+    alignSelf: "stretch",
     display: "flex",
     flex: 1,
     flexDirection: "column",
