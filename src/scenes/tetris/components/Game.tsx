@@ -315,12 +315,17 @@ const BoardContainer = g(View)({
   flexDirection: "column"
 })
 
-const Info = g(View)({
-  alignItems: "center",
-  display: "flex",
-  flexDirection: "column",
-  marginTop: 10
-})
+const Info = g(View)<ViewProps>(
+  {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    marginTop: 10
+  },
+  ({ theme }: ThemeProps) => ({
+    backgroundColor: theme.wall.backgroundColor
+  })
+)
 
 type ThemeProps = { theme: Theme }
 

@@ -62,7 +62,7 @@ export const GAMEBOY_THEME: Theme = {
     backgroundColor: "rgb(234, 255, 211)",
     borderColor: "rgba(0,0,0,.2)"
   },
-  color: "#ffffff",
+  color: "#000000",
   fontFamily: "sans-serif",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "gameboy",
@@ -88,7 +88,7 @@ export const GAMEBOY_THEME: Theme = {
   },
   wall: {
     backgroundColor: "rgb(170, 210, 170)",
-    borderColor: "rgb(234, 255, 211)",
+    borderColor: "rgb(0, 0, 0, 0.8)",
     borderWidth: 3
   }
 }
