@@ -187,7 +187,7 @@ const tetris = () => {
               <WallHole>
                 <JoystickButton
                   accessibilityLabel="toggle onscreen joystick"
-                  title={`JOYSTICK ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
+                  title={`PAD ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
                   onPress={() => setJoystickCollapsed(!joystickCollapsed)}
                 />
               </WallHole>

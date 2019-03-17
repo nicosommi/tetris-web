@@ -10,7 +10,7 @@ export const getJoystickHeight = (joystickCollapsed: boolean) => {
 
 function getPotentialBoxMaxWidth() {
   return Math.floor(
-    getViewportWidth() / (LINE_LENGTH + PREVIEW_LINE_LENGTH * 2)
+    (getViewportWidth() - 100) / (LINE_LENGTH + PREVIEW_LINE_LENGTH * 2)
   )
 }
 function getPotentialBoxMaxHeight(joystickCollapsed: boolean) {

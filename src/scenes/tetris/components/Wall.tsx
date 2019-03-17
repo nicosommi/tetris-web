@@ -47,8 +47,8 @@ const Wall = g(View)<ViewProps>(
     alignItems: "center",
     alignSelf: "stretch",
     display: "flex",
-    flex: 1,
     flexDirection: "column",
+    flexGrow: 1,
     justifyContent: "center",
     paddingLeft: 5,
     paddingRight: 5
