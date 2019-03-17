@@ -91,8 +91,9 @@ const tetris = () => {
     },
     sound: {
       handler: () => {
-        setSetting({ ...settings, sound: !settings.sound })
-        setSmokeTestEffects(true)
+        const sound = !settings.sound
+        setSetting({ ...settings, sound })
+        setSmokeTestEffects(sound)
       },
       label: "SOUND EFFECTS"
     },
@@ -140,7 +141,6 @@ const tetris = () => {
         )}
         <Effect
           url={theme.sounds.lineEat}
-          volume={smokeTestEffects ? 0.001 : settings.soundVolume}
           play={(settings.sound && game.lastEatenLines > 0) || smokeTestEffects}
         />
         <Container>
