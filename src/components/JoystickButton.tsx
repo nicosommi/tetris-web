@@ -9,20 +9,17 @@ type Props = TouchableOpacityProps & {
 }
 
 const JoystickButton: StatelessComponent<Props> = (props: Props) => {
-  const theme = useContext(ThemeContext)
   const { title, fontSize } = props
   return (
-    <Container {...{ ...props, theme }}>
-      <Caption theme={theme} fontSize={fontSize}>
-        {title}
-      </Caption>
+    <Container {...{ ...props }}>
+      <Caption fontSize={fontSize}>{title}</Caption>
     </Container>
   )
 }
 
 const BUTTON_SIDE = 30
 
-const Container = g(TouchableOpacity)<{ theme: Theme }>(
+const Container = g(TouchableOpacity)(
   {
     alignItems: "flex-start",
     display: "flex",
@@ -35,10 +32,11 @@ const Container = g(TouchableOpacity)<{ theme: Theme }>(
   })
 )
 
-const Caption = g(Text)<{ theme: Theme; fontSize?: number }>(
+const Caption = g(Text)<{ fontSize?: number }>(
   {},
-  ({ theme, fontSize }) => ({
+  ({ theme, fontSize }: { theme: Theme; fontSize?: number }) => ({
     color: theme.color,
+    fontFamily: theme.fontFamily,
     fontSize: fontSize ? fontSize : 20
   })
 )

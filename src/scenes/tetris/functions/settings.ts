@@ -26,7 +26,7 @@ export const TETROMINO_THEME: Theme = {
     borderColor: "rgba(255,255,255,.2)"
   },
   color: "#ffffff",
-  fontFamily: "sans-serif",
+  fontFamily: "Press Start\\ 2P",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "default",
   panel: {
@@ -63,7 +63,7 @@ export const GAMEBOY_THEME: Theme = {
     borderColor: "rgba(0,0,0,.2)"
   },
   color: "#000000",
-  fontFamily: "sans-serif",
+  fontFamily: "Press Start\\ 2P",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "gameboy",
   panel: {
@@ -98,7 +98,7 @@ export const RED_THEME: Theme = {
     borderColor: "rgba(0,0,0,.2)"
   },
   color: "#000000",
-  fontFamily: "sans-serif",
+  fontFamily: "Press Start\\ 2P",
   music: `${prefixUrl}/assets/music/01.mp3`,
   name: "red",
   panel: {
