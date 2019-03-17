@@ -1,6 +1,6 @@
-import { StatelessComponent, useContext } from "react"
+import { StatelessComponent } from "react"
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
-import { ThemeContext } from "../utils/theme"
+import { kindDependent } from "../utils/util"
 import { g, React } from "../utils/view"
 
 type Props = TouchableOpacityProps & {
@@ -37,7 +37,7 @@ const Caption = g(Text)<{ fontSize?: number }>(
   ({ theme, fontSize }: { theme: Theme; fontSize?: number }) => ({
     color: theme.color,
     fontFamily: theme.fontFamily,
-    fontSize: fontSize ? fontSize : 20
+    fontSize: fontSize ? fontSize : kindDependent(10, 20)
   })
 )
 

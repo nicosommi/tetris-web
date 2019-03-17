@@ -1,5 +1,6 @@
 import { View, ViewProps } from "react-native"
 import { isWeb } from "../../../utils/debug"
+import { kindDependent } from "../../../utils/util"
 import { g, React } from "../../../utils/view"
 
 type ThemeProps = { theme: Theme }
@@ -47,7 +48,7 @@ const Wall = g(View)<ViewProps>(
     alignItems: "center",
     alignSelf: "stretch",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: kindDependent("row", "column"),
     flexGrow: 1,
     justifyContent: "center",
     paddingLeft: 5,

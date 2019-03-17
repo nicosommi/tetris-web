@@ -11,6 +11,7 @@ import { g, React } from "../../../utils/view"
 import { useTetris } from "../functions/hook"
 
 import JoystickButton from "../../../components/JoystickButton"
+import { kindDependent } from "../../../utils/util"
 import Joystick from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
@@ -297,7 +298,7 @@ const tetris = () => {
 const Panel = g(View)<ViewProps>(
   {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: kindDependent("column", "row"),
     justifyContent: "center"
   },
   ({ theme }: ThemeProps) => ({
@@ -336,7 +337,7 @@ const WallHole = g(View)<ViewProps>(
   {
     alignItems: "center",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: kindDependent("row", "column"),
     marginTop: 10,
     padding: 10
   },
@@ -354,7 +355,7 @@ const Label = g(Text, {
 })<TextProps & LabelProps>({}, ({ small, theme }: LabelProps & ThemeProps) => ({
   color: theme.color,
   fontFamily: theme.fontFamily,
-  fontSize: small ? 12 : 20
+  fontSize: small ? kindDependent(6, 12) : kindDependent(10, 20)
 }))
 
 export default tetris
