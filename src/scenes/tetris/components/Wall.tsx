@@ -54,6 +54,23 @@ const Wall = g(View)<ViewProps>(
     paddingRight: 5
   },
   ({ theme }: ThemeProps) => ({
-    backgroundColor: theme.wall.backgroundColor
+    backgroundColor: isWeb()
+      ? theme.wall.borderColor
+      : theme.wall.backgroundColor,
+    backgroundImage: isWeb()
+      ? `linear-gradient(335deg, ${
+          theme.wall.backgroundColor
+        } 23px, transparent 23px), linear-gradient(155deg, ${
+          theme.wall.backgroundColor
+        } 23px, transparent 23px), linear-gradient(335deg, ${
+          theme.wall.backgroundColor
+        } 23px, transparent 23px), linear-gradient(155deg, ${
+          theme.wall.backgroundColor
+        } 23px, transparent 23px)`
+      : undefined,
+    backgroundPosition: isWeb()
+      ? "0px 2px, 4px 35px, 29px 31px, 34px 6px"
+      : undefined,
+    backgroundSize: isWeb() ? "58px 58px" : undefined
   })
 )

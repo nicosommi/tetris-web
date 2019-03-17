@@ -26,8 +26,7 @@ const Container = g(TouchableOpacity)<{ theme: Theme }>(
   {
     alignItems: "flex-start",
     display: "flex",
-    justifyContent: "center",
-    marginTop: -30
+    justifyContent: "center"
   },
   () => ({
     borderRadius: 0,

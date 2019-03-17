@@ -122,6 +122,7 @@ const tetris = () => {
   )
 
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
+  const [infoShown, showInfo] = useState(false)
   const theme = getThemeByName(settings.theme)
 
   return (
@@ -144,7 +145,7 @@ const tetris = () => {
         />
         <Container>
           {/* Use joystick arrow handlers and x y handlers for menu too */}
-          <Overlay open={game.paused}>
+          <Overlay open={game.paused && !infoShown}>
             <MenuContent>
               <MenuTitle label="SETTINGS" />
               {Object.entries(menuOptions).map(([key, value]) => (
@@ -162,21 +163,34 @@ const tetris = () => {
           </Overlay>
           <Panel>
             <WallComponent>
-              <DebugContext.Consumer>
-                {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
-              </DebugContext.Consumer>
-              <Label accessibilityLabel="time">Time</Label>
-              <Label accessibilityLabel={String(game.durationInSeconds)}>
-                {game.durationInSeconds}
-              </Label>
-              <Label accessibilityLabel="lines">Lines</Label>
-              <Label accessibilityLabel={String(game.lines)}>
-                {game.lines}
-              </Label>
-              <Label accessibilityLabel="level">Level</Label>
-              <Label accessibilityLabel={String(game.level)}>
-                {game.level}
-              </Label>
+              <WallHole>
+                <DebugContext.Consumer>
+                  {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
+                </DebugContext.Consumer>
+                <Label accessibilityLabel="time">Time</Label>
+                <Label accessibilityLabel={String(game.durationInSeconds)}>
+                  {game.durationInSeconds}
+                </Label>
+              </WallHole>
+              <WallHole>
+                <Label accessibilityLabel="lines">Lines</Label>
+                <Label accessibilityLabel={String(game.lines)}>
+                  {game.lines}
+                </Label>
+              </WallHole>
+              <WallHole>
+                <Label accessibilityLabel="level">Level</Label>
+                <Label accessibilityLabel={String(game.level)}>
+                  {game.level}
+                </Label>
+              </WallHole>
+              <WallHole>
+                <JoystickButton
+                  accessibilityLabel="toggle onscreen joystick"
+                  title={`JOYSTICK ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
+                  onPress={() => setJoystickCollapsed(!joystickCollapsed)}
+                />
+              </WallHole>
             </WallComponent>
             <BoardContainer>
               <BoardComponent joystickCollapsed={joystickCollapsed}>
@@ -195,49 +209,56 @@ const tetris = () => {
               </BoardComponent>
             </BoardContainer>
             <WallComponent>
-              {game.board.previewBoards
-                .slice(0, SHAPE_QUEUE_LENGTH - 1)
-                .map(previewBoard => (
-                  <ShapePreview
-                    key={`${previewBoard.id}`}
-                    joystickCollapsed={joystickCollapsed}
-                  >
-                    {previewBoard.lines.map((line, lineIndex) =>
-                      line.map((box, boxIndex) => (
-                        <BoxComponent
-                          key={`${box.id}`}
-                          box={box}
-                          joystickCollapsed={joystickCollapsed}
-                          line={lineIndex}
-                          column={boxIndex}
-                          grid={settings.grid}
-                        />
-                      ))
-                    )}
-                  </ShapePreview>
-                ))}
-              <Info>
-                <Label small>COMMANDS</Label>
-                <Label small>ROT: X or UP</Label>
-                <Label small>BLAST: Y</Label>
-                <Label small>ACC: DOWN</Label>
-                <Label small>PAUSE: START</Label>
-                <Label small>NEW: SELECT</Label>
-              </Info>
-              <Info>
-                <Label small>Keyboard</Label>
-                <Label small>wasd or arrows</Label>
-                <Label small>jk or zx</Label>
-                <Label small>ENTER</Label>
-                <Label small>SPACE</Label>
-              </Info>
+              <WallHole>
+                {game.board.previewBoards
+                  .slice(0, SHAPE_QUEUE_LENGTH - 1)
+                  .map(previewBoard => (
+                    <ShapePreview
+                      key={`${previewBoard.id}`}
+                      joystickCollapsed={joystickCollapsed}
+                    >
+                      {previewBoard.lines.map((line, lineIndex) =>
+                        line.map((box, boxIndex) => (
+                          <BoxComponent
+                            key={`${box.id}`}
+                            box={box}
+                            joystickCollapsed={joystickCollapsed}
+                            line={lineIndex}
+                            column={boxIndex}
+                            grid={settings.grid}
+                          />
+                        ))
+                      )}
+                    </ShapePreview>
+                  ))}
+              </WallHole>
+              <Overlay open={infoShown}>
+                <MenuContent>
+                  <MenuTitle label="INFO" />
+                  <Info>
+                    <Label small>COMMANDS</Label>
+                    <Label small>ROT: X or UP</Label>
+                    <Label small>BLAST: Y</Label>
+                    <Label small>ACC: DOWN</Label>
+                    <Label small>PAUSE: START</Label>
+                    <Label small>NEW: SELECT</Label>
+                  </Info>
+                  <Info>
+                    <Label small>Keyboard</Label>
+                    <Label small>wasd or arrows</Label>
+                    <Label small>jk or zx</Label>
+                    <Label small>ENTER</Label>
+                    <Label small>SPACE</Label>
+                  </Info>
+                  <MenuItem
+                    selected={true}
+                    label="BACK"
+                    onSelect={() => showInfo(false)}
+                  />
+                </MenuContent>
+              </Overlay>
             </WallComponent>
           </Panel>
-          <JoystickButton
-            accessibilityLabel="toggle onscreen joystick"
-            title={`JOYSTICK ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
-            onPress={() => setJoystickCollapsed(!joystickCollapsed)}
-          />
           <Joystick
             down={(...args) => {
               game.paused ? downMenu() : handlers.DOWN.apply(null, args)
@@ -248,7 +269,10 @@ const tetris = () => {
             right={(...args) => {
               game.paused ? increase() : handlers.RIGHT.apply(null, args)
             }}
-            select={handlers.RESTART}
+            select={(...args) => {
+              showInfo(!infoShown)
+              handlers.PAUSE.apply(null, args)
+            }}
             start={handlers.PAUSE}
             up={(...args) => {
               game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
@@ -299,6 +323,21 @@ const Info = g(View)({
 })
 
 type ThemeProps = { theme: Theme }
+
+const WallHole = g(View)<ViewProps>(
+  {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    marginTop: 10,
+    padding: 10
+  },
+  ({ theme }: ThemeProps) => ({
+    backgroundColor: theme.box.backgroundColor,
+    borderColor: theme.wall.borderColor,
+    borderWidth: 3
+  })
+)
 
 type LabelProps = { small?: boolean }
 
