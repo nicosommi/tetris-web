@@ -33,14 +33,18 @@ const Container = g(TouchableOpacity)(
   })
 )
 
-const Caption = g(Text)({
-  backgroundColor: "#000000",
-  borderRadius: 10,
-  color: FG_COLOR,
-  fontSize: 14,
-  marginTop: kindDependent(-55, -70),
-  textAlign: "center",
-  width: "75%"
-})
+const Caption = g(Text)(
+  {
+    backgroundColor: "#000000",
+    borderRadius: 10,
+    color: FG_COLOR,
+    fontSize: 14,
+    textAlign: "center",
+    width: "75%"
+  },
+  () => ({
+    marginTop: kindDependent(-55, -70)
+  })
+)
 
 export default CircleButton

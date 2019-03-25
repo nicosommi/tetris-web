@@ -48,7 +48,6 @@ const Wall = g(View)<ViewProps>(
     alignItems: "center",
     alignSelf: "stretch",
     display: "flex",
-    flexDirection: kindDependent("row", "column"),
     flexGrow: 1,
     justifyContent: "center",
     paddingLeft: 5,
@@ -72,6 +71,7 @@ const Wall = g(View)<ViewProps>(
     backgroundPosition: isWeb()
       ? "0px 2px, 4px 35px, 29px 31px, 34px 6px"
       : undefined,
-    backgroundSize: isWeb() ? "58px 58px" : undefined
+    backgroundSize: isWeb() ? "58px 58px" : undefined,
+    flexDirection: kindDependent("row", "column")
   })
 )

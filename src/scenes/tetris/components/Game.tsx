@@ -188,7 +188,7 @@ const tetris = () => {
               <WallHole>
                 <JoystickButton
                   accessibilityLabel="toggle onscreen joystick"
-                  title={`PAD ${joystickCollapsed ? "\u25BC" : "\u25B2"}`}
+                  title={`PAD ${joystickCollapsed ? "\u25B2" : "\u25BC"}`}
                   onPress={() => setJoystickCollapsed(!joystickCollapsed)}
                 />
               </WallHole>
@@ -298,12 +298,12 @@ const tetris = () => {
 const Panel = g(View)<ViewProps>(
   {
     display: "flex",
-    flexDirection: kindDependent("column", "row"),
     justifyContent: "center"
   },
   ({ theme }: ThemeProps) => ({
     backgroundColor: theme.panel.backgroundColor,
-    borderColor: theme.panel.borderColor
+    borderColor: theme.panel.borderColor,
+    flexDirection: kindDependent("column", "row")
   })
 )
 
@@ -337,14 +337,14 @@ const WallHole = g(View)<ViewProps>(
   {
     alignItems: "center",
     display: "flex",
-    flexDirection: kindDependent("row", "column"),
     marginTop: 10,
     padding: 10
   },
   ({ theme }: ThemeProps) => ({
     backgroundColor: theme.box.backgroundColor,
     borderColor: theme.wall.borderColor,
-    borderWidth: 3
+    borderWidth: 3,
+    flexDirection: kindDependent("row", "column")
   })
 )
 

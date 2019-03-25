@@ -28,19 +28,20 @@ type ContainerProps = {
   style?: ViewStyle
 }
 
-const Container = g(TouchableOpacity)<{ theme: Theme } & ContainerProps>(
+const Container = g(TouchableOpacity)(
   {
     alignItems: "center",
     backgroundColor: "#000000",
     borderRadius: 4,
     borderWidth: 1,
-    height: kindDependent(30, 45),
-    justifyContent: "center",
-    width: kindDependent(30, 45)
+    justifyContent: "center"
   },
-  ({ style }: ContainerProps, BUTTON_SIDE = kindDependent(30, 45)) => ({
-    ...style
-  })
+  ({ style }: ContainerProps, BUTTON_SIDE = kindDependent(30, 45)) =>
+    ({
+      ...style,
+      height: BUTTON_SIDE,
+      width: BUTTON_SIDE
+    } as any)
 )
 
 const Caption = g(Text)<{ theme: Theme }>({}, () => ({

@@ -30,7 +30,10 @@ const BoxComponent = (props: Props) => {
 
 const Container = g(View)<Props>(
   {},
-  ({ box, grid, theme, joystickCollapsed }: Props & { theme: Theme }) => ({
+  (
+    { box, grid, theme, joystickCollapsed }: Props & { theme: Theme },
+    MAX_SIDE = getBoxMaxSide(joystickCollapsed)
+  ) => ({
     backgroundColor: box.partOfShape
       ? theme.shapeColors[box.partOfShape.shape.type]
       : theme.box.backgroundColor,
@@ -41,8 +44,8 @@ const Container = g(View)<Props>(
       : undefined,
     borderStyle: grid ? "dashed" : undefined,
     borderWidth: box.partOfShape ? theme.shapeBox.borderWidth : grid ? 1 : 0,
-    height: getBoxMaxSide(joystickCollapsed),
-    width: getBoxMaxSide(joystickCollapsed)
+    height: MAX_SIDE,
+    width: MAX_SIDE
   })
 )
 
