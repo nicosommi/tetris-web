@@ -12,7 +12,9 @@ import { useTetris } from "../functions/hook"
 
 import JoystickButton from "../../../components/JoystickButton"
 import { kindDependent } from "../../../utils/util"
-import Joystick from "../../joystick/components/Joystick"
+import Joystick, {
+  JoystickVisibleContext
+} from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
 import MenuTitle from "../../menu/components/MenuTitle"
@@ -128,170 +130,171 @@ const tetris = () => {
   const theme = getThemeByName(settings.theme)
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <EmotionThemeProvider theme={theme}>
-        {isWeb() && (
-          <ReactPlayer
-            url={theme.music}
-            height={0}
-            loop
-            playing={settings.music}
-            volume={settings.musicVolume}
-            width={0}
+    <JoystickVisibleContext.Provider value={joystickCollapsed}>
+      <ThemeContext.Provider value={theme}>
+        <EmotionThemeProvider theme={theme}>
+          {isWeb() && (
+            <ReactPlayer
+              url={theme.music}
+              height={0}
+              loop
+              playing={settings.music}
+              volume={settings.musicVolume}
+              width={0}
+            />
+          )}
+          <Effect
+            url={theme.sounds.lineEat}
+            play={
+              (settings.sound && game.lastEatenLines > 0) || smokeTestEffects
+            }
           />
-        )}
-        <Effect
-          url={theme.sounds.lineEat}
-          play={(settings.sound && game.lastEatenLines > 0) || smokeTestEffects}
-        />
-        <Container>
-          {/* Use joystick arrow handlers and x y handlers for menu too */}
-          <Overlay open={game.paused && !infoShown}>
-            <MenuContent>
-              <MenuTitle label="SETTINGS" />
-              {Object.entries(menuOptions).map(([key, value]) => (
-                <MenuItem
-                  selected={key === currentMenuOption}
-                  key={key}
-                  label={value.label}
-                  value={settings[key as keyof Settings]}
-                  onIncrease={() => value.handler("increase")}
-                  onDecrease={() => value.handler("decrease")}
-                  onSelect={() => value.handler("select")}
-                />
-              ))}
-            </MenuContent>
-          </Overlay>
-          <Panel>
-            <WallComponent>
-              <WallHole>
-                <DebugContext.Consumer>
-                  {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
-                </DebugContext.Consumer>
-                <Label accessibilityLabel="time">Time</Label>
-                <Label accessibilityLabel={String(game.durationInSeconds)}>
-                  {game.durationInSeconds}
-                </Label>
-              </WallHole>
-              <WallHole>
-                <Label accessibilityLabel="lines">Lines</Label>
-                <Label accessibilityLabel={String(game.lines)}>
-                  {game.lines}
-                </Label>
-              </WallHole>
-              <WallHole>
-                <Label accessibilityLabel="level">Level</Label>
-                <Label accessibilityLabel={String(game.level)}>
-                  {game.level}
-                </Label>
-              </WallHole>
-              <WallHole>
-                <JoystickButton
-                  accessibilityLabel="toggle onscreen joystick"
-                  title={`PAD ${joystickCollapsed ? "\u25B2" : "\u25BC"}`}
-                  onPress={() => setJoystickCollapsed(!joystickCollapsed)}
-                />
-              </WallHole>
-            </WallComponent>
-            <BoardContainer>
-              <BoardComponent joystickCollapsed={joystickCollapsed}>
-                {game.board.lines.map((line, lineIndex) =>
-                  line.map((box, boxIndex) => (
-                    <BoxComponent
-                      key={`${box.id}`}
-                      box={box}
-                      joystickCollapsed={joystickCollapsed}
-                      line={lineIndex}
-                      column={boxIndex}
-                      grid={settings.grid}
-                    />
-                  ))
-                )}
-              </BoardComponent>
-            </BoardContainer>
-            <WallComponent>
-              <WallHole>
-                {game.board.previewBoards
-                  .slice(0, SHAPE_QUEUE_LENGTH - 1)
-                  .map(previewBoard => (
-                    <ShapePreview
-                      key={`${previewBoard.id}`}
-                      joystickCollapsed={joystickCollapsed}
-                    >
-                      {previewBoard.lines.map((line, lineIndex) =>
-                        line.map((box, boxIndex) => (
-                          <BoxComponent
-                            key={`${box.id}`}
-                            box={box}
-                            joystickCollapsed={joystickCollapsed}
-                            line={lineIndex}
-                            column={boxIndex}
-                            grid={settings.grid}
-                          />
-                        ))
-                      )}
-                    </ShapePreview>
-                  ))}
-              </WallHole>
-              <Overlay open={infoShown}>
-                <MenuContent>
-                  <MenuTitle label="INFO" />
-                  <Info>
-                    <Label small>COMMANDS</Label>
-                    <Label small>ROT: X or UP</Label>
-                    <Label small>BLAST: Y</Label>
-                    <Label small>ACC: DOWN</Label>
-                    <Label small>PAUSE: START</Label>
-                    <Label small>NEW: SELECT</Label>
-                  </Info>
-                  <Info>
-                    <Label small>Keyboard</Label>
-                    <Label small>wasd or arrows</Label>
-                    <Label small>jk or zx</Label>
-                    <Label small>ENTER</Label>
-                    <Label small>SPACE</Label>
-                  </Info>
+          <Container>
+            {/* Use joystick arrow handlers and x y handlers for menu too */}
+            <Overlay open={game.paused && !infoShown}>
+              <MenuContent>
+                <MenuTitle label="SETTINGS" />
+                {Object.entries(menuOptions).map(([key, value]) => (
                   <MenuItem
-                    selected={true}
-                    label="BACK"
-                    onSelect={() => showInfo(false)}
+                    selected={key === currentMenuOption}
+                    key={key}
+                    label={value.label}
+                    value={settings[key as keyof Settings]}
+                    onIncrease={() => value.handler("increase")}
+                    onDecrease={() => value.handler("decrease")}
+                    onSelect={() => value.handler("select")}
                   />
-                </MenuContent>
-              </Overlay>
-            </WallComponent>
-          </Panel>
-          <Joystick
-            down={(...args) => {
-              game.paused ? downMenu() : handlers.DOWN.apply(null, args)
-            }}
-            left={(...args) => {
-              game.paused ? decrease() : handlers.LEFT.apply(null, args)
-            }}
-            right={(...args) => {
-              game.paused ? increase() : handlers.RIGHT.apply(null, args)
-            }}
-            select={(...args) => {
-              showInfo(!infoShown)
-              if (!infoShown && !game.paused) handlers.PAUSE.apply(null, args)
-            }}
-            start={(...args) => {
-              if (infoShown) showInfo(!infoShown)
-              if (!game.paused) handlers.PAUSE.apply(null, args)
-            }}
-            up={(...args) => {
-              game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
-            }}
-            x={(...args) => {
-              game.paused ? select() : handlers.ROTATE.apply(null, args)
-            }}
-            y={(...args) => {
-              game.paused ? select() : handlers.BLAST.apply(null, args)
-            }}
-            visible={!joystickCollapsed}
-          />
-        </Container>
-      </EmotionThemeProvider>
-    </ThemeContext.Provider>
+                ))}
+              </MenuContent>
+            </Overlay>
+            <Panel>
+              <WallComponent>
+                <WallHole>
+                  <DebugContext.Consumer>
+                    {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
+                  </DebugContext.Consumer>
+                  <Label accessibilityLabel="time">Time</Label>
+                  <Label accessibilityLabel={String(game.durationInSeconds)}>
+                    {game.durationInSeconds}
+                  </Label>
+                </WallHole>
+                <WallHole>
+                  <Label accessibilityLabel="lines">Lines</Label>
+                  <Label accessibilityLabel={String(game.lines)}>
+                    {game.lines}
+                  </Label>
+                </WallHole>
+                <WallHole>
+                  <Label accessibilityLabel="level">Level</Label>
+                  <Label accessibilityLabel={String(game.level)}>
+                    {game.level}
+                  </Label>
+                </WallHole>
+                <WallHole>
+                  <JoystickButton
+                    accessibilityLabel="toggle onscreen joystick"
+                    title={`PAD ${joystickCollapsed ? "\u25B2" : "\u25BC"}`}
+                    onPress={() => setJoystickCollapsed(!joystickCollapsed)}
+                  />
+                </WallHole>
+              </WallComponent>
+              <BoardContainer>
+                <BoardComponent joystickCollapsed={joystickCollapsed}>
+                  {game.board.lines.map((line, lineIndex) =>
+                    line.map((box, boxIndex) => (
+                      <BoxComponent
+                        key={`${box.id}`}
+                        box={box}
+                        line={lineIndex}
+                        column={boxIndex}
+                        grid={settings.grid}
+                      />
+                    ))
+                  )}
+                </BoardComponent>
+              </BoardContainer>
+              <WallComponent>
+                <WallHole>
+                  {game.board.previewBoards
+                    .slice(0, SHAPE_QUEUE_LENGTH - 1)
+                    .map(previewBoard => (
+                      <ShapePreview
+                        key={`${previewBoard.id}`}
+                        joystickCollapsed={joystickCollapsed}
+                      >
+                        {previewBoard.lines.map((line, lineIndex) =>
+                          line.map((box, boxIndex) => (
+                            <BoxComponent
+                              key={`${box.id}`}
+                              box={box}
+                              line={lineIndex}
+                              column={boxIndex}
+                              grid={settings.grid}
+                            />
+                          ))
+                        )}
+                      </ShapePreview>
+                    ))}
+                </WallHole>
+                <Overlay open={infoShown}>
+                  <MenuContent>
+                    <MenuTitle label="INFO" />
+                    <Info>
+                      <Label small>COMMANDS</Label>
+                      <Label small>ROT: X or UP</Label>
+                      <Label small>BLAST: Y</Label>
+                      <Label small>ACC: DOWN</Label>
+                      <Label small>PAUSE: START</Label>
+                      <Label small>NEW: SELECT</Label>
+                    </Info>
+                    <Info>
+                      <Label small>Keyboard</Label>
+                      <Label small>wasd or arrows</Label>
+                      <Label small>jk or zx</Label>
+                      <Label small>ENTER</Label>
+                      <Label small>SPACE</Label>
+                    </Info>
+                    <MenuItem
+                      selected={true}
+                      label="BACK"
+                      onSelect={() => showInfo(false)}
+                    />
+                  </MenuContent>
+                </Overlay>
+              </WallComponent>
+            </Panel>
+            <Joystick
+              down={(...args) => {
+                game.paused ? downMenu() : handlers.DOWN.apply(null, args)
+              }}
+              left={(...args) => {
+                game.paused ? decrease() : handlers.LEFT.apply(null, args)
+              }}
+              right={(...args) => {
+                game.paused ? increase() : handlers.RIGHT.apply(null, args)
+              }}
+              select={(...args) => {
+                showInfo(!infoShown)
+                if (!infoShown && !game.paused) handlers.PAUSE.apply(null, args)
+              }}
+              start={(...args) => {
+                if (infoShown) showInfo(!infoShown)
+                if (!game.paused) handlers.PAUSE.apply(null, args)
+              }}
+              up={(...args) => {
+                game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
+              }}
+              x={(...args) => {
+                game.paused ? select() : handlers.ROTATE.apply(null, args)
+              }}
+              y={(...args) => {
+                game.paused ? select() : handlers.BLAST.apply(null, args)
+              }}
+            />
+          </Container>
+        </EmotionThemeProvider>
+      </ThemeContext.Provider>
+    </JoystickVisibleContext.Provider>
   )
 }
 
