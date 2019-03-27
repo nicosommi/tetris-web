@@ -1,6 +1,6 @@
 import { View, ViewProps } from "react-native"
 import { isWeb } from "../../../utils/debug"
-import { kindDependent } from "../../../utils/util"
+import { orientationDependent } from "../../../utils/util"
 import { g, React } from "../../../utils/view"
 
 type ThemeProps = { theme: Theme }
@@ -72,6 +72,6 @@ const Wall = g(View)<ViewProps>(
       ? "0px 2px, 4px 35px, 29px 31px, 34px 6px"
       : undefined,
     backgroundSize: isWeb() ? "58px 58px" : undefined,
-    flexDirection: kindDependent("row", "column")
+    flexDirection: orientationDependent("row", "column")
   })
 )

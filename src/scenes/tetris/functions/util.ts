@@ -19,7 +19,7 @@ export const getJoystickHeight = (joystickCollapsed: boolean) => {
 }
 
 export const getWallsHeight = () => {
-  return 40 + 70
+  return 42 + 5
 }
 
 export const getWallsWidth = () => {

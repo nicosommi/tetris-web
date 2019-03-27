@@ -7,4 +7,6 @@ export function orientationDependent<T>(portrait: T, landscape: T): T {
   return getViewportWidth() < getViewportHeight() ? portrait : landscape
 }
 
-export const kindDependent = orientationDependent
+export function kindDependent<T>(small: T, large: T): T {
+  return getViewportWidth() < 400 || getViewportHeight() < 400 ? small : large
+}

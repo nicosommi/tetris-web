@@ -11,7 +11,7 @@ import { g, React } from "../../../utils/view"
 import { useTetris } from "../functions/hook"
 
 import JoystickButton from "../../../components/JoystickButton"
-import { kindDependent } from "../../../utils/util"
+import { kindDependent, orientationDependent } from "../../../utils/util"
 import Joystick, {
   JoystickVisibleContext
 } from "../../joystick/components/Joystick"
@@ -306,7 +306,7 @@ const Panel = g(View)<ViewProps>(
   ({ theme }: ThemeProps) => ({
     backgroundColor: theme.panel.backgroundColor,
     borderColor: theme.panel.borderColor,
-    flexDirection: kindDependent("column", "row")
+    flexDirection: orientationDependent("column", "row")
   })
 )
 
@@ -339,15 +339,15 @@ type ThemeProps = { theme: Theme }
 const WallHole = g(View)<ViewProps>(
   {
     alignItems: "center",
-    display: "flex",
-    marginTop: 10,
-    padding: 10
+    display: "flex"
   },
   ({ theme }: ThemeProps) => ({
     backgroundColor: theme.box.backgroundColor,
     borderColor: theme.wall.borderColor,
     borderWidth: 3,
-    flexDirection: kindDependent("row", "column")
+    flexDirection: orientationDependent("row", "column"),
+    marginTop: kindDependent(1, 10),
+    padding: kindDependent(1, 10)
   })
 )
 
