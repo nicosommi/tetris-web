@@ -15,11 +15,11 @@ import {
 export const chance = () => new C()
 
 export const getJoystickHeight = (joystickCollapsed: boolean) => {
-  return joystickCollapsed ? 0 : kindDependent(150, 175)
+  return joystickCollapsed ? 0 : kindDependent(150, 190)
 }
 
 export const getWallsHeight = () => {
-  return 42 + 5
+  return getViewportHeight() * 0.1
 }
 
 export const getWallsWidth = () => {

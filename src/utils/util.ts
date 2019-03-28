@@ -8,5 +8,5 @@ export function orientationDependent<T>(portrait: T, landscape: T): T {
 }
 
 export function kindDependent<T>(small: T, large: T): T {
-  return getViewportWidth() < 400 || getViewportHeight() < 400 ? small : large
+  return getViewportWidth() < 550 || getViewportHeight() < 550 ? small : large
 }
