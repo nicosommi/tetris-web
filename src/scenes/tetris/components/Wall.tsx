@@ -1,6 +1,6 @@
 import { View, ViewProps } from "react-native"
 import { isWeb } from "../../../utils/debug"
-import { orientationDependent } from "../../../utils/util"
+import { kindDependent, orientationDependent } from "../../../utils/util"
 import { g, React } from "../../../utils/view"
 
 type ThemeProps = { theme: Theme }
@@ -57,6 +57,13 @@ const Wall = g(View)<ViewProps>(
     backgroundColor: isWeb()
       ? theme.wall.borderColor
       : theme.wall.backgroundColor,
+    ...kindDependent(buildSmallBricks(theme), buildBricks(theme)),
+    flexDirection: orientationDependent("row", "column")
+  })
+)
+
+function buildBricks(theme: Theme): any {
+  return {
     backgroundImage: isWeb()
       ? `linear-gradient(335deg, ${
           theme.wall.backgroundColor
@@ -71,7 +78,26 @@ const Wall = g(View)<ViewProps>(
     backgroundPosition: isWeb()
       ? "0px 2px, 4px 35px, 29px 31px, 34px 6px"
       : undefined,
-    backgroundSize: isWeb() ? "58px 58px" : undefined,
-    flexDirection: orientationDependent("row", "column")
-  })
-)
+    backgroundSize: isWeb() ? "58px 58px" : undefined
+  }
+}
+
+function buildSmallBricks(theme: Theme): any {
+  return {
+    backgroundColor: theme.wall.backgroundColor,
+    backgroundImage: isWeb()
+      ? `linear-gradient(335deg, ${
+          theme.wall.borderColor
+        } 23px, transparent 23px),
+      linear-gradient(155deg, ${theme.wall.borderColor} 23px, transparent 23px),
+      linear-gradient(335deg, ${theme.wall.borderColor} 23px, transparent 23px),
+      linear-gradient(155deg, ${theme.wall.borderColor} 23px, transparent 23px),
+      linear-gradient(335deg, ${theme.wall.borderColor} 10px, transparent 10px),
+      linear-gradient(155deg, ${theme.wall.borderColor} 10px, transparent 10px),
+      linear-gradient(335deg, ${theme.wall.borderColor} 10px, transparent 10px),
+      linear-gradient(155deg, ${theme.wall.borderColor} 10px, transparent 10px)`
+      : undefined,
+    backgroundPosition: `0px 2px, 4px 35px, 29px 31px, 33px 6px, 0px 36px, 4px 2px, 29px 6px, 33px 30px`,
+    backgroundSize: isWeb() ? "58px 58px" : undefined
+  }
+}

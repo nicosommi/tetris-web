@@ -301,6 +301,7 @@ const tetris = () => {
 const Panel = g(View)<ViewProps>(
   {
     display: "flex",
+    flex: 1,
     justifyContent: "center"
   },
   ({ theme }: ThemeProps) => ({
@@ -313,7 +314,7 @@ const Panel = g(View)<ViewProps>(
 const Container = g(View)({
   display: "flex",
   flexDirection: "column",
-  flexGrow: 0
+  flexGrow: 1
 })
 
 const BoardContainer = g(View)({

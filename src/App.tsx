@@ -1,11 +1,6 @@
 import React from "react"
-import { View } from "react-native"
 import Tetris from "./scenes/tetris/components/Game"
 
-const IndexPage = () => (
-  <View>
-    <Tetris />
-  </View>
-)
+const IndexPage = () => <Tetris />
 
 export default IndexPage
