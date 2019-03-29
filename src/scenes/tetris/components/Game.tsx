@@ -169,7 +169,7 @@ const tetris = () => {
             </Overlay>
             <Panel>
               <WallComponent>
-                <WallHole>
+                <WallHole flexDirection="column">
                   <DebugContext.Consumer>
                     {isDebug => isDebug && <Label>Thicks: {game.ticks}</Label>}
                   </DebugContext.Consumer>
@@ -178,13 +178,13 @@ const tetris = () => {
                     {game.durationInSeconds}
                   </Label>
                 </WallHole>
-                <WallHole>
+                <WallHole flexDirection="column">
                   <Label accessibilityLabel="lines">Lines</Label>
                   <Label accessibilityLabel={String(game.lines)}>
                     {game.lines}
                   </Label>
                 </WallHole>
-                <WallHole>
+                <WallHole flexDirection="column">
                   <Label accessibilityLabel="level">Level</Label>
                   <Label accessibilityLabel={String(game.level)}>
                     {game.level}
@@ -336,17 +336,20 @@ const Info = g(View)<ViewProps>(
 )
 
 type ThemeProps = { theme: Theme }
+type WallHoleProps = { flexDirection?: "row" | "column" }
 
-const WallHole = g(View)<ViewProps>(
+const WallHole = g(View)<ViewProps & WallHoleProps>(
   {
     alignItems: "center",
     display: "flex"
   },
-  ({ theme }: ThemeProps) => ({
+  ({ theme, flexDirection }: ThemeProps & WallHoleProps) => ({
     backgroundColor: theme.box.backgroundColor,
     borderColor: theme.wall.borderColor,
     borderWidth: 3,
-    flexDirection: orientationDependent("row", "column"),
+    flexDirection: flexDirection
+      ? flexDirection
+      : orientationDependent("row", "column"),
     marginTop: kindDependent(1, 10),
     padding: kindDependent(1, 10)
   })
