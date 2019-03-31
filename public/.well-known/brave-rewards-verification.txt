@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: tetris-web.netlify.com
+Token: 78ceb14350b294b7eabded934d74e165ee083952b94b695a23f7ea4c5f29deac
