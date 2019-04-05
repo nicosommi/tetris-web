@@ -27,7 +27,7 @@ import Effect from "./Effect"
 import ShapePreview from "./ShapePreview"
 import WallComponent from "./Wall"
 
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 
 type MenuOptionIds =
   | keyof Pick<Settings, "grid" | "music" | "sound" | "theme">
@@ -60,9 +60,18 @@ const tetris = () => {
   })
 
   const [smokeTestEffects, setSmokeTestEffects] = useState(false)
+  const reproduced = useRef(false)
   useEffect(() => {
     setSmokeTestEffects(false)
-  })
+    const listener = () => {
+      if (!reproduced.current) {
+        setSmokeTestEffects(true)
+        reproduced.current = true
+      }
+    }
+    document.body.addEventListener("click", listener)
+    return () => document.body.removeEventListener("click", listener)
+  }, [])
 
   const [game, handlers] = useTetris()
 
@@ -96,7 +105,6 @@ const tetris = () => {
       handler: () => {
         const sound = !settings.sound
         setSetting({ ...settings, sound })
-        setSmokeTestEffects(sound)
       },
       label: "SOUND EFFECTS"
     },
@@ -145,9 +153,8 @@ const tetris = () => {
           )}
           <Effect
             url={theme.sounds.lineEat}
-            play={
-              (settings.sound && game.lastEatenLines > 0) || smokeTestEffects
-            }
+            play={settings.sound && game.lastEatenLines > 0}
+            smokePlay={smokeTestEffects && !reproduced.current}
           />
           <Container>
             {/* Use joystick arrow handlers and x y handlers for menu too */}

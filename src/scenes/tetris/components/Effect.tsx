@@ -6,18 +6,22 @@ const { useRef, useEffect } = React
 
 type Props = {
   play: boolean
+  smokePlay: boolean
   url: string
 }
 
-const Effect = ({ play, url }: Props) => {
+const Effect = ({ play, smokePlay, url }: Props) => {
   const effectComponentRef = useRef<HTMLAudioElement>(null)
 
-  // TODO: improve typings
   useEffect(() => {
     if (effectComponentRef.current && play === true) {
       effectComponentRef.current.play()
     }
-  }, [play])
+    if (effectComponentRef.current && smokePlay === true) {
+      effectComponentRef.current.play()
+      effectComponentRef.current.pause()
+    }
+  }, [play, smokePlay])
 
   return isWeb() ? (
     <ErrorBoundary>
