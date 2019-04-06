@@ -70,10 +70,10 @@ const tetris = () => {
       }
     }
     document.body.addEventListener("click", listener)
-    document.body.addEventListener("touchstart", listener)
+    document.body.addEventListener("touchend", listener)
     return () => {
       document.body.removeEventListener("click", listener)
-      document.body.removeEventListener("touchstart", listener)
+      document.body.removeEventListener("touchend", listener)
     }
   }, [])
 
@@ -158,7 +158,7 @@ const tetris = () => {
           <Effect
             url={theme.sounds.lineEat}
             play={settings.sound && game.lastEatenLines > 0}
-            smokePlay={smokeTestEffects && !reproduced.current}
+            smokePlay={smokeTestEffects}
           />
           <Container>
             {/* Use joystick arrow handlers and x y handlers for menu too */}
