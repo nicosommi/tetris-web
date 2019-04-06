@@ -70,7 +70,11 @@ const tetris = () => {
       }
     }
     document.body.addEventListener("click", listener)
-    return () => document.body.removeEventListener("click", listener)
+    document.body.addEventListener("touchstart", listener)
+    return () => {
+      document.body.removeEventListener("click", listener)
+      document.body.removeEventListener("touchstart", listener)
+    }
   }, [])
 
   const [game, handlers] = useTetris()
