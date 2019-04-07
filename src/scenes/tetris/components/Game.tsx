@@ -290,7 +290,15 @@ const tetris = () => {
               }}
               start={(...args) => {
                 if (infoShown) showInfo(!infoShown)
-                handlers.PAUSE.apply(null, args)
+                const cmo = currentMenuOption as MenuOptionIds
+                if (game.paused && cmo === "new-game") {
+                  menuOptions[currentMenuOption as MenuOptionIds].handler.apply(
+                    null,
+                    ["select"]
+                  )
+                } else {
+                  handlers.PAUSE.apply(null, args)
+                }
               }}
               up={(...args) => {
                 game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
