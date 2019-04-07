@@ -2,7 +2,7 @@ import { isWeb } from "../../../utils/debug"
 import { React } from "../../../utils/view"
 import ErrorBoundary from "./ErrorBoundary"
 
-const { useRef, useLayoutEffect } = React
+const { useRef, useLayoutEffect, useState } = React
 
 type Props = {
   play: boolean
@@ -13,10 +13,17 @@ type Props = {
 const Effect = ({ play, smokePlay, url }: Props) => {
   const effectComponentRef = useRef<HTMLAudioElement>(null)
 
+  const [played, setPlayed] = useState(false)
+
   useLayoutEffect(() => {
     if (effectComponentRef.current && play === true) {
       effectComponentRef.current.play()
-    } else if (effectComponentRef.current && smokePlay === true) {
+    } else if (
+      effectComponentRef.current &&
+      smokePlay === true &&
+      played === false
+    ) {
+      setPlayed(true)
       effectComponentRef.current.play()
       effectComponentRef.current.pause()
     }
