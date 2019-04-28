@@ -20,7 +20,15 @@ const Startup = g(View)(
     width: "100%",
     zIndex: 1
   },
-  () => orientationDependent({}, {})
+  () =>
+    orientationDependent(
+      {
+        backgroundSize: "auto 100%"
+      },
+      {
+        backgroundSize: "contain"
+      }
+    )
 )
 
 export default Startup
