@@ -188,14 +188,11 @@ const reduceGame: GameReducer = (previous, action): Game => {
       }
     }
     case "ROTATE": {
-      // rotation strategy as setting? axis place on the shape
       if (!previous.board.activeShape) {
         return previous
       }
       const activeShape = {
         ...previous.board.activeShape,
-        // FIXME: add extra logic to rotate adjusting absolute coordinates so it feels correct
-        // FIXME: add extra logic for shapes at the sides
         position: getNextPosition(previous.board.activeShape.position)
       }
       const collides = doesShapeCollidesWithFilledBoxInCurrentPosition(
@@ -205,9 +202,6 @@ const reduceGame: GameReducer = (previous, action): Game => {
       if (collides) {
         return previous
       }
-      // get shape width for this new on all lines or not off board
-      // if width > available on some line
-      // if intersection, adjust to most closest...
       return {
         ...previous,
         board: {
@@ -218,7 +212,6 @@ const reduceGame: GameReducer = (previous, action): Game => {
       }
     }
     case "RESTART": {
-      // console.log("unknown action", { action })
       return createGame(previous)
     }
     default: {
