@@ -16,6 +16,7 @@ const { useReducer, useEffect, useLayoutEffect, useState, useRef } = React
 const initialGame: Game = createGame()
 
 const reduceGame: GameReducer = (previous, action): Game => {
+  if (!previous.startDate && action.type !== "START") return previous
   if (
     previous.gameOver === true &&
     action.type !== "RESTART" &&
@@ -25,6 +26,10 @@ const reduceGame: GameReducer = (previous, action): Game => {
   if (previous.paused && action.type !== "PAUSE" && action.type !== "RESTART")
     return previous
   switch (action.type) {
+    case "START": {
+      const startDate = previous.ticks === 0 ? new Date() : previous.startDate
+      return { ...previous, startDate }
+    }
     case "SECOND": {
       const durationInSeconds = previous.paused
         ? previous.durationInSeconds
@@ -76,7 +81,6 @@ const reduceGame: GameReducer = (previous, action): Game => {
         : [oneForNow, ...newShapeQueue.slice(0, newShapeQueue.length)]
       const lines = previous.lines + newLines
       const level = getLevelForLines(lines)
-      const startDate = previous.ticks === 0 ? new Date() : previous.startDate
       const ticks = action.payload ? Number(action.payload) : previous.ticks
 
       return {
@@ -107,7 +111,6 @@ const reduceGame: GameReducer = (previous, action): Game => {
         lastEatenLines: newLines,
         level,
         lines,
-        startDate,
         ticks
       }
     }
@@ -271,6 +274,7 @@ const createHandlers: CommandCreator = d => ({
   RIGHT: createHandler("RIGHT", d),
   ROTATE: createHandler("ROTATE", d),
   SECOND: createHandler("SECOND", d),
+  START: createHandler("START", d),
   TICK: createHandler("TICK", d)
 })
 

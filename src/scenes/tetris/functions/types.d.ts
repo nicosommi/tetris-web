@@ -81,6 +81,7 @@ type ActionType =
   | "RESTART"
   | "PAUSE"
   | "SECOND"
+  | "START"
 type Action<T = any> = {
   type: ActionType
   payload?: T
