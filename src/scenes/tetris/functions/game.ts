@@ -33,7 +33,7 @@ export function createGame(previous?: Game): Game {
     lastEatenLines: 0,
     level: 1,
     lines: 0,
-    paused: false,
+    paused: true,
     previous,
     score: 0,
     ticks: 0
