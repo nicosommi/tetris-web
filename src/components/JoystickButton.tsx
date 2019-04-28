@@ -1,18 +1,21 @@
 import { StatelessComponent } from "react"
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
 import { kindDependent } from "../utils/util"
-import { g, React } from "../utils/view"
+import { g, keyframes, React } from "../utils/view"
 
 type Props = TouchableOpacityProps & {
+  blink?: boolean
   title: string
   fontSize?: number
 }
 
 const JoystickButton: StatelessComponent<Props> = (props: Props) => {
-  const { title, fontSize } = props
+  const { blink, title, fontSize } = props
   return (
     <Container {...{ ...props }}>
-      <Caption fontSize={fontSize}>{title}</Caption>
+      <Caption fontSize={fontSize} blink={blink}>
+        {title}
+      </Caption>
     </Container>
   )
 }
@@ -32,9 +35,23 @@ const Container = g(TouchableOpacity)(
   })
 )
 
-const Caption = g(Text)<{ fontSize?: number }>(
+const blinker = keyframes(`
+  50% {
+    opacity: 0;
+  }
+`)
+
+type CaptionProps = {
+  blink?: boolean
+  fontSize?: number
+}
+
+const Caption = g(Text, {
+  shouldForwardProp: prop => prop !== "blink"
+})<CaptionProps>(
   {},
-  ({ theme, fontSize }: { theme: Theme; fontSize?: number }) => ({
+  ({ blink, theme, fontSize }: CaptionProps & { theme: Theme }) => ({
+    animation: blink ? `${blinker} 1.2s linear infinite` : undefined,
     color: theme.color,
     fontFamily: theme.fontFamily,
     fontSize: fontSize ? fontSize : kindDependent(10, 20)

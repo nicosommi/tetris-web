@@ -19,7 +19,7 @@ const ButtonComponent: StatelessComponent<Props> = (props: Props) => {
 
 const BUTTON_SIDE = 30
 
-const Container = g(TouchableOpacity)<{ theme: Theme }>(
+const Container = g(TouchableOpacity)(
   {
     alignItems: "center",
     justifyContent: "center"
@@ -31,7 +31,7 @@ const Container = g(TouchableOpacity)<{ theme: Theme }>(
   })
 )
 
-const Caption = g(Text)<{ theme: Theme }>({}, () => ({
+const Caption = g(Text)({}, () => ({
   fontSize: 20
 }))
 

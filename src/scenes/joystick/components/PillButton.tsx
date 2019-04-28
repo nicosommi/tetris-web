@@ -18,7 +18,7 @@ const PillButton: StatelessComponent<Props> = (props: Props) => {
   )
 }
 
-const Container = g(TouchableOpacity)<{ theme: Theme }>(
+const Container = g(TouchableOpacity)(
   {
     alignItems: "center",
     backgroundColor: "#000000",
@@ -32,7 +32,7 @@ const Container = g(TouchableOpacity)<{ theme: Theme }>(
   })
 )
 
-const Caption = g(Text)<{ theme: Theme }>(
+const Caption = g(Text)(
   {
     fontSize: 8,
     marginTop: -60

@@ -44,7 +44,7 @@ const Container = g(TouchableOpacity)(
     } as any)
 )
 
-const Caption = g(Text)<{ theme: Theme }>({}, () => ({
+const Caption = g(Text)({}, () => ({
   color: "#000000",
   fontSize: 20,
   textShadow: "-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray"

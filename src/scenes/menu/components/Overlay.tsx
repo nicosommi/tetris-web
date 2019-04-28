@@ -16,7 +16,7 @@ type ContainerProps = {
 }
 
 const Container = animated(
-  g(View)(
+  g(View)<ContainerProps>(
     {
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.9)",

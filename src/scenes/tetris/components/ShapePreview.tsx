@@ -8,7 +8,7 @@ type Props = {
   joystickCollapsed: boolean
 }
 
-const ShapePreview = g(View)(
+const ShapePreview = g(View)<Props>(
   {
     display: "flex",
     flexDirection: "row",

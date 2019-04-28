@@ -25,6 +25,7 @@ import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import Effect from "./Effect"
 import ShapePreview from "./ShapePreview"
+import Startup from "./Startup"
 import WallComponent from "./Wall"
 
 const { useState, useEffect, useRef } = React
@@ -89,7 +90,10 @@ const tetris = () => {
     },
     "new-game": {
       handler: type => {
-        if (type === "select") handlers.RESTART()
+        if (type === "select") {
+          setJoystickCollapsed(true)
+          handlers.RESTART()
+        }
       },
       label: "START A NEW GAME"
     },
@@ -162,17 +166,16 @@ const tetris = () => {
           />
           <Container>
             {/* Use joystick arrow handlers and x y handlers for menu too */}
-            <Overlay open={!game.startDate}>
-              <MenuContent>
-                <MenuTitle label="TETRIS WEB" />
-                <MenuItem
-                  selected
-                  key={"start"}
-                  label={"START"}
-                  onSelect={() => handlers.START()}
+            {!game.startDate && (
+              <Startup>
+                <JoystickButton
+                  accessibilityLabel="start game"
+                  blink
+                  title={"PRESS START"}
+                  onPress={() => handlers.START()}
                 />
-              </MenuContent>
-            </Overlay>
+              </Startup>
+            )}
             <Overlay open={game.paused && !infoShown}>
               <MenuContent>
                 <MenuTitle label="SETTINGS" />
