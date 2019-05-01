@@ -82,6 +82,9 @@ const reduceGame: GameReducer = (previous, action): Game => {
       const lines = previous.lines + newLines
       const level = getLevelForLines(lines)
       const ticks = action.payload ? Number(action.payload) : previous.ticks
+      const score = newLines
+        ? previous.score + (10 * newLines * level + 10 / ticks)
+        : previous.score
 
       return {
         ...previous,
@@ -111,6 +114,7 @@ const reduceGame: GameReducer = (previous, action): Game => {
         lastEatenLines: newLines,
         level,
         lines,
+        score,
         ticks
       }
     }

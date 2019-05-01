@@ -25,6 +25,7 @@ import { SHAPE_QUEUE_LENGTH, themes } from "../functions/settings"
 import BoardComponent from "./Board"
 import BoxComponent from "./Box"
 import Effect from "./Effect"
+import GameOver from "./GameOver"
 import ShapePreview from "./ShapePreview"
 import Startup from "./Startup"
 import WallComponent from "./Wall"
@@ -196,6 +197,17 @@ const tetris = () => {
     y: () => select()
   }
 
+  const joystickMaskGameOver: Mask = {
+    down: () => undefined,
+    left: () => undefined,
+    right: () => undefined,
+    select: () => undefined,
+    start: (...args) => handlers.RESTART.apply(null, args),
+    up: () => undefined,
+    x: (...args) => handlers.RESTART.apply(null, args),
+    y: (...args) => handlers.RESTART.apply(null, args)
+  }
+
   return (
     <JoystickVisibleContext.Provider value={joystickCollapsed}>
       <ThemeContext.Provider value={theme}>
@@ -227,6 +239,21 @@ const tetris = () => {
                 />
               </Startup>
             )}
+            {game.gameOver && (
+              <GameOver>
+                <MenuContent>
+                  <MenuTitle label={`SCORE ${game.score}`} />
+                  <MenuTitle label="GAME OVER" />
+                  <JoystickButton
+                    accessibilityLabel="restart game"
+                    blink
+                    title={"TRY AGAIN"}
+                    onPress={() => handlers.RESTART()}
+                    style={{ alignItems: "center" }}
+                  />
+                </MenuContent>
+              </GameOver>
+            )}
             <Overlay open={game.paused && !infoShown}>
               <MenuContent>
                 <MenuTitle label="SETTINGS" />
@@ -255,6 +282,12 @@ const tetris = () => {
                     <Label accessibilityLabel="time">Time</Label>
                     <Label accessibilityLabel={String(game.durationInSeconds)}>
                       {game.durationInSeconds}
+                    </Label>
+                  </WallHole>
+                  <WallHole flexDirection="column">
+                    <Label accessibilityLabel="score">Score</Label>
+                    <Label accessibilityLabel={String(game.score)}>
+                      {game.score}
                     </Label>
                   </WallHole>
                   <WallHole flexDirection="column">
@@ -345,7 +378,9 @@ const tetris = () => {
             )}
             <Joystick
               mask={
-                infoShown
+                game.gameOver
+                  ? joystickMaskGameOver
+                  : infoShown
                   ? joystickMaskInfo
                   : game.paused
                   ? joystickMaskMenu
