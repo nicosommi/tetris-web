@@ -8,13 +8,14 @@ import OptionPad from "./OptionPad"
 
 const { useContext } = React
 
-type Props = TouchableOpacityProps &
-  { [key in JoystickButtonType]: CommandHandler }
+export type Mask = { [key in JoystickButtonType]: CommandHandler }
+
+type Props = TouchableOpacityProps & { mask: Mask }
 
 export const JoystickVisibleContext = React.createContext(false)
 
 const Joystick = (props: Props) => {
-  const { up, down, left, right, select, start, x, y } = props
+  const { up, down, left, right, select, start, x, y } = props.mask
   const visible = !useContext(JoystickVisibleContext)
   const MainComponent = visible ? ViewContainer : React.Fragment
   const FinalVBox = visible ? VBox : React.Fragment

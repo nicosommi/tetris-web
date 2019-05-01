@@ -13,7 +13,8 @@ import { useTetris } from "../functions/hook"
 import JoystickButton from "../../../components/JoystickButton"
 import { kindDependent, orientationDependent } from "../../../utils/util"
 import Joystick, {
-  JoystickVisibleContext
+  JoystickVisibleContext,
+  Mask
 } from "../../joystick/components/Joystick"
 import MenuContent from "../../menu/components/MenuContent"
 import MenuItem from "../../menu/components/MenuItem"
@@ -144,6 +145,56 @@ const tetris = () => {
   const [joystickCollapsed, setJoystickCollapsed] = useState(true)
   const [infoShown, showInfo] = useState(false)
   const theme = getThemeByName(settings.theme)
+
+  const joystickMaskInGame: Mask = {
+    down: (...args) => handlers.DOWN.apply(null, args),
+    left: (...args) => handlers.LEFT.apply(null, args),
+    right: (...args) => handlers.RIGHT.apply(null, args),
+    select: (...args) => {
+      handlers.PAUSE.apply(null, args)
+      showInfo(true)
+    },
+    start: (...args) => {
+      if (!game.startDate) {
+        handlers.START.apply(null, args)
+        return
+      }
+      handlers.PAUSE.apply(null, args)
+    },
+    up: (...args) => handlers.ROTATE.apply(null, args),
+    x: (...args) => handlers.ROTATE.apply(null, args),
+    y: (...args) => handlers.BLAST.apply(null, args)
+  }
+  const joystickMaskInfo: Mask = {
+    down: () => undefined,
+    left: () => undefined,
+    right: () => undefined,
+    select: () => showInfo(false),
+    start: () => showInfo(false),
+    up: () => undefined,
+    x: () => showInfo(false),
+    y: () => showInfo(false)
+  }
+  const joystickMaskMenu: Mask = {
+    down: () => downMenu(),
+    left: () => decrease(),
+    right: () => increase(),
+    select: () => undefined,
+    start: (...args) => {
+      const cmo = currentMenuOption as MenuOptionIds
+      if (cmo === "new-game") {
+        menuOptions[currentMenuOption as MenuOptionIds].handler.apply(null, [
+          "select"
+        ])
+        return
+      } else {
+        handlers.PAUSE.apply(null, args)
+      }
+    },
+    up: () => upMenu(),
+    x: () => select(),
+    y: () => select()
+  }
 
   return (
     <JoystickVisibleContext.Provider value={joystickCollapsed}>
@@ -293,45 +344,13 @@ const tetris = () => {
               </Panel>
             )}
             <Joystick
-              down={(...args) => {
-                game.paused ? downMenu() : handlers.DOWN.apply(null, args)
-              }}
-              left={(...args) => {
-                game.paused ? decrease() : handlers.LEFT.apply(null, args)
-              }}
-              right={(...args) => {
-                game.paused ? increase() : handlers.RIGHT.apply(null, args)
-              }}
-              select={(...args) => {
-                showInfo(!infoShown)
-                if (!infoShown && !game.paused) handlers.PAUSE.apply(null, args)
-              }}
-              start={(...args) => {
-                if (!game.startDate) {
-                  handlers.START.apply(null, args)
-                  return
-                }
-                if (infoShown) showInfo(!infoShown)
-                const cmo = currentMenuOption as MenuOptionIds
-                if (game.paused && cmo === "new-game") {
-                  menuOptions[currentMenuOption as MenuOptionIds].handler.apply(
-                    null,
-                    ["select"]
-                  )
-                  return
-                } else {
-                  handlers.PAUSE.apply(null, args)
-                }
-              }}
-              up={(...args) => {
-                game.paused ? upMenu() : handlers.ROTATE.apply(null, args)
-              }}
-              x={(...args) => {
-                game.paused ? select() : handlers.ROTATE.apply(null, args)
-              }}
-              y={(...args) => {
-                game.paused ? select() : handlers.BLAST.apply(null, args)
-              }}
+              mask={
+                infoShown
+                  ? joystickMaskInfo
+                  : game.paused
+                  ? joystickMaskMenu
+                  : joystickMaskInGame
+              }
             />
           </Container>
         </EmotionThemeProvider>
