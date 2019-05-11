@@ -93,7 +93,6 @@ const tetris = () => {
     "new-game": {
       handler: type => {
         if (type === "select") {
-          setJoystickCollapsed(true)
           handlers.RESTART()
         }
       },
@@ -143,7 +142,9 @@ const tetris = () => {
     menuOptions[menuOption as MenuOptionIds].handler(actionType)
   )
 
-  const [joystickCollapsed, setJoystickCollapsed] = useState(true)
+  const [joystickCollapsed, setJoystickCollapsed] = useState(() =>
+    orientationDependent(false, true)
+  )
   const [infoShown, showInfo] = useState(false)
   const theme = getThemeByName(settings.theme)
 
@@ -209,7 +210,9 @@ const tetris = () => {
   }
 
   return (
-    <JoystickVisibleContext.Provider value={joystickCollapsed}>
+    <JoystickVisibleContext.Provider
+      value={!game.startDate ? true : joystickCollapsed}
+    >
       <ThemeContext.Provider value={theme}>
         <EmotionThemeProvider theme={theme}>
           {isWeb() && (
